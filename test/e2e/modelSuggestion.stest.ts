@@ -14,7 +14,7 @@ ssuite({ title: 'modelSuggestionTool', subtitle: 'toolCalling', location: 'panel
 	const getState = () => deserializeWorkbenchState(scenarioFolder, path.join(scenarioFolder, 'tools.state.json'));
 
 	stest({ description: 'model-suggestion', model: "claude-sonnet-4" }, generateToolTestRunner({
-		question: '/editAgent Suggest me a model that is cheap and good for summarizing documents using model_suggestion tool?',
+		question: '/editAgent Suggest me a model that is cheap and good for summarizing documents and using OpenAI SDK and model_suggestion tool?',
 		scenarioFolderPath: '',
 		getState,
 		expectedToolCalls: ToolName.ModelSuggestion,

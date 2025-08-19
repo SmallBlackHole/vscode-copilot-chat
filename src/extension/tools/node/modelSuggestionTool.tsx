@@ -4,6 +4,7 @@
  *--------------------------------------------------------------------------------------------*/
 
 import { GetAiModelGuidanceTool, IAiModelGuidanceParameters } from "ai-mlstudio/lmt/getAiModelGuidanceTool";
+import { inspect } from 'util';
 import type * as vscode from 'vscode';
 import { LanguageModelTextPart, LanguageModelToolResult } from '../../../vscodeTypes';
 import { ToolName } from '../common/toolNames';
@@ -18,6 +19,7 @@ export class ModelSuggestionTool implements ICopilotTool<void> {
 
 	async invoke(options: vscode.LanguageModelToolInvocationOptions<void>, token: vscode.CancellationToken) {
 		console.log('ModelSuggestionTool invoked');
+		console.log('Tool invocation options:', inspect(options, { depth: null, colors: true }));
 		const invokeOptions: vscode.LanguageModelToolInvocationOptions<IAiModelGuidanceParameters> = {
 			toolInvocationToken: options.toolInvocationToken,
 			input: {} as IAiModelGuidanceParameters
