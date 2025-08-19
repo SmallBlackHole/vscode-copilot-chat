@@ -52,6 +52,7 @@ export enum ToolName {
 	CoreRunTask = 'run_task',
 	CoreGetTaskOutput = 'get_task_output',
 	CoreRunTest = 'runTests',
+	ModelSuggestion = 'model_suggestion'
 }
 
 export enum ContributedToolName {
@@ -93,6 +94,7 @@ export enum ContributedToolName {
 	SimpleBrowser = 'copilot_openSimpleBrowser',
 	CreateDirectory = 'copilot_createDirectory',
 	RunVscodeCmd = 'copilot_runVscodeCommand',
+	ModelSuggestion = 'copilot_modelSuggestion'
 }
 
 const toolNameToContributedToolNames = new Map<ToolName, ContributedToolName>();

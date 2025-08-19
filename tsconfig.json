@@ -4,7 +4,6 @@
 		"jsx": "react",
 		"jsxFactory": "vscpp",
 		"jsxFragmentFactory": "vscppf",
-		"rootDir": ".",
 		"types": [
 			"minimist",
 			"mocha",
@@ -16,7 +15,8 @@
 		],
 		// Needed for tsx to run test files
 		"paths": {
-			"vscode": ["./src/util/common/test/shims/vscodeTypesShim.ts"]
+			"vscode": ["./src/util/common/test/shims/vscodeTypesShim.ts"],
+			"ai-mlstudio/*": ["../Skylight/vscode/ai-mlstudio/src/*"]
 		}
 	},
 	"include": [
