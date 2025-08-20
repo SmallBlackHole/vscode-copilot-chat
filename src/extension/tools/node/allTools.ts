@@ -12,6 +12,7 @@ import './editNotebookTool';
 import './findFilesTool';
 import './findTestsFilesTool';
 import './findTextInFilesTool';
+import './generatePrompt';
 import './getErrorsTool';
 import './getNotebookCellOutputTool';
 import './getSearchViewResultsTool';

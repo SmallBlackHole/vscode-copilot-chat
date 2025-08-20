@@ -60,4 +60,6 @@
 // import './simulation/slash-test/testGen.ts.stest';
 // import './simulation/tools/toolcall.stest';
 
+import './e2e/generatePrompt.stest';
 import './e2e/modelSuggestion.stest';
+

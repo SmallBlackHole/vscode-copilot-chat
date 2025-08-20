@@ -1046,7 +1046,7 @@
       },
       {
         "name": "copilot_modelSuggestion",
-        "displayName": "%copilot.tools.modelSuggestion.name%",
+        "displayName": "%github.copilot.tools.modelSuggestion.name%",
         "modelDescription": "Essential tool for any AI development task - provides expert guidance and best practices for choosing the right model, implementation patterns, optimization strategies, etc., to ensure your AI solution works effectively.",
         "toolReferenceName": "modelSuggestion",
         "canBeReferencedInPrompt": true,
@@ -1112,6 +1112,23 @@
             "preferredLanguage",
             "preferredSDK"
           ]
+        }
+      },
+      {
+        "name": "copilot_generatePrompt",
+        "displayName": "%github.copilot.tools.generatePrompt.name%",
+        "modelDescription": "Change prompts in code to adapt it for specific scenarios and use cases. Takes existing code and modifies the prompts to match the given scenario (e.g., board games, cooking, fitness, education, etc.). Helps you quickly adapt template code for your specific AI application needs.",
+        "toolReferenceName": "generatePrompt",
+        "canBeReferencedInPrompt": true,
+        "tags": [],
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "scenario": {
+              "type": "string",
+              "description": "A clear description of the scenario or application domain you want to generate prompts for. Examples: 'board game AI app', 'cooking assistant', 'fitness trainer', 'educational tutor', etc. If not provided, the tool will generate a positive scenario automatically."
+            }
+          }
         }
       }
     ],

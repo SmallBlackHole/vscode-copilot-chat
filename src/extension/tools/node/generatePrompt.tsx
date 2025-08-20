@@ -3,36 +3,32 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { GetAiModelGuidanceTool, IAiModelGuidanceParameters } from "ai-mlstudio/lmt/getAiModelGuidanceTool";
+import { GeneratePromptTool, IGeneratePromptParameters } from "ai-mlstudio/lmt/generatePromptTool";
 import { inspect } from 'util';
 import type * as vscode from 'vscode';
 import { LanguageModelTextPart, LanguageModelToolResult } from '../../../vscodeTypes';
 import { ToolName } from '../common/toolNames';
 import { ICopilotTool, ToolRegistry } from '../common/toolsRegistry';
 
-export class ModelSuggestionTool implements ICopilotTool<void> {
-	public static toolName = ToolName.ModelSuggestion;
-	public static getAiModelGuidanceTool = new GetAiModelGuidanceTool();
+export class CopilotGeneratePromptTool implements ICopilotTool<void> {
+	public static toolName = ToolName.GeneratePrompt;
+	public static generatePromptTool = new GeneratePromptTool();
 	constructor() {
-		console.log('ModelSuggestionTool initialized');
+		console.log('GeneratePromptTool initialized');
 	}
 
 	async invoke(options: vscode.LanguageModelToolInvocationOptions<void>, token: vscode.CancellationToken) {
-		console.log('ModelSuggestionTool invoked');
+		console.log('GeneratePromptTool invoked');
 		console.log('Tool invocation options:', inspect(options, { depth: null, colors: true }));
-		const invokeOptions: vscode.LanguageModelToolInvocationOptions<IAiModelGuidanceParameters> = {
+		const invokeOptions: vscode.LanguageModelToolInvocationOptions<IGeneratePromptParameters> = {
 			toolInvocationToken: options.toolInvocationToken,
 			input: {
-				preferredHost: (options.input as any).preferredHost ?? [],
-				preferredLanguage: (options.input as any).preferredLanguage ?? [],
-				preferredSDK: (options.input as any).preferredSDK ?? [],
-				currentModel: (options.input as any).languageModel ?? "",
-				moreIntents: (options.input as any).moreIntent ?? ""
-			} as IAiModelGuidanceParameters
+				scenario: (options.input as any).scenario ?? undefined,
+			} as IGeneratePromptParameters
 		};
 		console.log('Real invoke options:', inspect(invokeOptions, { depth: null, colors: true }));
-		const toolResult = await ModelSuggestionTool.getAiModelGuidanceTool.invoke(invokeOptions, token);
-		console.log('ModelSuggestionTool invoke completed', JSON.stringify(toolResult, null, 2));
+		const toolResult = await CopilotGeneratePromptTool.generatePromptTool.invoke(invokeOptions, token);
+		console.log('GeneratePromptTool invoke completed', JSON.stringify(toolResult, null, 2));
 		return new LanguageModelToolResult([
 			new LanguageModelTextPart(
 				(toolResult.content[0] as any).value
@@ -41,4 +37,4 @@ export class ModelSuggestionTool implements ICopilotTool<void> {
 	}
 }
 
-ToolRegistry.registerTool(ModelSuggestionTool);
+ToolRegistry.registerTool(CopilotGeneratePromptTool);
