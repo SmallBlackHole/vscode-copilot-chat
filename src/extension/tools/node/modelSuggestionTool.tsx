@@ -26,7 +26,7 @@ export class ModelSuggestionTool implements ICopilotTool<void> {
 				preferredHost: (options.input as any).preferredHost ?? [],
 				preferredLanguage: (options.input as any).preferredLanguage ?? [],
 				preferredSDK: (options.input as any).preferredSDK ?? [],
-				moreIntents: (options.input as any).moreIntent ?? ""
+				moreIntent: (options.input as any).moreIntent ?? ""
 			} as IAiModelGuidanceParameters
 		};
 		console.log('Real invoke options:', inspect(invokeOptions, { depth: null, colors: true }));
