@@ -26,7 +26,6 @@ export class ModelSuggestionTool implements ICopilotTool<void> {
 				preferredHost: (options.input as any).preferredHost ?? [],
 				preferredLanguage: (options.input as any).preferredLanguage ?? [],
 				preferredSDK: (options.input as any).preferredSDK ?? [],
-				currentModel: (options.input as any).languageModel ?? "",
 				moreIntents: (options.input as any).moreIntent ?? ""
 			} as IAiModelGuidanceParameters
 		};
