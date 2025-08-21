@@ -13,7 +13,6 @@ export class CopilotGeneratePromptTool implements ICopilotTool<void> {
 	public static toolName = ToolName.GeneratePrompt;
 	public static generatePromptTool = new GeneratePromptTool();
 	constructor() {
-		console.log('GeneratePromptTool initialized');
 	}
 
 	async invoke(options: vscode.LanguageModelToolInvocationOptions<void>, token: vscode.CancellationToken) {

@@ -13,7 +13,6 @@ export class ModelSuggestionTool implements ICopilotTool<void> {
 	public static toolName = ToolName.ModelSuggestion;
 	public static getAiModelGuidanceTool = new GetAiModelGuidanceTool();
 	constructor() {
-		console.log('ModelSuggestionTool initialized');
 	}
 
 	async invoke(options: vscode.LanguageModelToolInvocationOptions<void>, token: vscode.CancellationToken) {
