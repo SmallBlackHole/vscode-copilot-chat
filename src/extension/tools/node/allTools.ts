@@ -16,6 +16,7 @@ import './generatePrompt';
 import './getErrorsTool';
 import './getNotebookCellOutputTool';
 import './getSearchViewResultsTool';
+import './getTracingCodeGenBestPracticesTool';
 import './githubRepoTool';
 import './insertEditTool';
 import './installExtensionTool';

@@ -1130,6 +1130,48 @@
             }
           }
         }
+      },
+      {
+        "name": "copilot_getTracingCodeGenBestPractices",
+        "displayName": "%github.copilot.tools.getTracingCodeGenBestPractices.name%",
+        "modelDescription": "This tool returns a list of best practices for code generation and operations when working with tracing for AI applications. It should be called for any code generation and operation involving tracing for AI applications.",
+        "toolReferenceName": "getTracingCodeGenBestPractices",
+        "canBeReferencedInPrompt": true,
+        "tags": [],
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "language": {
+              "type": "string",
+              "description": "The programming language of the AI application",
+              "enum": [
+                "python",
+                "javascript",
+                "typescript",
+                "others"
+              ]
+            },
+            "sdk": {
+              "type": "string",
+              "description": "The AI SDK used by the application. The main module for openai-agents Python SDK is `agents`, and the usage is like `from agents import Agent\nagent = Agent(name=\"Hello agent\", instructions=\"You are a helpful agent.\")`.",
+              "enum": [
+                "openai",
+                "openai-agents",
+                "azure-ai-inference",
+                "azure-ai-agents",
+                "azure-ai-projects",
+                "langchain",
+                "google-genai",
+                "anthropic",
+                "others"
+              ]
+            }
+          },
+          "required": [
+            "language",
+            "sdk"
+          ]
+        }
       }
     ],
     "languageModelToolSets": [

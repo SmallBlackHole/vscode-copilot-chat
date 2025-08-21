@@ -61,5 +61,6 @@
 // import './simulation/tools/toolcall.stest';
 
 import './e2e/generatePrompt.stest';
+import './e2e/getTracingCodeGenBestPractices.stest';
 import './e2e/modelSuggestion.stest';
 

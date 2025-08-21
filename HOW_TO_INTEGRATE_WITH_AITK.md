@@ -31,6 +31,7 @@ This document outlines how to integrate and test the VS Code Copilot Chat extens
 4. **Skylight code update**
    - Skip send Telemetry in tool implementation
    - Skip `fetchNewestTemplateZip` in templateUtils.ts
+   - Better follow this branch change to fix compile error 'https://github.com/microsoft/Skylight/tree/refactor/run-in-simulate'
 
 5. **Build the Project**
    ```bash
