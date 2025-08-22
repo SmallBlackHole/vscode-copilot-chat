@@ -99,7 +99,7 @@ function updateToolNames(toolEnumName: string, contributedToolName: string, tool
  * Reads the Skylight package.json and package.nls.json to extract tool information
  */
 function extractSkylightToolInfo(referenceToolName: string) {
-	const skylightPath = 'C:\\code\\Skylight\\vscode\\ai-mlstudio';
+	const skylightPath = path.join(__dirname, '..', '..', 'Skylight', 'vscode', 'ai-mlstudio');
 	const packageJsonPath = path.join(skylightPath, 'package.json');
 	const packageNlsPath = path.join(skylightPath, 'package.nls.json');
 
