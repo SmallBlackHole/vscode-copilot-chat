@@ -192,6 +192,65 @@ After generating a test file, you can run it with:
 npm run simulate
 ```
 
+### Test Scenario Generator Script (`generate-test-scenario`)
+
+The `generateTestScenario.ts` script automatically creates complete test scenario folders with conversation files, state files, and workspace structure similar to existing test scenarios.
+
+#### Usage
+
+```bash
+npm run generate-test-scenario "<expectedToolCalls>" "<question>"
+```
+
+#### Parameters
+
+- **expectedToolCalls**: The expected tool name in snake_case format (e.g., "generate_prompt")
+- **question**: The test question that will be asked to the AI agent (e.g., "Generate a prompt good for summarizing documents?")
+
+#### Examples
+
+```bash
+# Generate test scenario for prompt generation
+npm run generate-test-scenario "generate_prompt" "Generate a prompt good for summarizing documents?"
+
+# Generate test scenario for model suggestion
+npm run generate-test-scenario "model_suggestion" "Suggest me a good model for code generation"
+
+# Generate test scenario for tracing tools
+npm run generate-test-scenario "get_tracing_code_gen_best_practices" "Get tracing code generation best practices?"
+```
+
+#### What the Script Does Automatically
+
+1. **✅ Creates test scenario folder** in `/test/scenarios/test-{tool-name}/` with kebab-case naming
+2. **✅ Generates conversation.json** with proper question formatting and tool configuration
+3. **✅ Creates tools.state.json** with standard VS Code editor state for testing
+4. **✅ Sets up workspace folder** with sample `functions.ts` file
+5. **✅ Configures tool permissions** with common tools enabled plus the target tool
+
+#### Generated Folder Structure
+
+```
+test/scenarios/test-{tool-name}/
+├── {toolname}.conversation.json
+├── tools.state.json
+└── workspace/
+    └── functions.ts
+```
+
+#### Generated Files Content
+
+- **conversation.json**: Contains test question, expected tool calls, and tool permissions
+- **tools.state.json**: Standard VS Code editor state with active file, selections, and diagnostics
+- **workspace/functions.ts**: Sample TypeScript file with functions for testing context
+
+#### Next Steps After Generation
+
+1. **Review conversation.json**: Verify the question and tool configuration
+2. **Customize workspace files**: Add relevant code files for your specific test scenario
+3. **Run the test**: Use your simulation framework to execute the test scenario
+4. **Iterate**: Adjust the test files based on test results and requirements
+
 ## Testing
 
 ### Unit Tests

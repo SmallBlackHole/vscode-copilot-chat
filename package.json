@@ -3834,6 +3834,7 @@
 		"create_venv": "tsx script/setup/createVenv.mts",
 		"generate-aitk-tool": "tsx script/generateAitkTool.ts",
 		"generate-stest": "tsx script/generateStestFile.ts",
+		"generate-test-scenario": "tsx script/generateTestScenario.ts",
 		"package": "vsce package",
 		"web": "vscode-test-web --headless --extensionDevelopmentPath=. ."
 	},
