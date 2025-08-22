@@ -3833,6 +3833,7 @@
 		"setup:dotnet:win32": "powershell.exe -NoProfile -ExecutionPolicy Bypass -Command \"Invoke-WebRequest -Uri https://raw.githubusercontent.com/dotnet/install-scripts/main/src/dotnet-install.ps1 -OutFile dotnet-install.ps1; ./dotnet-install.ps1 -channel 10.0; Remove-Item dotnet-install.ps1\"",
 		"create_venv": "tsx script/setup/createVenv.mts",
 		"generate-aitk-tool": "tsx script/generateAitkTool.ts",
+		"generate-stest": "tsx script/generateStestFile.ts",
 		"package": "vsce package",
 		"web": "vscode-test-web --headless --extensionDevelopmentPath=. ."
 	},

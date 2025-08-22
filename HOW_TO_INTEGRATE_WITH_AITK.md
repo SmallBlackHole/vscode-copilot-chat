@@ -112,15 +112,13 @@ export class GeneratedClassName implements ICopilotTool<void> {
 }
 ```
 
-#### Available AITK Tools
+#### Already integrated AITK Tools
 
-Common AI Toolkit tools that can be integrated:
-
-| Reference Tool Name | Import Tool Name | Purpose |
+| Reference Tool Name | Import Tool Name | Generated Class Name |
 |-------------------|------------------|---------|
-| `aitk-get_ai_model_guidance` | `GetAiModelGuidanceTool` | AI model selection and guidance |
-| `aitk-get_tracing_code_gen_best_practices` | `GetTracingCodeGenBestPracticesTool` | Tracing implementation best practices |
-| `aitk-open_tracing_page` | `OpenTracingPageTool` | Open AI Toolkit tracing page |
+| `aitk-get_ai_model_guidance` | `GetAiModelGuidanceTool` | `ModelSuggestionTool` |
+| `aitk-get_tracing_code_gen_best_practices` | `GetTracingCodeGenBestPracticesTool` | `TracingCodeBestPracticesTool` |
+| `aitk-generate_prompt` | `GeneratePromptTool` | `CopilotGeneratePromptTool` |
 
 #### Prerequisites for Tool Generation
 
@@ -131,6 +129,68 @@ Before using the generator script, ensure:
 3. **Reference tool exists** in Skylight's package.json under `contributes.languageModelTools`
 
 For more details, see `/src/util/aitk/README.md`.
+
+### Test File Generator Script (`generate-stest`)
+
+The `generateStestFile.ts` script automatically creates simulation test files for AI Toolkit tools with proper import management.
+
+#### Usage
+
+```bash
+npm run generate-stest <toolName> [testQuestion]
+```
+
+#### Parameters
+
+- **toolName**: The ToolName enum value (e.g., "GetTracingCodeGenBestPractices")
+- **testQuestion**: Optional custom test question. If not provided, a default question is generated based on the tool name
+
+#### Examples
+
+```bash
+# Generate test with default question
+npm run generate-stest GetTracingCodeGenBestPractices
+
+# Generate test with custom question
+npm run generate-stest ModelSuggestion "Suggest me a good model for code generation"
+
+# Generate test for tracing page tool
+npm run generate-stest OpenTracingPage
+```
+
+#### What the Script Does Automatically
+
+1. **✅ Creates the stest file** in `/test/e2e/` with kebab-case naming (e.g., `get-tracing-code-gen-best-practices.stest.ts`)
+2. **✅ Adds import to simulationTests.ts** automatically with alphabetical ordering
+3. **✅ Generates test structure** with proper suite and test configuration
+4. **✅ Sets up tool configuration** with required tools enabled
+5. **✅ Creates default questions** based on tool name if not provided
+
+#### Generated Test Structure
+
+The script creates test files with this structure:
+
+```typescript
+ssuite({ title: 'toolNameTool', subtitle: 'toolCalling', location: 'panel' }, () => {
+	stest({ description: 'tool-name', model: "claude-sonnet-4" }, generateToolTestRunner({
+		question: '/editAgent use the ToolName tool to help with my task?',
+		expectedToolCalls: ToolName.ToolName,
+		tools: {
+			[ToolName.ToolName]: true,
+			// ... other required tools
+		},
+	}));
+});
+```
+
+#### Running Generated Tests
+
+After generating a test file, you can run it with:
+
+```bash
+# Run all tests
+npm run simulate
+```
 
 ## Testing
 
