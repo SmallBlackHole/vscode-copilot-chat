@@ -7,20 +7,21 @@ import type { CancellationToken } from 'vscode';
 import { IAuthenticationService } from '../../../platform/authentication/common/authentication';
 import { IChatMLFetcher } from '../../../platform/chat/common/chatMLFetcher';
 import { ChatFetchResponseType, ChatResponse } from '../../../platform/chat/common/commonTypes';
+import { IConfigurationService } from '../../../platform/configuration/common/configurationService';
 import { ICAPIClientService } from '../../../platform/endpoint/common/capiClient';
 import { IDomainService } from '../../../platform/endpoint/common/domainService';
 import { IChatModelInformation } from '../../../platform/endpoint/common/endpointProvider';
 import { ChatEndpoint } from '../../../platform/endpoint/node/chatEndpoint';
 import { IEnvService } from '../../../platform/env/common/envService';
+import { ILogService } from '../../../platform/log/common/logService';
 import { isOpenAiFunctionTool } from '../../../platform/networking/common/fetch';
 import { IFetcherService } from '../../../platform/networking/common/fetcherService';
-import { IChatEndpoint, IEndpointBody, IMakeChatRequestOptions } from '../../../platform/networking/common/networking';
+import { IChatEndpoint, ICreateEndpointBodyOptions, IEndpointBody, IMakeChatRequestOptions } from '../../../platform/networking/common/networking';
+import { IExperimentationService } from '../../../platform/telemetry/common/nullExperimentationService';
 import { ITelemetryService } from '../../../platform/telemetry/common/telemetry';
 import { IThinkingDataService } from '../../../platform/thinking/node/thinkingDataService';
 import { ITokenizerProvider } from '../../../platform/tokenizer/node/tokenizer';
 import { IInstantiationService } from '../../../util/vs/platform/instantiation/common/instantiation';
-import { IConfigurationService } from '../../../platform/configuration/common/configurationService';
-import { IExperimentationService } from '../../../platform/telemetry/common/nullExperimentationService';
 
 function hydrateBYOKErrorMessages(response: ChatResponse): ChatResponse {
 	if (response.type === ChatFetchResponseType.Failed && response.streamError) {
@@ -60,7 +61,8 @@ export class OpenAIEndpoint extends ChatEndpoint {
 		@IInstantiationService protected instantiationService: IInstantiationService,
 		@IThinkingDataService private thinkingDataService: IThinkingDataService,
 		@IConfigurationService configurationService: IConfigurationService,
-		@IExperimentationService expService: IExperimentationService
+		@IExperimentationService expService: IExperimentationService,
+		@ILogService logService: ILogService
 	) {
 		super(
 			_modelInfo,
@@ -74,8 +76,24 @@ export class OpenAIEndpoint extends ChatEndpoint {
 			tokenizerProvider,
 			instantiationService,
 			configurationService,
-			expService
+			expService,
+			logService
 		);
+	}
+
+	override createRequestBody(options: ICreateEndpointBodyOptions): IEndpointBody {
+		options.ignoreStatefulMarker = false;
+		const body = super.createRequestBody(options);
+		if (this.useResponsesApi) {
+			body.store = true;
+			body.n = undefined;
+			body.stream_options = undefined;
+			if (!this._modelInfo.capabilities.supports.thinking) {
+				body.reasoning = undefined;
+			}
+		}
+
+		return body;
 	}
 
 	override interceptBody(body: IEndpointBody | undefined): void {
@@ -106,7 +124,7 @@ export class OpenAIEndpoint extends ChatEndpoint {
 		if (body?.tools) {
 			body.tools = body.tools.map(tool => {
 				if (isOpenAiFunctionTool(tool) && tool.function.parameters === undefined) {
-					tool.function.parameters = {};
+					tool.function.parameters = { type: "object", properties: {} };
 				}
 				return tool;
 			});
@@ -120,15 +138,8 @@ export class OpenAIEndpoint extends ChatEndpoint {
 			}
 			// Removing max tokens defaults to the maximum which is what we want for BYOK
 			delete body.max_tokens;
-			body['stream_options'] = { 'include_usage': true };
-
-			if (this.useResponsesApi) {
-				body.n = undefined;
-				body.stream_options = undefined;
-
-				if (!this._modelInfo.capabilities.supports.thinking) {
-					body.reasoning = undefined;
-				}
+			if (!this.useResponsesApi) {
+				body['stream_options'] = { 'include_usage': true };
 			}
 		}
 	}
@@ -159,7 +170,10 @@ export class OpenAIEndpoint extends ChatEndpoint {
 	}
 
 	public override async makeChatRequest2(options: IMakeChatRequestOptions, token: CancellationToken): Promise<ChatResponse> {
-		const response = await super.makeChatRequest2(options, token);
+		let response = await super.makeChatRequest2(options, token);
+		if (response.type === ChatFetchResponseType.InvalidStatefulMarker) {
+			response = await this._makeChatRequest2({ ...options, ignoreStatefulMarker: true }, token);
+		}
 		return hydrateBYOKErrorMessages(response);
 	}
 }
