@@ -33,12 +33,28 @@ This document outlines how to integrate and test the VS Code Copilot Chat extens
    - Telemetry transmission is disabled in tool implementations
    - Template ZIP fetching is bypassed in `templateUtils.ts`
 
-   **Note**: These modifications are applied automatically during the run process - no manual intervention required.
+   The simulation scripts automatically set required environment variables:
+   - `SIMULATION=1` - Enables simulation mode
+   - `SKIP_TELEMETRY=1` - Disables telemetry transmission
 
 5. **Build the Project**
    ```bash
    npm run build
    ```
+
+## Testing
+
+### Unit Tests
+Run the basic unit test suite:
+```bash
+npm run simulate
+```
+
+### End-to-End Tests
+Run comprehensive e2e tests with model suggestions:
+```bash
+npm run simulate -- --external-scenarios <your-repo-path>/test/scenarios/test-model-suggestion  --parallelism 1 --sidebar --disable-tools=get_errors --in-extension-host --scenario-workspace-folder --verbose --output c:/temp/out --skip-cache --model claude-sonnet-4
+```
 
 ## AI Toolkit Tool Integration
 
@@ -242,17 +258,3 @@ test/scenarios/test-{tool-name}/
 2. **Customize workspace files**: Add relevant code files for your specific test scenario
 3. **Run the test**: Use your simulation framework to execute the test scenario
 4. **Iterate**: Adjust the test files based on test results and requirements
-
-## Testing
-
-### Unit Tests
-Run the basic unit test suite:
-```bash
-npm run simulate
-```
-
-### End-to-End Tests
-Run comprehensive e2e tests with model suggestions:
-```bash
-npm run simulate --external-scenarios <your-repo-path>/test/scenarios/test-model-suggestion  --parallelism 1 --sidebar -n 1 --disable-tools=get_errors --in-extension-host --scenario-workspace-folder --verbose --output c:/temp/out --skip-cache --model claude-sonnet-4
-```
