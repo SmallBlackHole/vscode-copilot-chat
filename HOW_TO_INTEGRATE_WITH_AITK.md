@@ -28,10 +28,12 @@ This document outlines how to integrate and test the VS Code Copilot Chat extens
    - Run `npm run get_token` to obtain a GitHub OAuth token interactively
    - Or set the `GITHUB_OAUTH_TOKEN` environment variable with your token
 
-4. **Skylight code update**
-   - Skip send Telemetry in tool implementation
-   - Skip `fetchNewestTemplateZip` in templateUtils.ts
-   - Better follow this branch change to fix compile error 'https://github.com/microsoft/Skylight/tree/refactor/run-in-simulate'
+4. **Skylight Code Modifications**
+   The following Skylight code modifications are automatically handled by the integration scripts:
+   - Telemetry transmission is disabled in tool implementations
+   - Template ZIP fetching is bypassed in `templateUtils.ts`
+
+   **Note**: These modifications are applied automatically during the run process - no manual intervention required.
 
 5. **Build the Project**
    ```bash
@@ -119,16 +121,6 @@ export class GeneratedClassName implements ICopilotTool<void> {
 | `aitk-get_ai_model_guidance` | `GetAiModelGuidanceTool` | `ModelSuggestionTool` |
 | `aitk-get_tracing_code_gen_best_practices` | `GetTracingCodeGenBestPracticesTool` | `TracingCodeBestPracticesTool` |
 | `aitk-generate_prompt` | `GeneratePromptTool` | `CopilotGeneratePromptTool` |
-
-#### Prerequisites for Tool Generation
-
-Before using the generator script, ensure:
-
-1. **Skylight repository** is cloned to `C:\code\Skylight\vscode\ai-mlstudio` (or update the path in the script)
-2. **AI Toolkit dependencies** are properly installed in your project
-3. **Reference tool exists** in Skylight's package.json under `contributes.languageModelTools`
-
-For more details, see `/src/util/aitk/README.md`.
 
 ### Test File Generator Script (`generate-stest`)
 
@@ -262,5 +254,5 @@ npm run simulate
 ### End-to-End Tests
 Run comprehensive e2e tests with model suggestions:
 ```bash
-node dist/simulationMain.js --external-scenarios <your-repo-path>/test/scenarios/test-model-suggestion  --parallelism 1 --sidebar -n 1 --disable-tools=get_errors --in-extension-host --scenario-workspace-folder --verbose --output c:/temp/out --skip-cache --model claude-sonnet-4
+npm run simulate --external-scenarios <your-repo-path>/test/scenarios/test-model-suggestion  --parallelism 1 --sidebar -n 1 --disable-tools=get_errors --in-extension-host --scenario-workspace-folder --verbose --output c:/temp/out --skip-cache --model claude-sonnet-4
 ```

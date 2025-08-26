@@ -14,7 +14,7 @@ ssuite({ title: 'generatePromptTool', subtitle: 'toolCalling', location: 'panel'
 	const getState = () => deserializeWorkbenchState(scenarioFolder, path.join(scenarioFolder, 'tools.state.json'));
 
 	stest({ description: 'generate-prompt', model: "claude-sonnet-4" }, generateToolTestRunner({
-		question: '/editAgent Generate a prompt good for summarizing documents?',
+		question: '/editAgent Generate a prompt good for rewriting email?',
 		scenarioFolderPath: '',
 		getState,
 		expectedToolCalls: ToolName.GeneratePrompt,
