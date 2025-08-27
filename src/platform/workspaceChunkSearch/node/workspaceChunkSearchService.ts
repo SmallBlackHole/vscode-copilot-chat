@@ -8,7 +8,7 @@ import type * as vscode from 'vscode';
 import { createFencedCodeBlock, getLanguageId } from '../../../util/common/markdown';
 import { Result } from '../../../util/common/result';
 import { createServiceIdentifier } from '../../../util/common/services';
-import { CallTracker, TelemetryCorrelationId } from '../../../util/common/telemetryCorrelationId';
+import { TelemetryCorrelationId } from '../../../util/common/telemetryCorrelationId';
 import { TokenizerType } from '../../../util/common/tokenizer';
 import { coalesce } from '../../../util/vs/base/common/arrays';
 import { CancelablePromise, createCancelablePromise, raceCancellationError, raceTimeout } from '../../../util/vs/base/common/async';
@@ -60,6 +60,7 @@ export interface WorkspaceChunkSearchResult {
 export interface WorkspaceChunkSearchSizing {
 	readonly endpoint: IChatEndpoint;
 	readonly tokenBudget: number | undefined;
+	readonly fullWorkspaceTokenBudget: number | undefined;
 	readonly maxResults: number | undefined;
 }
 
@@ -142,6 +143,8 @@ export class WorkspaceChunkSearchService extends Disposable implements IWorkspac
 				this._logService.info(`WorkspaceChunkSearchService: using embedding type ${best}`);
 				this._impl = this._register(this._instantiationService.createInstance(WorkspaceChunkSearchServiceImpl, best));
 				this._register(this._impl.onDidChangeIndexState(() => this._onDidChangeIndexState.fire()));
+				this._onDidChangeIndexState.fire();
+
 				return this._impl;
 			}
 		} catch {
@@ -255,7 +258,7 @@ class WorkspaceChunkSearchServiceImpl extends Disposable implements IWorkspaceCh
 
 		if (
 			this._extensionContext.workspaceState.get(this.shouldEagerlyIndexKey, false)
-			&& (this._experimentationService.getTreatmentVariable<boolean>('vscode', 'copilotchat.workspaceChunkSearch.shouldEagerlyInitLocalIndex') ?? true)
+			&& (this._experimentationService.getTreatmentVariable<boolean>('copilotchat.workspaceChunkSearch.shouldEagerlyInitLocalIndex') ?? true)
 		) {
 			this._codeSearchChunkSearch.isAvailable().then(async hasCodeSearch => {
 				if (!hasCodeSearch && !this._isDisposed) {
@@ -269,7 +272,7 @@ class WorkspaceChunkSearchServiceImpl extends Disposable implements IWorkspaceCh
 		}
 
 		this._register(this._authUpgradeService.onDidGrantAuthUpgrade(() => {
-			if (this._experimentationService.getTreatmentVariable<boolean>('vscode', 'copilotchat.workspaceChunkSearch.shouldRemoteIndexOnAuthUpgrade') ?? true) {
+			if (this._experimentationService.getTreatmentVariable<boolean>('copilotchat.workspaceChunkSearch.shouldRemoteIndexOnAuthUpgrade') ?? true) {
 				void this.triggerRemoteIndexing('auto', new TelemetryCorrelationId('onDidGrantAuthUpgrade')).catch(e => {
 					// noop
 				});
@@ -291,7 +294,7 @@ class WorkspaceChunkSearchServiceImpl extends Disposable implements IWorkspaceCh
 	}
 
 	async hasFastSearch(sizing: StrategySearchSizing): Promise<boolean> {
-		if (this._experimentationService.getTreatmentVariable<boolean>('vscode', 'copilotchat.workspaceChunkSearch.markAllSearchesSlow')) {
+		if (this._experimentationService.getTreatmentVariable<boolean>('copilotchat.workspaceChunkSearch.markAllSearchesSlow')) {
 			return false;
 		}
 
@@ -332,6 +335,7 @@ class WorkspaceChunkSearchServiceImpl extends Disposable implements IWorkspaceCh
 			const stratSizing: StrategySearchSizing = {
 				endpoint: sizing.endpoint,
 				tokenBudget: sizing.tokenBudget,
+				fullWorkspaceTokenBudget: sizing.fullWorkspaceTokenBudget,
 				maxResultCountHint: this.getMaxChunks(sizing),
 			};
 
@@ -775,13 +779,8 @@ class WorkspaceChunkSearchServiceImpl extends Disposable implements IWorkspaceCh
 		});
 	}
 
-	private async computeEmbeddings(inputType: 'query' | 'document', strings: readonly string[], token: CancellationToken): Promise<Embeddings> {
-		const embeddings = await this._embeddingsComputer.computeEmbeddings(this._embeddingType, strings, { inputType }, new CallTracker('WorkspaceChunkSearchService::computeEmbeddings'), token);
-		if (!embeddings) {
-			throw new Error('Timeout computing embeddings');
-		}
-
-		return embeddings;
+	private computeEmbeddings(inputType: 'query' | 'document', strings: readonly string[], token: CancellationToken): Promise<Embeddings> {
+		return this._embeddingsComputer.computeEmbeddings(this._embeddingType, strings, { inputType }, new TelemetryCorrelationId('WorkspaceChunkSearchService::computeEmbeddings'), token);
 	}
 
 	/**

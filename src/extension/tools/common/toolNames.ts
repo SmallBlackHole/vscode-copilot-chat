@@ -53,7 +53,9 @@ export enum ToolName {
 	CoreRunTest = 'runTests',
 	ModelSuggestion = 'model_suggestion',
 	GeneratePrompt = 'generate_prompt',
-	GetTracingCodeGenBestPractices = 'get_tracing_code_gen_best_practices'
+	GetTracingCodeGenBestPractices = 'get_tracing_code_gen_best_practices',
+	ToolReplay = 'tool_replay',
+	EditFilesPlaceholder = 'edit_files'
 }
 
 export enum ContributedToolName {
@@ -97,7 +99,9 @@ export enum ContributedToolName {
 	RunVscodeCmd = 'copilot_runVscodeCommand',
 	ModelSuggestion = 'copilot_modelSuggestion',
 	GeneratePrompt = 'copilot_generatePrompt',
-	GetTracingCodeGenBestPractices = 'copilot_getTracingCodeGenBestPractices'
+	GetTracingCodeGenBestPractices = 'copilot_getTracingCodeGenBestPractices',
+	ToolReplay = 'copilot_toolReplay',
+	EditFilesPlaceholder = 'copilot_editFiles'
 }
 
 const toolNameToContributedToolNames = new Map<ToolName, ContributedToolName>();
