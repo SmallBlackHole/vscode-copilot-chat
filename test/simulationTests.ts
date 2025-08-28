@@ -60,7 +60,9 @@
 // import './simulation/slash-test/testGen.ts.stest';
 // import './simulation/tools/toolcall.stest';
 
-import './e2e/generatePrompt.stest';
-import './e2e/getTracingCodeGenBestPractices.stest';
-import './e2e/modelSuggestion.stest';
+import './e2e/a-i-feature-best-practices-tool-wrapper.stest';
+import './e2e/a-i-feature-evaluation-planner-tool-wrapper.stest';
+// import './e2e/generatePrompt.stest';
+// import './e2e/getTracingCodeGenBestPractices.stest';
+// import './e2e/modelSuggestion.stest';
 

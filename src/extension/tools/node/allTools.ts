@@ -41,4 +41,6 @@ import './userPreferencesTool';
 import './vscodeAPITool';
 import './vscodeCmdTool';
 import './toolReplayTool';
+import './aIFeatureEvaluationPlannerToolWrapperTool';
+import './aIFeatureBestPracticesToolWrapperTool';
 

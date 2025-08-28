@@ -55,6 +55,8 @@ export enum ToolName {
 	GeneratePrompt = 'generate_prompt',
 	GetTracingCodeGenBestPractices = 'get_tracing_code_gen_best_practices',
 	ToolReplay = 'tool_replay',
+	AIFeatureEvaluationPlannerToolWrapper = 'a_i_feature_evaluation_planner_tool_wrapper',
+	AIFeatureBestPracticesToolWrapper = 'a_i_feature_best_practices_tool_wrapper',
 	EditFilesPlaceholder = 'edit_files'
 }
 
@@ -101,6 +103,8 @@ export enum ContributedToolName {
 	GeneratePrompt = 'copilot_generatePrompt',
 	GetTracingCodeGenBestPractices = 'copilot_getTracingCodeGenBestPractices',
 	ToolReplay = 'copilot_toolReplay',
+	AIFeatureEvaluationPlannerToolWrapper = 'copilot_aIFeatureEvaluationPlannerToolWrapper',
+	AIFeatureBestPracticesToolWrapper = 'copilot_aIFeatureBestPracticesToolWrapper',
 	EditFilesPlaceholder = 'copilot_editFiles'
 }
 
