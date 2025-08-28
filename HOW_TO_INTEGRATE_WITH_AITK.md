@@ -4,7 +4,7 @@ This document outlines how to integrate and test the VS Code Copilot Chat extens
 
 ## Prerequisites
 
-- Node.js and npm installed
+- Node.js and npm installed (Node.js version 22.18.0 or higher is required. If you encounter crypto-related or other errors during simulation tests, ensure you're using Node.js 22.18.0+)
 - Git access to both repositories
 - GitHub OAuth token for authentication
 
