@@ -53,7 +53,7 @@ npm run simulate
 ### End-to-End Tests
 Run comprehensive e2e tests with model suggestions:
 ```bash
-npm run simulate -- --external-scenarios <your-repo-path>/test/scenarios/test-model-suggestion  --parallelism 1 --sidebar --disable-tools=get_errors --in-extension-host --scenario-workspace-folder --verbose --output c:/temp/out --skip-cache --model claude-sonnet-4
+npm run simulate -- --external-scenarios <your-repo-path>/test/scenarios/test-generate-prompt  --parallelism 1 --sidebar --disable-tools=get_errors --verbose --output c:/temp/out --skip-cache --model claude-sonnet-4
 ```
 
 ## AI Toolkit Tool Integration
