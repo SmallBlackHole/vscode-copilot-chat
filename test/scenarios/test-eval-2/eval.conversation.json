@@ -16,5 +16,21 @@
             "a_i_feature_evaluation_planner_tool_wrapper": true,
             "a_i_feature_evaluation_executor_tool_wrapper": true
         }
+    },
+    {
+        "question": "/editAgent yes, but only do the first step for now",
+        "stateFile": "./tools.state.json",
+        "tools": {
+            "find_files": true,
+			"grep_search": true,
+			"read_file": true,
+			"insert_edit_into_file": true,
+			"semantic_search": true,
+			"list_dir": true,
+			"search_workspace_symbols": true,
+            "model_suggestion": true,
+            "a_i_feature_evaluation_planner_tool_wrapper": true,
+            "a_i_feature_evaluation_executor_tool_wrapper": true
+        }
     }
 ]

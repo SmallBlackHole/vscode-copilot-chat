@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { AIFeatureBestPracticesTool } from "ai-mlstudio/lmt/aIFeatureBestPracticesTool";
+import { AIFeatureBestPracticesTool } from "ai-mlstudio/lmt/AIFeatureBestPracticesTool";
 import type * as vscode from 'vscode';
 import { LanguageModelTextPart, LanguageModelToolResult } from '../../../vscodeTypes';
 import { ToolName } from '../common/toolNames';

@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { AIFeatureEvaluationPlannerTool } from "ai-mlstudio/lmt/aIFeatureEvaluationPlannerTool";
+import { AIFeatureEvaluationPlannerTool } from "ai-mlstudio/lmt/AIFeatureEvaluationPlannerTool";
 import type * as vscode from 'vscode';
 import { LanguageModelTextPart, LanguageModelToolResult } from '../../../vscodeTypes';
 import { ToolName } from '../common/toolNames';
