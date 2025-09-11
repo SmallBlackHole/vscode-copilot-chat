@@ -51,6 +51,9 @@ Run the basic unit test suite:
 npm run simulate
 ```
 
+### Example result
+![alt text](./resource/unitTest.png)
+
 ### End-to-End Tests
 Run comprehensive e2e tests with model suggestions:
 ```bash
