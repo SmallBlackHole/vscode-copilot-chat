@@ -55,7 +55,10 @@ export enum ToolName {
 	GeneratePrompt = 'generate_prompt',
 	GetTracingCodeGenBestPractices = 'get_tracing_code_gen_best_practices',
 	ToolReplay = 'tool_replay',
-	EditFilesPlaceholder = 'edit_files'
+	EditFilesPlaceholder = 'edit_files',
+	ExecutePrompt = 'execute_prompt',
+	ExecuteTask = 'execute_task',
+	CoreConfirmationTool = 'vscode_get_confirmation'
 }
 
 export enum ContributedToolName {
@@ -101,7 +104,9 @@ export enum ContributedToolName {
 	GeneratePrompt = 'copilot_generatePrompt',
 	GetTracingCodeGenBestPractices = 'copilot_getTracingCodeGenBestPractices',
 	ToolReplay = 'copilot_toolReplay',
-	EditFilesPlaceholder = 'copilot_editFiles'
+	EditFilesPlaceholder = 'copilot_editFiles',
+	ExecutePrompt = 'execute_prompt',
+	ExecuteTask = 'execute_task',
 }
 
 const toolNameToContributedToolNames = new Map<ToolName, ContributedToolName>();
