@@ -1,0 +1,18 @@
+[
+    {
+        "question": "/editAgent write a simple console app to tell a joke about a given topic using ai",
+        "stateFile": "./tools.state.json",
+        "expectedToolCalls": "agent_code_gen",
+        "toolInputValues": {},
+        "tools": {
+            "find_files": true,
+            "grep_search": true,
+            "read_file": true,
+            "insert_edit_into_file": true,
+            "semantic_search": true,
+            "list_dir": true,
+            "search_workspace_symbols": true,
+            "agent_code_gen": true
+        }
+    }
+]

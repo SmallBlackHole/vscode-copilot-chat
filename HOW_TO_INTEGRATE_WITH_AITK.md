@@ -1,7 +1,6 @@
 # AI Toolkit (AITK) Integration Guide
 
 This document outlines how to integrate and test the VS Code Copilot Chat extension with the AI Toolkit.
-- !!! if you want to try eval test, switch to this branch (https://github.com/SmallBlackHole/vscode-copilot-chat/tree/refactor/eval-simulation) and use this branch for Skylight (https://github.com/microsoft/Skylight/tree/refactor/eval-simulation).
 
 ## Prerequisites
 
@@ -30,6 +29,9 @@ This document outlines how to integrate and test the VS Code Copilot Chat extens
    - Or set the `GITHUB_OAUTH_TOKEN` environment variable with your token
 
 4. **Skylight Code Modifications**
+   ```
+   npm install -g cross-env
+   ```
    The following Skylight code modifications are automatically handled by the integration scripts:
    - Telemetry transmission is disabled in tool implementations
    - Template ZIP fetching is bypassed in `templateUtils.ts`

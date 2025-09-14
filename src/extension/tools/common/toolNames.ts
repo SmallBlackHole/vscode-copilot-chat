@@ -58,6 +58,7 @@ export enum ToolName {
 	EditFilesPlaceholder = 'edit_files',
 	ExecutePrompt = 'execute_prompt',
 	ExecuteTask = 'execute_task',
+	AgentCodeGen = 'agent_code_gen',
 	CoreConfirmationTool = 'vscode_get_confirmation'
 }
 
@@ -107,6 +108,7 @@ export enum ContributedToolName {
 	EditFilesPlaceholder = 'copilot_editFiles',
 	ExecutePrompt = 'execute_prompt',
 	ExecuteTask = 'execute_task',
+	AgentCodeGen = 'copilot_agentCodeGen',
 }
 
 const toolNameToContributedToolNames = new Map<ToolName, ContributedToolName>();
