@@ -10,7 +10,7 @@ import { ToolName } from '../common/toolNames';
 import { ICopilotTool, ToolRegistry } from '../common/toolsRegistry';
 
 export class AgentCodeGenTool implements ICopilotTool<void> {
-	public static toolName = ToolName.AgentCodeGen;
+	public static toolName = ToolName.GetAgentCodeGenBestPractices;
 	public static getAgentCodeGenTool = new GetAgentCodeGenTool();
 	constructor() {
 	}

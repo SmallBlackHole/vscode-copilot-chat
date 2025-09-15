@@ -2,7 +2,7 @@
     {
         "question": "/editAgent write a simple console app to tell a joke about a given topic using ai",
         "stateFile": "./tools.state.json",
-        "expectedToolCalls": "agent_code_gen",
+        "expectedToolCalls": "get_agent_code_gen_best_practices",
         "toolInputValues": {},
         "tools": {
             "find_files": true,
@@ -12,7 +12,7 @@
             "semantic_search": true,
             "list_dir": true,
             "search_workspace_symbols": true,
-            "agent_code_gen": true
+            "get_agent_code_gen_best_practices": true
         }
     }
 ]

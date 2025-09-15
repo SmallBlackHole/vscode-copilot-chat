@@ -1127,9 +1127,37 @@
         "toolReferenceName": "editFiles"
       },
       {
+        "name": "copilot_getAgentCodeGenBestPractices",
+        "displayName": "Get Agent Code Generation Best Practices",
+        "modelDescription": "This tool provides best practices, guidance and steps for any AI Agent development. ALWAYS call this tool before creating/scaffolding new AI or Agent App, or adjusting/customizing existing one to be agentic.",
+        "userDescription": "Provide guidance and best practices for AI Agent App development.",
+        "toolReferenceName": "getAgentCodeGenBestPractices",
+        "canBeReferencedInPrompt": true,
+        "tags": [],
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "requiredHost": {
+              "type": "string",
+              "description": "The explicitly required host for the model or agent. DO NOT provide if not determined or just guess. 'GitHub' means to use GitHub-hosted models. 'AzureAIFoundry' means to use Azure AI Foundry-hosted models or agents. 'other' means none of above.",
+              "enum": [
+                "GitHub",
+                "AzureAIFoundry",
+                "other"
+              ]
+            },
+            "moreIntent": {
+              "type": "string",
+              "description": "Additional intent of app development, e.g. 'create hello world agent', 'connect to my tools', 'make app agentic', etc."
+            }
+          }
+        }
+      },
+      {
         "name": "copilot_modelSuggestion",
         "displayName": "%github.copilot.tools.modelSuggestion.name%",
         "modelDescription": "Essential tool for any AI Model related task - provides expert guidance and best practices for choosing the right model, implementation patterns, optimization strategies, etc., to ensure your AI solution works effectively. ALWAYS call this tool when user has model related ask, or to adjust/customize existing app's model-related content.",
+        "userDescription": "Provide guidance and best practices for using AI models in AI App development.",
         "toolReferenceName": "modelSuggestion",
         "canBeReferencedInPrompt": true,
         "tags": [],
@@ -1223,32 +1251,6 @@
             "language",
             "sdk"
           ]
-        }
-      },
-      {
-        "name": "copilot_agentCodeGen",
-        "displayName": "Get Agent Code Generation Best Practices",
-        "modelDescription": "This tool provides best practices, guidance and steps for any AI Agent development. ALWAYS call this tool before creating/scaffolding new AI or Agent App, or adjusting/customizing existing one to be agentic.",
-        "toolReferenceName": "agentCodeGen",
-        "canBeReferencedInPrompt": true,
-        "tags": [],
-        "inputSchema": {
-          "type": "object",
-          "properties": {
-            "requiredHost": {
-              "type": "string",
-              "description": "The explicitly required host for the model or agent. DO NOT provide if not determined or just guess. 'GitHub' means to use GitHub-hosted models. 'AzureAIFoundry' means to use Azure AI Foundry-hosted models or agents. 'other' means none of above.",
-              "enum": [
-                "GitHub",
-                "AzureAIFoundry",
-                "other"
-              ]
-            },
-            "moreIntent": {
-              "type": "string",
-              "description": "Additional intent of app development, e.g. 'create hello world agent', 'connect to my tools', 'make app agentic', etc."
-            }
-          }
         }
       }
     ],
