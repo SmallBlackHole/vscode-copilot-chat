@@ -243,7 +243,7 @@
 	"github.copilot.tools.searchResults.name": "Search View Results",
 	"github.copilot.tools.searchResults.description": "The results from the search view",
 	"github.copilot.tools.githubRepo.name": "Search GitHub Repository",
-	"github.copilot.tools.modelSuggestion.name": "Model Suggestion",
+	"github.copilot.tools.modelSuggestion.name": "Get AI Model Guidance",
 	"github.copilot.tools.generatePrompt.name": "Generate Prompt",
 	"github.copilot.tools.getTracingCodeGenBestPractices.name": "Get Tracing Code Generation Best Practices",
 	"github.copilot.tools.githubRepo.userDescription": "Searches a GitHub repository for relevant source code snippets. You can specify a repository using `owner/repo`",

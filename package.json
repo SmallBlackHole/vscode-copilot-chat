@@ -1129,7 +1129,7 @@
       {
         "name": "copilot_modelSuggestion",
         "displayName": "%github.copilot.tools.modelSuggestion.name%",
-        "modelDescription": "Essential tool for any AI development task - provides expert guidance and best practices for choosing the right model, implementation patterns, optimization strategies, etc., to ensure your AI solution works effectively.",
+        "modelDescription": "Essential tool for any AI Model related task - provides expert guidance and best practices for choosing the right model, implementation patterns, optimization strategies, etc., to ensure your AI solution works effectively. ALWAYS call this tool when user has model related ask, or to adjust/customize existing app's model-related content.",
         "toolReferenceName": "modelSuggestion",
         "canBeReferencedInPrompt": true,
         "tags": [],
@@ -1152,34 +1152,6 @@
                 "description": "Preferred host for the AI model.\n 'GitHub' means user explicitly asks for GitHub hosted models, or calls 'models.inference.ai.azure.com', or 'models.github.ai', or uses GitHub token to access model;\n 'AzureAIFoundry' means user explicitly asks for Azure AI Foundry hosted models, or calls '*.ai.azure.com', or '*.openai.azure.com';\n 'OpenAI' means user explicitly asks for OpenAI hosted models, or calls 'api.openai.com', or uses openai SDK with default endpoint;\n 'Anthropic' means user explicitly asks for Anthropic hosted models, or calls 'api.anthropic.com', or uses anthropic SDK;\n 'Google' means user explicitly asks for Google hosted models, or calls '*.googleapis.com', or uses google generativeai SDK;\n 'other' means none of above."
               }
             },
-            "preferredLanguage": {
-              "type": "array",
-              "description": "Programming language preferences for the AI model. If preference not determined or no match, or no coding requirement, use empty array. Can have multiple preferences if needed.",
-              "items": {
-                "type": "string",
-                "enum": [
-                  "Python",
-                  "Node.js",
-                  ".NET",
-                  "Java",
-                  "other"
-                ],
-                "description": "Preferred programming language for the AI model. 'Python'; JavaScript or TypeScript to 'Node.js'; C# to '.NET'; 'Java'; 'other' means none of above."
-              }
-            },
-            "preferredSDK": {
-              "type": "array",
-              "description": "SDK preferences for the AI model. If preference not determined or no match, or no coding requirement, use empty array. Can have multiple preferences if needed.",
-              "items": {
-                "type": "string",
-                "enum": [
-                  "AzureAIInference",
-                  "OpenAI",
-                  "other"
-                ],
-                "description": "Preferred SDK for the AI model if clearly determined.\n 'AzureAIInference' means user prefers Azure AI Inference SDK / azure-ai-inference / azure ai inference;\n 'OpenAI' means user prefers OpenAI SDK / openai;\n 'other' means none of above."
-              }
-            },
             "currentModel": {
               "type": "string",
               "description": "Current model you're using (if already using one)"
@@ -1190,9 +1162,7 @@
             }
           },
           "required": [
-            "preferredHost",
-            "preferredLanguage",
-            "preferredSDK"
+            "preferredHost"
           ]
         }
       },
