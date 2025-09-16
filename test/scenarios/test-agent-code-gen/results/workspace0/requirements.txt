@@ -1,0 +1,2 @@
+agent-framework[azure] @ git+https://github.com/microsoft/agent-framework.git@main#subdirectory=python/packages/main
+openai>=1.0.0

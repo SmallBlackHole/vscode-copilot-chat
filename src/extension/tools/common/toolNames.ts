@@ -59,6 +59,7 @@ export enum ToolName {
 	ExecutePrompt = 'execute_prompt',
 	ExecuteTask = 'execute_task',
 	GetAgentCodeGenBestPractices = 'get_agent_code_gen_best_practices',
+	GetAgentModelCodeSample = 'get_agent_model_code_sample',
 	CoreConfirmationTool = 'vscode_get_confirmation'
 }
 
@@ -109,6 +110,7 @@ export enum ContributedToolName {
 	ExecutePrompt = 'execute_prompt',
 	ExecuteTask = 'execute_task',
 	GetAgentCodeGenBestPractices = 'copilot_getAgentCodeGenBestPractices',
+	GetAgentModelCodeSample = 'copilot_getAgentModelCodeSample',
 }
 
 const toolNameToContributedToolNames = new Map<ToolName, ContributedToolName>();

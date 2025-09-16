@@ -1,7 +1,7 @@
 [
     {
         "question": "/editAgent write a simple console app to tell a joke about a given topic using ai",
-        "stateFile": "./tools.state.json",
+        "stateFile": "./tools0.state.json",
         "expectedToolCalls": "get_agent_code_gen_best_practices",
         "toolInputValues": {},
         "tools": {
@@ -13,8 +13,8 @@
             "list_dir": true,
             "search_workspace_symbols": true,
             "get_agent_code_gen_best_practices": true,
-            "create_file": true,
-
+            "get_agent_model_code_sample": true,
+            "create_file": true
         }
     }
 ]

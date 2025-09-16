@@ -1,0 +1,115 @@
+[
+	{
+		"type": "initialTestSummary",
+		"runOutputFolderName": "results",
+		"testsToRun": [
+			"test-agent-code-gen [panel] - agentcodegen0",
+			"test-agent-code-gen [panel] - agentcodegen1"
+		],
+		"nRuns": 1
+	},
+	{
+		"type": "testRunStart",
+		"name": "test-agent-code-gen [panel] - agentcodegen0",
+		"runNumber": 0
+	},
+	{
+		"type": "testRunStart",
+		"name": "test-agent-code-gen [panel] - agentcodegen1",
+		"runNumber": 0
+	},
+	{
+		"type": "testRunEnd",
+		"name": "test-agent-code-gen [panel] - agentcodegen0",
+		"runNumber": 0,
+		"duration": 97459,
+		"writtenFiles": [
+			{
+				"relativePath": "test-agent-code-gen-panel-agentcodegen0\\requirements.post-0.txt",
+				"tag": "inline-changed-doc-tag"
+			},
+			{
+				"relativePath": "test-agent-code-gen-panel-agentcodegen0\\constraints.post-0.txt",
+				"tag": "inline-changed-doc-tag"
+			},
+			{
+				"relativePath": "test-agent-code-gen-panel-agentcodegen0\\joke_teller.post-0.py",
+				"tag": "inline-changed-doc-tag"
+			},
+			{
+				"relativePath": "test-agent-code-gen-panel-agentcodegen0\\README.post-0.md",
+				"tag": "inline-changed-doc-tag"
+			},
+			{
+				"relativePath": "test-agent-code-gen-panel-agentcodegen0\\.gitignore-0.post",
+				"tag": "inline-changed-doc-tag"
+			},
+			{
+				"relativePath": "test-agent-code-gen-panel-agentcodegen0\\inline-simulator-0.txt",
+				"tag": "inline-state-tag"
+			},
+			{
+				"relativePath": "test-agent-code-gen-panel-agentcodegen0\\sim-requests-0.txt",
+				"tag": "requests-tag"
+			},
+			{
+				"relativePath": "test-agent-code-gen-panel-agentcodegen0\\sim-log-0.txt",
+				"tag": "implicit-log-tag"
+			}
+		],
+		"pass": true,
+		"annotations": [],
+		"averageRequestDuration": null,
+		"requestCount": 9,
+		"hasCacheMiss": false
+	},
+	{
+		"type": "testRunEnd",
+		"name": "test-agent-code-gen [panel] - agentcodegen1",
+		"runNumber": 0,
+		"duration": 107439,
+		"writtenFiles": [
+			{
+				"relativePath": "test-agent-code-gen-panel-agentcodegen1\\requirements.post-0.txt",
+				"tag": "inline-changed-doc-tag"
+			},
+			{
+				"relativePath": "test-agent-code-gen-panel-agentcodegen1\\constraints.post-0.txt",
+				"tag": "inline-changed-doc-tag"
+			},
+			{
+				"relativePath": "test-agent-code-gen-panel-agentcodegen1\\.env-0.post",
+				"tag": "inline-changed-doc-tag"
+			},
+			{
+				"relativePath": "test-agent-code-gen-panel-agentcodegen1\\weather_tools.post-0.py",
+				"tag": "inline-changed-doc-tag"
+			},
+			{
+				"relativePath": "test-agent-code-gen-panel-agentcodegen1\\weather_agent.post-0.py",
+				"tag": "inline-changed-doc-tag"
+			},
+			{
+				"relativePath": "test-agent-code-gen-panel-agentcodegen1\\README.post-0.md",
+				"tag": "inline-changed-doc-tag"
+			},
+			{
+				"relativePath": "test-agent-code-gen-panel-agentcodegen1\\inline-simulator-0.txt",
+				"tag": "inline-state-tag"
+			},
+			{
+				"relativePath": "test-agent-code-gen-panel-agentcodegen1\\sim-requests-0.txt",
+				"tag": "requests-tag"
+			},
+			{
+				"relativePath": "test-agent-code-gen-panel-agentcodegen1\\sim-log-0.txt",
+				"tag": "implicit-log-tag"
+			}
+		],
+		"pass": true,
+		"annotations": [],
+		"averageRequestDuration": null,
+		"requestCount": 10,
+		"hasCacheMiss": false
+	}
+]

@@ -1,0 +1,47 @@
+[
+  {
+    "kind": "initial",
+    "additionalFiles": [
+      {
+        "workspacePath": "requirements.txt",
+        "relativeDiskPath": "test-agent-code-gen-panel-agentcodegen1\\requirements.post-0.txt",
+        "languageId": "plaintext"
+      },
+      {
+        "workspacePath": "constraints.txt",
+        "relativeDiskPath": "test-agent-code-gen-panel-agentcodegen1\\constraints.post-0.txt",
+        "languageId": "plaintext"
+      },
+      {
+        "workspacePath": ".env",
+        "relativeDiskPath": "test-agent-code-gen-panel-agentcodegen1\\.env-0.post",
+        "languageId": "plaintext"
+      },
+      {
+        "workspacePath": "weather_tools.py",
+        "relativeDiskPath": "test-agent-code-gen-panel-agentcodegen1\\weather_tools.post-0.py",
+        "languageId": "python"
+      },
+      {
+        "workspacePath": "weather_agent.py",
+        "relativeDiskPath": "test-agent-code-gen-panel-agentcodegen1\\weather_agent.post-0.py",
+        "languageId": "python"
+      },
+      {
+        "workspacePath": "README.md",
+        "relativeDiskPath": "test-agent-code-gen-panel-agentcodegen1\\README.post-0.md",
+        "languageId": "markdown"
+      }
+    ],
+    "diagnostics": []
+  },
+  {
+    "kind": "interaction",
+    "changedFiles": [],
+    "annotations": [],
+    "interaction": {
+      "query": "/editAgent Please create a simple weather agent for retrieving weather information for a given city"
+    },
+    "requestCount": 10
+  }
+]

@@ -1,0 +1,96 @@
+[
+	{
+		"test": "test-agent-code-gen [panel] - agentcodegen0",
+		"outcomeDirectory": "test-agent-code-gen-panel-agentcodegen0",
+		"conversationPath": "C:\\Users\\dol\\workspace\\code\\vscode-copilot-chat-sbh\\test\\scenarios\\test-agent-code-gen\\agentcodegen0.conversation.json",
+		"score": 1,
+		"duration": 97443,
+		"usage": {
+			"completion_tokens": 4826,
+			"prompt_tokens": 152990,
+			"total_tokens": 157816,
+			"prompt_tokens_details": {
+				"cached_tokens": 130778
+			}
+		},
+		"outcomes": [
+			{
+				"kind": "answer",
+				"content": "I'll help you create a simple console app that tells jokes about a given topic using AI. First, let me get the best practices for AI agent development and then create the application. Now let me get AI model guidance to select the best model for this joke-telling app: Perfect! Based on the guidance, I'll use GitHub models for this simple console app, specifically the `gpt-4.1-mini` model which is cost-effective and well-suited for this type of application. Now let me get code samples for creating an agent application: Great! Now I have all the information I need. Let me create a simple console app that tells jokes about a given topic using AI. I'll create the project structure and implement the joke-telling app using the Microsoft Agent Framework with GitHub models. Perfect! I've created a complete AI joke-telling console application for you. Here's what I've built:\n\n## 🎭 AI Joke Teller Console App\n\nThis is a simple yet powerful console application that uses AI to tell jokes about any topic you provide. Here's what makes it special:\n\n### ✨ Key Features:\n- **AI-Powered Jokes**: Uses GitHub models (gpt-4.1-mini by default) for creative, family-friendly joke generation\n- **Cost-Effective**: Leverages GitHub models with free tier availability\n- **Two Modes**: Interactive mode for continuous fun, or single-joke mode via command line\n- **Smart Agent**: Uses Microsoft Agent Framework with specialized comedy instructions\n- **Family-Friendly**: Ensures all jokes are appropriate for all audiences\n\n### 📁 Project Structure:\n-  - Main application with the AI joke teller\n-  - Dependencies for the Microsoft Agent Framework\n-  - Version constraints for proper installation\n-  - Comprehensive setup and usage guide\n-  - Standard Python gitignore file\n\n### 🚀 How to Use:\n\n1. **Setup**: Install dependencies in a virtual environment\n2. **Get Token**: Create a GitHub Personal Access Token\n3. **Run Interactive Mode**: \n   ```bash\n   python joke_teller.py\n   ```\n4. **Or Single Joke Mode**:\n   ```bash\n   python joke_teller.py programming\n   python joke_teller.py \"artificial intelligence\"\n   ```\n\n### 🤖 Why These Choices:\n\n- **Model**: I selected `gpt-4.1-mini` as the default because it's cost-effective, fast, and perfect for creative tasks like joke generation\n- **SDK**: Used Microsoft Agent Framework because it provides excellent structure for AI interactions and supports GitHub models seamlessly\n- **GitHub Models**: Chosen for the free tier availability and easy setup with just a GitHub token\n\nThe app includes comprehensive error handling, user-friendly prompts, and detailed documentation. You can customize the joke style by modifying the agent instructions, choose different models, and even extend it with additional features.\n\nReady to start telling some AI-powered jokes? Just follow the setup instructions in the README and you'll be laughing in no time! 🎪✨",
+				"annotations": []
+			}
+		],
+		"cacheInfo": [
+			[]
+		],
+		"originalResults": [
+			{
+				"kind": "pass",
+				"usage": {
+					"completion_tokens": 4826,
+					"prompt_tokens": 152990,
+					"total_tokens": 157816,
+					"prompt_tokens_details": {
+						"cached_tokens": 130778
+					}
+				},
+				"contentFilterCount": 0,
+				"duration": 97443,
+				"outcome": {
+					"kind": "answer",
+					"content": "I'll help you create a simple console app that tells jokes about a given topic using AI. First, let me get the best practices for AI agent development and then create the application. Now let me get AI model guidance to select the best model for this joke-telling app: Perfect! Based on the guidance, I'll use GitHub models for this simple console app, specifically the `gpt-4.1-mini` model which is cost-effective and well-suited for this type of application. Now let me get code samples for creating an agent application: Great! Now I have all the information I need. Let me create a simple console app that tells jokes about a given topic using AI. I'll create the project structure and implement the joke-telling app using the Microsoft Agent Framework with GitHub models. Perfect! I've created a complete AI joke-telling console application for you. Here's what I've built:\n\n## 🎭 AI Joke Teller Console App\n\nThis is a simple yet powerful console application that uses AI to tell jokes about any topic you provide. Here's what makes it special:\n\n### ✨ Key Features:\n- **AI-Powered Jokes**: Uses GitHub models (gpt-4.1-mini by default) for creative, family-friendly joke generation\n- **Cost-Effective**: Leverages GitHub models with free tier availability\n- **Two Modes**: Interactive mode for continuous fun, or single-joke mode via command line\n- **Smart Agent**: Uses Microsoft Agent Framework with specialized comedy instructions\n- **Family-Friendly**: Ensures all jokes are appropriate for all audiences\n\n### 📁 Project Structure:\n-  - Main application with the AI joke teller\n-  - Dependencies for the Microsoft Agent Framework\n-  - Version constraints for proper installation\n-  - Comprehensive setup and usage guide\n-  - Standard Python gitignore file\n\n### 🚀 How to Use:\n\n1. **Setup**: Install dependencies in a virtual environment\n2. **Get Token**: Create a GitHub Personal Access Token\n3. **Run Interactive Mode**: \n   ```bash\n   python joke_teller.py\n   ```\n4. **Or Single Joke Mode**:\n   ```bash\n   python joke_teller.py programming\n   python joke_teller.py \"artificial intelligence\"\n   ```\n\n### 🤖 Why These Choices:\n\n- **Model**: I selected `gpt-4.1-mini` as the default because it's cost-effective, fast, and perfect for creative tasks like joke generation\n- **SDK**: Used Microsoft Agent Framework because it provides excellent structure for AI interactions and supports GitHub models seamlessly\n- **GitHub Models**: Chosen for the free tier availability and easy setup with just a GitHub token\n\nThe app includes comprehensive error handling, user-friendly prompts, and detailed documentation. You can customize the joke style by modifying the agent instructions, choose different models, and even extend it with additional features.\n\nReady to start telling some AI-powered jokes? Just follow the setup instructions in the README and you'll be laughing in no time! 🎪✨",
+					"annotations": []
+				},
+				"cacheInfo": [],
+				"hasCacheMiss": false
+			}
+		]
+	},
+	{
+		"test": "test-agent-code-gen [panel] - agentcodegen1",
+		"outcomeDirectory": "test-agent-code-gen-panel-agentcodegen1",
+		"conversationPath": "C:\\Users\\dol\\workspace\\code\\vscode-copilot-chat-sbh\\test\\scenarios\\test-agent-code-gen\\agentcodegen1.conversation.json",
+		"score": 1,
+		"duration": 107423,
+		"usage": {
+			"completion_tokens": 5722,
+			"prompt_tokens": 171315,
+			"total_tokens": 177037,
+			"prompt_tokens_details": {
+				"cached_tokens": 148140
+			}
+		},
+		"outcomes": [
+			{
+				"kind": "answer",
+				"content": "I'll help you create a simple weather agent for retrieving weather information. Let me start by getting the best practices for AI agent development and then create the necessary files. Now let me get specific guidance on AI model selection for this weather agent: Now let me get the specific code samples for creating an agent: Perfect! Now I have all the information I need to create a weather agent. Let me create the project structure with the necessary files. Perfect! I've created a complete weather agent project for you. Here's what I've built:\n\n## 🌤️ Weather Agent Project\n\nI've created a simple yet powerful weather agent using the Microsoft Agent Framework and GitHub models. Here's what the project includes:\n\n### **Project Structure**\n-  - Main agent implementation with conversational AI\n-  - Weather data retrieval functions (real + simulated)\n-  - Dependencies for the Agent Framework\n-  - Version constraints for installation\n-  - Environment configuration template\n-  - Comprehensive documentation\n\n### **Key Features**\n- 🤖 **AI-Powered Conversations** - Uses GitHub models (GPT-4.1-mini) for natural language understanding\n- 🌍 **Real Weather Data** - Integrates with OpenWeatherMap API for accurate weather information\n- 🎲 **Simulated Mode** - Falls back to simulated data for testing without API keys\n- 📅 **Weather Forecasts** - Provides multi-day weather forecasts\n- 🔄 **Context Awareness** - Maintains conversation history across multiple queries\n\n### **Model Selection**\nI chose **GitHub models** because they're:\n- Free to start (no charge until hitting rate limits)\n- Easy to set up with just a GitHub Personal Access Token\n- Support multiple models through a single endpoint\n- Perfect for getting started with AI agents\n\nThe default model is `openai/gpt-4.1-mini` which offers a good balance of performance and cost-effectiveness.\n\n### **Next Steps**\n1. **Install dependencies**: Create a virtual environment and run `pip install -r  --constraint constraints.txt`\n2. **Configure environment**: Update the  file with your GitHub token\n3. **Run the agent**: Execute `python weather_agent.py` to start the interactive weather agent\n4. **Optional**: Add an OpenWeatherMap API key for real weather data (otherwise it uses simulated data)\n\nThe agent can handle queries like:\n- \"What's the weather like in London?\"\n- \"Give me a 5-day forecast for New York\"\n- \"How's the weather in Tokyo today?\"\n\nWould you like me to help you set up the environment or explain any part of the implementation in more detail?",
+				"annotations": []
+			}
+		],
+		"cacheInfo": [
+			[]
+		],
+		"originalResults": [
+			{
+				"kind": "pass",
+				"usage": {
+					"completion_tokens": 5722,
+					"prompt_tokens": 171315,
+					"total_tokens": 177037,
+					"prompt_tokens_details": {
+						"cached_tokens": 148140
+					}
+				},
+				"contentFilterCount": 0,
+				"duration": 107423,
+				"outcome": {
+					"kind": "answer",
+					"content": "I'll help you create a simple weather agent for retrieving weather information. Let me start by getting the best practices for AI agent development and then create the necessary files. Now let me get specific guidance on AI model selection for this weather agent: Now let me get the specific code samples for creating an agent: Perfect! Now I have all the information I need to create a weather agent. Let me create the project structure with the necessary files. Perfect! I've created a complete weather agent project for you. Here's what I've built:\n\n## 🌤️ Weather Agent Project\n\nI've created a simple yet powerful weather agent using the Microsoft Agent Framework and GitHub models. Here's what the project includes:\n\n### **Project Structure**\n-  - Main agent implementation with conversational AI\n-  - Weather data retrieval functions (real + simulated)\n-  - Dependencies for the Agent Framework\n-  - Version constraints for installation\n-  - Environment configuration template\n-  - Comprehensive documentation\n\n### **Key Features**\n- 🤖 **AI-Powered Conversations** - Uses GitHub models (GPT-4.1-mini) for natural language understanding\n- 🌍 **Real Weather Data** - Integrates with OpenWeatherMap API for accurate weather information\n- 🎲 **Simulated Mode** - Falls back to simulated data for testing without API keys\n- 📅 **Weather Forecasts** - Provides multi-day weather forecasts\n- 🔄 **Context Awareness** - Maintains conversation history across multiple queries\n\n### **Model Selection**\nI chose **GitHub models** because they're:\n- Free to start (no charge until hitting rate limits)\n- Easy to set up with just a GitHub Personal Access Token\n- Support multiple models through a single endpoint\n- Perfect for getting started with AI agents\n\nThe default model is `openai/gpt-4.1-mini` which offers a good balance of performance and cost-effectiveness.\n\n### **Next Steps**\n1. **Install dependencies**: Create a virtual environment and run `pip install -r  --constraint constraints.txt`\n2. **Configure environment**: Update the  file with your GitHub token\n3. **Run the agent**: Execute `python weather_agent.py` to start the interactive weather agent\n4. **Optional**: Add an OpenWeatherMap API key for real weather data (otherwise it uses simulated data)\n\nThe agent can handle queries like:\n- \"What's the weather like in London?\"\n- \"Give me a 5-day forecast for New York\"\n- \"How's the weather in Tokyo today?\"\n\nWould you like me to help you set up the environment or explain any part of the implementation in more detail?",
+					"annotations": []
+				},
+				"cacheInfo": [],
+				"hasCacheMiss": false
+			}
+		]
+	}
+]

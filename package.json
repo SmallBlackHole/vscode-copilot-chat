@@ -1252,6 +1252,54 @@
             "sdk"
           ]
         }
+      },
+      {
+        "name": "copilot_getAgentModelCodeSample",
+        "displayName": "Get Agent & Model Code Sample",
+        "modelDescription": "This tool provides code samples and snippets for AI Agent and AI Model development. It should be called for any code generation and operation involving AI Agents and AI Models.",
+        "toolReferenceName": "getAgentModelCodeSample",
+        "canBeReferencedInPrompt": true,
+        "tags": [],
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "category": {
+              "type": "string",
+              "description": "The category of the AI application development. 'Agent' means to build single agent or agentic app with complex capabilities. 'Workflow' or 'MultiAgents' means to orchestrate multiple agents or build as workflow. 'Chat' means to build simple chat with model.",
+              "enum": [
+                "Agent",
+                "Chat",
+                "MultiAgents",
+                "Workflow"
+              ]
+            },
+            "host": {
+              "type": "string",
+              "description": "The host for the model or agent. 'GitHub' means to use GitHub-hosted models. 'AzureAIFoundry' means to use Azure AI Foundry-hosted models or agents. 'other' means none of above. For workflow or multi-agents category, use 'AzureAIFoundry'.",
+              "enum": [
+                "GitHub",
+                "AzureAIFoundry",
+                "other"
+              ]
+            },
+            "language": {
+              "type": "string",
+              "description": "The programming language of the AI application development.",
+              "enum": [
+                "Python",
+                "Node.js",
+                ".NET",
+                "Java",
+                "other"
+              ]
+            }
+          },
+          "required": [
+            "category",
+            "host",
+            "language"
+          ]
+        }
       }
     ],
     "languageModelToolSets": [

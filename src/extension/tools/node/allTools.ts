@@ -44,3 +44,4 @@ import './vscodeAPITool';
 import './vscodeCmdTool';
 import './toolReplayTool';
 import './agentCodeGenTool';
+import './getAgentModelCodeSampleTool';
