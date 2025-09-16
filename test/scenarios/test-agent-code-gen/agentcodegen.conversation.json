@@ -12,7 +12,9 @@
             "semantic_search": true,
             "list_dir": true,
             "search_workspace_symbols": true,
-            "get_agent_code_gen_best_practices": true
+            "get_agent_code_gen_best_practices": true,
+            "create_file": true,
+
         }
     }
 ]

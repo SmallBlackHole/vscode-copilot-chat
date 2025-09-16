@@ -105,6 +105,12 @@ export class CreateFileTool implements ICopilotTool<ICreateFileParams> {
 			sendEditNotebookTelemetry(this.telemetryService, this.endpointProvider, 'createFile', uri, this._promptContext.requestId, options.model ?? this._promptContext.request?.model);
 		} else {
 			const content = removeLeadingFilepathComment(options.input.content, languageId, options.input.filePath);
+			if (!fileExists) {
+				await this.fileSystemService.writeFile(uri, Buffer.from(content));
+				doc = hasSupportedNotebooks
+					? await this.workspaceService.openNotebookDocumentAndSnapshot(uri, this.alternativeNotebookContent.getFormat(this._promptContext?.request?.model))
+					: await this.workspaceService.openTextDocumentAndSnapshot(uri);
+			}
 			await processFullRewrite(uri, doc as TextDocumentSnapshot | undefined, content, this._promptContext.stream, token, []);
 			this._promptContext.stream.textEdit(uri, true);
 			return new LanguageModelToolResult([
