@@ -22,14 +22,14 @@
 		"type": "testRunEnd",
 		"name": "test-agent-code-gen [panel] - agentcodegen0",
 		"runNumber": 0,
-		"duration": 72204,
+		"duration": 97459,
 		"writtenFiles": [
 			{
 				"relativePath": "test-agent-code-gen-panel-agentcodegen0\\requirements.post-0.txt",
 				"tag": "inline-changed-doc-tag"
 			},
 			{
-				"relativePath": "test-agent-code-gen-panel-agentcodegen0\\.env.post-0.example",
+				"relativePath": "test-agent-code-gen-panel-agentcodegen0\\constraints.post-0.txt",
 				"tag": "inline-changed-doc-tag"
 			},
 			{
@@ -38,6 +38,10 @@
 			},
 			{
 				"relativePath": "test-agent-code-gen-panel-agentcodegen0\\README.post-0.md",
+				"tag": "inline-changed-doc-tag"
+			},
+			{
+				"relativePath": "test-agent-code-gen-panel-agentcodegen0\\.gitignore-0.post",
 				"tag": "inline-changed-doc-tag"
 			},
 			{
@@ -63,34 +67,30 @@
 		"type": "testRunEnd",
 		"name": "test-agent-code-gen [panel] - agentcodegen1",
 		"runNumber": 0,
-		"duration": 150472,
+		"duration": 107439,
 		"writtenFiles": [
-			{
-				"relativePath": "test-agent-code-gen-panel-agentcodegen1\\README.post-0.md",
-				"tag": "inline-changed-doc-tag"
-			},
 			{
 				"relativePath": "test-agent-code-gen-panel-agentcodegen1\\requirements.post-0.txt",
 				"tag": "inline-changed-doc-tag"
 			},
 			{
-				"relativePath": "test-agent-code-gen-panel-agentcodegen1\\config.post-0.py",
+				"relativePath": "test-agent-code-gen-panel-agentcodegen1\\constraints.post-0.txt",
 				"tag": "inline-changed-doc-tag"
 			},
 			{
-				"relativePath": "test-agent-code-gen-panel-agentcodegen1\\recipe_agent.post-0.py",
+				"relativePath": "test-agent-code-gen-panel-agentcodegen1\\.env-0.post",
 				"tag": "inline-changed-doc-tag"
 			},
 			{
-				"relativePath": "test-agent-code-gen-panel-agentcodegen1\\.env.post-0.example",
+				"relativePath": "test-agent-code-gen-panel-agentcodegen1\\weather_tools.post-0.py",
 				"tag": "inline-changed-doc-tag"
 			},
 			{
-				"relativePath": "test-agent-code-gen-panel-agentcodegen1\\sample_recipes.post-0.py",
+				"relativePath": "test-agent-code-gen-panel-agentcodegen1\\weather_agent.post-0.py",
 				"tag": "inline-changed-doc-tag"
 			},
 			{
-				"relativePath": "test-agent-code-gen-panel-agentcodegen1\\copilot-instructions.post-0.md",
+				"relativePath": "test-agent-code-gen-panel-agentcodegen1\\README.post-0.md",
 				"tag": "inline-changed-doc-tag"
 			},
 			{
@@ -107,20 +107,9 @@
 			}
 		],
 		"pass": true,
-		"annotations": [
-			{
-				"severity": "error",
-				"label": "missing-path-in-code-block",
-				"message": "Code block without a file path"
-			},
-			{
-				"severity": "error",
-				"label": "missing-path-in-code-block",
-				"message": "Code block without a file path"
-			}
-		],
+		"annotations": [],
 		"averageRequestDuration": null,
-		"requestCount": 17,
+		"requestCount": 10,
 		"hasCacheMiss": false
 	}
 ]

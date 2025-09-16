@@ -1,0 +1,3 @@
+agent-framework-azure @ git+https://github.com/microsoft/agent-framework.git@main#subdirectory=python/packages/azure
+agent-framework-foundry @ git+https://github.com/microsoft/agent-framework.git@main#subdirectory=python/packages/foundry
+agent-framework-workflow @ git+https://github.com/microsoft/agent-framework.git@main#subdirectory=python/packages/workflow

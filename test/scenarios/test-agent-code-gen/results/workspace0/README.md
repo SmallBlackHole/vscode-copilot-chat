@@ -1,130 +1,181 @@
 # AI Joke Teller Console App
 
-A simple console application that uses AI to generate jokes about user-specified topics. This app demonstrates how to integrate GitHub Models (AI) into a console application.
+A simple console application that tells jokes about any given topic using AI. Built with the Microsoft Agent Framework and GitHub models for cost-effective, high-quality joke generation.
 
 ## Features
 
-- 🎭 Generate AI-powered jokes on any topic
-- 🔄 Interactive console interface
-- 🛡️ Family-friendly, clean humor
-- 💰 Cost-effective using GitHub Models (free tier available)
-- ⚡ Fast response using GPT-4.1-mini model
+- 🎭 AI-powered joke generation on any topic
+- 💰 Cost-effective using GitHub models (free tier available)
+- 🎯 Interactive mode for continuous joke telling
+- 📝 Command-line mode for single jokes
+- 🛡️ Family-friendly content filtering
+- 🚀 Fast response times with optimized models
 
-## Setup Instructions
+## Setup
 
 ### 1. Install Dependencies
 
+First, create a virtual environment and install the required packages:
+
 ```bash
-pip install -r requirements.txt
+# Create virtual environment
+python -m venv venv
+
+# Activate virtual environment
+# On Linux/Mac:
+source venv/bin/activate
+# On Windows:
+venv\Scripts\activate
+
+# Install dependencies
+pip install -r requirements.txt --constraint constraints.txt
 ```
 
 ### 2. Get GitHub Personal Access Token
 
-1. Go to [GitHub Personal Access Tokens](https://github.com/settings/tokens)
+You need a GitHub Personal Access Token to access GitHub models:
+
+1. Go to [GitHub Settings > Personal Access Tokens](https://github.com/settings/tokens)
 2. Click "Generate new token (classic)"
 3. Give it a name like "AI Joke Teller"
-4. Select the `read:packages` scope (required for GitHub Models)
+4. Select appropriate scopes (no special scopes needed for model access)
 5. Click "Generate token"
 6. Copy the token (you won't see it again!)
 
-### 3. Configure Environment Variables
+### 3. Set Environment Variable (Optional)
 
-1. Copy the example environment file:
-   ```bash
-   cp .env.example .env
-   ```
+You can set your GitHub token as an environment variable:
 
-2. Edit `.env` and replace `your_github_personal_access_token_here` with your actual GitHub token:
-   ```
-   GITHUB_TOKEN=ghp_your_actual_token_here
-   ```
+```bash
+# Linux/Mac:
+export GITHUB_TOKEN="your_github_token_here"
 
-### 4. Run the Application
+# Windows (Command Prompt):
+set GITHUB_TOKEN=your_github_token_here
+
+# Windows (PowerShell):
+$env:GITHUB_TOKEN="your_github_token_here"
+```
+
+## Usage
+
+### Interactive Mode
+
+Run the app without arguments for interactive mode:
 
 ```bash
 python joke_teller.py
 ```
 
-## Usage
+This will start an interactive session where you can:
+- Enter any topic to get jokes about
+- Type 'quit', 'exit', or 'bye' to stop
+- Get multiple jokes by continuing the conversation
 
-1. Run the application
-2. Enter any topic when prompted (e.g., "cats", "programming", "pizza")
-3. Enjoy your AI-generated joke!
-4. Type `quit` or `exit` to stop
+### Single Joke Mode
 
-### Example Session
+Pass a topic as command-line arguments for a single joke:
 
-```
-🎭 Welcome to the AI Joke Teller! 🎭
-I can tell jokes about any topic you'd like!
-Type 'quit' or 'exit' to stop.
-
-What topic would you like a joke about? cats
-
-🤔 Thinking of a joke about 'cats'...
-
-😄 Here's your joke:
-Why don't cats play poker in the jungle? Because there are too many cheetahs!
-
---------------------------------------------------
-What topic would you like a joke about? programming
-
-🤔 Thinking of a joke about 'programming'...
-
-😄 Here's your joke:
-Why do programmers prefer dark mode? Because light attracts bugs!
-
---------------------------------------------------
-What topic would you like a joke about? quit
-Thanks for using the AI Joke Teller! Have a great day! 👋
+```bash
+python joke_teller.py programming
+python joke_teller.py "artificial intelligence"
+python joke_teller.py cats and dogs
 ```
 
-## Technical Details
+## Example Output
 
-### Model Selection
-- **Model**: OpenAI GPT-4.1-mini via GitHub Models
-- **Why this model**: Cost-effective, fast, and perfect for creative text generation like jokes
-- **Endpoint**: GitHub Models (https://models.github.ai)
+```
+🎭 AI Joke Teller - Powered by Microsoft Agent Framework & GitHub Models
+======================================================================
 
-### Architecture
-- Simple Python console application
-- Uses OpenAI SDK for API communication
-- Environment-based configuration for security
-- Error handling for robust operation
+🎭 AI Joke Teller initialized successfully!
+💡 Using model: openai/gpt-4.1-mini
 
-### Cost
-- GitHub Models offers a **free tier** for getting started
-- GPT-4.1-mini is one of the most cost-effective options
-- No charges until you hit rate limits
+🎪 Welcome to the AI Joke Teller!
+📝 Enter any topic and I'll tell you a joke about it.
+💬 Type 'quit', 'exit', or 'bye' to stop.
+
+🎯 What topic would you like a joke about? programming
+🤔 Thinking of a joke...
+
+😂 Here's your joke:
+Why do programmers prefer dark mode?
+
+Because light attracts bugs! 🐛
+
+And here's a bonus one:
+How many programmers does it take to change a light bulb?
+None. That's a hardware problem!
+
+--------------------------------------------------
+🎯 What topic would you like a joke about? quit
+👋 Thanks for using AI Joke Teller! Have a great day!
+```
+
+## Model Options
+
+The app supports various GitHub models:
+
+- **openai/gpt-4.1-mini** (default) - Fast, cost-effective, great for jokes
+- **openai/gpt-4.1** - More capable, higher quality responses
+- **openai/gpt-4o-mini** - Multimodal capabilities
+- And many more available on GitHub models
+
+## Project Structure
+
+```
+ai-joke-teller/
+├── joke_teller.py          # Main application
+├── requirements.txt        # Python dependencies
+├── constraints.txt         # Version constraints
+└── README.md              # This file
+```
+
+## How It Works
+
+1. **Agent Framework**: Uses Microsoft Agent Framework for structured AI interactions
+2. **GitHub Models**: Leverages GitHub's model endpoint for cost-effective AI access
+3. **Specialized Instructions**: The AI agent is specifically instructed to create family-friendly, creative jokes
+4. **Error Handling**: Robust error handling for network issues and API problems
 
 ## Customization
 
-You can customize the application by:
+You can customize the joke teller by modifying the agent instructions in `joke_teller.py`:
 
-1. **Changing the model**: Edit the `self.model` in `JokeTeller.__init__()`
-2. **Adjusting creativity**: Modify the `temperature` parameter (0.0-1.0)
-3. **Changing joke style**: Modify the system prompt in `generate_joke()`
-4. **Adding joke categories**: Extend the prompt to include specific joke types
+```python
+instructions="""You are a witty and family-friendly comedian AI. 
+Your job is to tell creative, clean, and funny jokes about any topic the user provides.
+# Add your custom instructions here...
+"""
+```
 
 ## Troubleshooting
 
 ### Common Issues
 
-1. **"GITHUB_TOKEN not found"**
-   - Make sure you created the `.env` file
-   - Verify your token is correctly set in the `.env` file
+1. **"GitHub token is required"**
+   - Make sure you've set the `GITHUB_TOKEN` environment variable or enter it when prompted
 
-2. **Authentication errors**
-   - Check that your GitHub token has the correct permissions
-   - Ensure the token hasn't expired
-
-3. **API errors**
+2. **"Error initializing joke teller"**
    - Check your internet connection
-   - Verify GitHub Models service status
+   - Verify your GitHub token is valid
+   - Ensure the model ID is correct
 
-### Support
-For issues with GitHub Models, check the [GitHub Models documentation](https://docs.github.com/en/github-models).
+3. **"Rate limit exceeded"**
+   - GitHub models have rate limits on the free tier
+   - Wait a moment before trying again
+   - Consider upgrading to a paid plan for higher limits
+
+### Getting Help
+
+- Check the [Microsoft Agent Framework documentation](https://github.com/microsoft/agent-framework)
+- Review [GitHub Models documentation](https://docs.github.com/en/github-models)
+- Ensure all dependencies are properly installed
 
 ## License
 
-This project is open source and available under the MIT License.
+This project is open source. Feel free to modify and distribute as needed.
+
+---
+
+Enjoy your AI-powered jokes! 🎭✨

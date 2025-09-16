@@ -1,6 +1,6 @@
 [
     {
-        "question": "/editAgent I want to create an LLM-based AI agent that can recommend recipes based on the ingredients users provide.",
+        "question": "/editAgent Please create a simple weather agent for retrieving weather information for a given city",
         "stateFile": "./tools1.state.json",
         "expectedToolCalls": "get_agent_code_gen_best_practices",
         "toolInputValues": {},
@@ -13,6 +13,7 @@
             "list_dir": true,
             "search_workspace_symbols": true,
             "get_agent_code_gen_best_practices": true,
+            "get_agent_model_code_sample": true,
             "create_file": true
         }
     }

@@ -3,38 +3,33 @@
     "kind": "initial",
     "additionalFiles": [
       {
-        "workspacePath": "README.md",
-        "relativeDiskPath": "test-agent-code-gen-panel-agentcodegen1\\README.post-0.md",
-        "languageId": "markdown"
-      },
-      {
         "workspacePath": "requirements.txt",
         "relativeDiskPath": "test-agent-code-gen-panel-agentcodegen1\\requirements.post-0.txt",
         "languageId": "plaintext"
       },
       {
-        "workspacePath": "config.py",
-        "relativeDiskPath": "test-agent-code-gen-panel-agentcodegen1\\config.post-0.py",
-        "languageId": "python"
-      },
-      {
-        "workspacePath": "recipe_agent.py",
-        "relativeDiskPath": "test-agent-code-gen-panel-agentcodegen1\\recipe_agent.post-0.py",
-        "languageId": "python"
-      },
-      {
-        "workspacePath": ".env.example",
-        "relativeDiskPath": "test-agent-code-gen-panel-agentcodegen1\\.env.post-0.example",
+        "workspacePath": "constraints.txt",
+        "relativeDiskPath": "test-agent-code-gen-panel-agentcodegen1\\constraints.post-0.txt",
         "languageId": "plaintext"
       },
       {
-        "workspacePath": "examples\\sample_recipes.py",
-        "relativeDiskPath": "test-agent-code-gen-panel-agentcodegen1\\sample_recipes.post-0.py",
+        "workspacePath": ".env",
+        "relativeDiskPath": "test-agent-code-gen-panel-agentcodegen1\\.env-0.post",
+        "languageId": "plaintext"
+      },
+      {
+        "workspacePath": "weather_tools.py",
+        "relativeDiskPath": "test-agent-code-gen-panel-agentcodegen1\\weather_tools.post-0.py",
         "languageId": "python"
       },
       {
-        "workspacePath": ".github\\copilot-instructions.md",
-        "relativeDiskPath": "test-agent-code-gen-panel-agentcodegen1\\copilot-instructions.post-0.md",
+        "workspacePath": "weather_agent.py",
+        "relativeDiskPath": "test-agent-code-gen-panel-agentcodegen1\\weather_agent.post-0.py",
+        "languageId": "python"
+      },
+      {
+        "workspacePath": "README.md",
+        "relativeDiskPath": "test-agent-code-gen-panel-agentcodegen1\\README.post-0.md",
         "languageId": "markdown"
       }
     ],
@@ -43,21 +38,10 @@
   {
     "kind": "interaction",
     "changedFiles": [],
-    "annotations": [
-      {
-        "severity": "error",
-        "label": "missing-path-in-code-block",
-        "message": "Code block without a file path"
-      },
-      {
-        "severity": "error",
-        "label": "missing-path-in-code-block",
-        "message": "Code block without a file path"
-      }
-    ],
+    "annotations": [],
     "interaction": {
-      "query": "/editAgent I want to create an LLM-based AI agent that can recommend recipes based on the ingredients users provide."
+      "query": "/editAgent Please create a simple weather agent for retrieving weather information for a given city"
     },
-    "requestCount": 17
+    "requestCount": 10
   }
 ]

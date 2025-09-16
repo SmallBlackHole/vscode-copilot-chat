@@ -8,8 +8,8 @@
         "languageId": "plaintext"
       },
       {
-        "workspacePath": ".env.example",
-        "relativeDiskPath": "test-agent-code-gen-panel-agentcodegen0\\.env.post-0.example",
+        "workspacePath": "constraints.txt",
+        "relativeDiskPath": "test-agent-code-gen-panel-agentcodegen0\\constraints.post-0.txt",
         "languageId": "plaintext"
       },
       {
@@ -21,6 +21,11 @@
         "workspacePath": "README.md",
         "relativeDiskPath": "test-agent-code-gen-panel-agentcodegen0\\README.post-0.md",
         "languageId": "markdown"
+      },
+      {
+        "workspacePath": ".gitignore",
+        "relativeDiskPath": "test-agent-code-gen-panel-agentcodegen0\\.gitignore-0.post",
+        "languageId": "plaintext"
       }
     ],
     "diagnostics": []

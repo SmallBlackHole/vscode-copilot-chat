@@ -1,127 +1,175 @@
-# Recipe Recommendation Agent
+# Weather Agent
 
-An LLM-based AI agent that recommends recipes based on ingredients provided by users, built with Microsoft Agent Framework and GitHub models.
+A simple weather agent built with the Microsoft Agent Framework that can retrieve weather information for any city using GitHub models.
 
 ## Features
 
-- 🥗 Ingredient-based recipe recommendations
-- 🤖 Powered by Microsoft Agent Framework
-- 🔄 Uses GitHub models with free tier
-- 📱 Simple command-line interface
-- 🎯 Customizable dietary preferences and restrictions
+- 🌤️ **Real Weather Data**: Uses OpenWeatherMap API for accurate weather information
+- 🎲 **Simulated Weather**: Fallback to simulated data for testing or when API is unavailable
+- 🔄 **Multi-turn Conversations**: Maintains context across multiple queries
+- 📅 **Weather Forecasts**: Provides multi-day weather forecasts
+- 🤖 **AI-Powered**: Uses GitHub models (GPT-4.1-mini) for natural language processing
 
-## Prerequisites
+## Setup
 
-- Python 3.8+
-- GitHub Personal Access Token (for GitHub models)
+### 1. Install Dependencies
 
-## Installation
+First, create a virtual environment and install the required packages:
 
-1. Clone this repository or download the files
-2. Install dependencies:
-   ```bash
-   pip install -r requirements.txt
-   ```
+```bash
+# Create virtual environment
+python -m venv weather-agent-env
 
-3. Set up your GitHub Personal Access Token:
-   - Go to [GitHub Settings > Developer settings > Personal access tokens](https://github.com/settings/tokens)
-   - Generate a new token with appropriate permissions
-   - Set it as an environment variable:
-   ```bash
-   export GITHUB_TOKEN=your_github_token_here
-   ```
+# Activate virtual environment
+# On Windows:
+weather-agent-env\Scripts\activate
+# On macOS/Linux:
+source weather-agent-env/bin/activate
+
+# Install dependencies
+pip install -r requirements.txt --constraint constraints.txt
+```
+
+### 2. Environment Configuration
+
+Copy the `.env` file and update it with your credentials:
+
+```bash
+# Copy the example environment file
+cp .env .env.local
+```
+
+Update the `.env` file with your credentials:
+
+```env
+# Required: GitHub Personal Access Token for accessing GitHub models
+GITHUB_TOKEN=your_github_token_here
+
+# Optional: OpenWeatherMap API Key for real weather data
+WEATHER_API_KEY=your_openweathermap_api_key_here
+
+# Model configuration
+MODEL_ID=openai/gpt-4.1-mini
+```
+
+#### Getting a GitHub Token
+
+1. Go to [GitHub Settings > Personal Access Tokens](https://github.com/settings/tokens)
+2. Click "Generate new token (classic)"
+3. Give it a name like "Weather Agent"
+4. Select the appropriate scopes (for GitHub models, basic access is sufficient)
+5. Copy the generated token to your `.env` file
+
+#### Getting an OpenWeatherMap API Key (Optional)
+
+1. Sign up at [OpenWeatherMap](https://openweathermap.org/api)
+2. Get your free API key
+3. Add it to your `.env` file
+
+If you don't provide a weather API key, the agent will use simulated weather data.
 
 ## Usage
 
 ### Basic Usage
 
+Run the weather agent:
+
 ```bash
-python recipe_agent.py
+python weather_agent.py
 ```
 
-### Example Interaction
+The agent will start in interactive mode where you can ask weather questions like:
+- "What's the weather like in London?"
+- "How's the weather in Tokyo today?"
+- "Can you give me a 5-day forecast for New York?"
 
+### Using in Your Code
+
+```python
+import asyncio
+from weather_agent import WeatherAgent
+
+async def example():
+    # Create weather agent
+    agent = WeatherAgent(use_real_weather=True)  # Set to False for simulated data
+    
+    # Get weather for a specific city
+    weather = await agent.get_weather("Paris")
+    print(weather)
+    
+    # Have a conversation
+    thread = agent.get_new_thread()
+    response = await agent.chat("What's the weather like in Seattle?", thread=thread)
+    print(response)
+    
+    # Follow-up question (maintains context)
+    response2 = await agent.chat("What about tomorrow?", thread=thread)
+    print(response2)
+
+# Run the example
+asyncio.run(example())
 ```
-Recipe Recommendation Agent
-===========================
-
-What ingredients do you have? chicken, rice, broccoli
-
-🤖 Based on your ingredients (chicken, rice, broccoli), here are some delicious recipe recommendations:
-
-1. **Chicken and Broccoli Rice Bowl**
-   - A healthy one-bowl meal with seasoned chicken, steamed broccoli, and fluffy rice
-   - Cook time: 25 minutes
-   - Difficulty: Easy
-
-2. **Chicken Fried Rice with Broccoli**
-   - Classic fried rice with diced chicken and fresh broccoli florets
-   - Cook time: 20 minutes
-   - Difficulty: Easy
-
-Would you like detailed instructions for any of these recipes? (y/n)
-```
-
-### Configuration
-
-You can customize the agent by modifying `config.py`:
-
-- Model selection (default: gpt-4o-mini for cost efficiency)
-- Dietary restrictions
-- Cuisine preferences
-- Recipe complexity level
 
 ## Project Structure
 
 ```
-recipe-agent/
-├── recipe_agent.py          # Main agent application
-├── config.py               # Configuration settings
-├── requirements.txt        # Python dependencies
-├── README.md              # This file
-├── .env.example           # Environment variables template
-└── examples/
-    └── sample_recipes.py   # Example usage and sample outputs
+weather-agent/
+├── weather_agent.py      # Main agent implementation
+├── weather_tools.py      # Weather data retrieval tools
+├── requirements.txt      # Python dependencies
+├── constraints.txt       # Version constraints
+├── .env                  # Environment variables (copy and configure)
+└── README.md            # This file
 ```
 
-## Model Information
+## How It Works
 
-This agent uses GitHub models for cost-effective development:
+1. **Agent Framework**: Uses Microsoft Agent Framework to create an AI agent
+2. **GitHub Models**: Leverages GitHub's hosted AI models for natural language understanding
+3. **Function Calling**: The agent can call weather functions to retrieve real data
+4. **Context Management**: Maintains conversation context across multiple interactions
 
-- **Default Model**: `openai/gpt-4o-mini` - Affordable and efficient for recipe generation
-- **Alternative**: `openai/gpt-4o` - Higher quality for more complex recipe requests
-- **Reasoning Model**: `openai/o1-mini` - For complex dietary requirement analysis
+## Available Models
 
-## Contributing
+The agent uses GitHub models by default. You can change the model by updating the `MODEL_ID` in your `.env` file. Some available options:
 
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Test thoroughly
-5. Submit a pull request
-
-## License
-
-MIT License - see LICENSE file for details
-
-## Support
-
-For issues and questions:
-- Check the troubleshooting section below
-- Open an issue on GitHub
-- Review the Microsoft Agent Framework documentation
+- `openai/gpt-4.1-mini` (default) - Fast and cost-effective
+- `openai/gpt-4.1` - More capable for complex queries
+- `openai/gpt-4o-mini` - Multimodal capabilities
+- `microsoft/phi-4-mini-instruct` - Smaller, efficient model
 
 ## Troubleshooting
 
 ### Common Issues
 
-1. **Authentication Error**: Ensure your GitHub token is correctly set
-2. **Model Not Available**: Check if the model is available in your region
-3. **Rate Limiting**: GitHub models have free tier limits; consider upgrading if needed
+1. **Missing GitHub Token**: Make sure you've set `GITHUB_TOKEN` in your `.env` file
+2. **Installation Issues**: Ensure you're using Python 3.10 or later
+3. **Network Issues**: The agent requires internet access to reach GitHub models and weather APIs
 
-### Debug Mode
+### Error Messages
 
-Run with debug logging:
-```bash
-python recipe_agent.py --debug
+- `GITHUB_TOKEN environment variable is required`: Add your GitHub token to `.env`
+- `Error fetching weather data`: Check your `WEATHER_API_KEY` or use simulated mode
+- `Model not found`: Verify your `MODEL_ID` is correct and available
+
+## Extending the Agent
+
+You can easily extend the agent with additional tools:
+
+```python
+# Add to weather_tools.py
+def get_air_quality(location: str) -> str:
+    """Get air quality information for a location."""
+    # Implementation here
+    pass
+
+# Add to agent tools in weather_agent.py
+self.agent = ChatAgent(
+    # ... other parameters
+    tools=[weather_function, get_weather_forecast, get_air_quality],
+)
 ```
+
+## License
+
+This project is open source and available under the MIT License.
