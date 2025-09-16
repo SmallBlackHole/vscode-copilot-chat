@@ -1,0 +1,126 @@
+[
+	{
+		"type": "initialTestSummary",
+		"runOutputFolderName": "results",
+		"testsToRun": [
+			"test-agent-code-gen [panel] - agentcodegen0",
+			"test-agent-code-gen [panel] - agentcodegen1"
+		],
+		"nRuns": 1
+	},
+	{
+		"type": "testRunStart",
+		"name": "test-agent-code-gen [panel] - agentcodegen0",
+		"runNumber": 0
+	},
+	{
+		"type": "testRunStart",
+		"name": "test-agent-code-gen [panel] - agentcodegen1",
+		"runNumber": 0
+	},
+	{
+		"type": "testRunEnd",
+		"name": "test-agent-code-gen [panel] - agentcodegen0",
+		"runNumber": 0,
+		"duration": 72204,
+		"writtenFiles": [
+			{
+				"relativePath": "test-agent-code-gen-panel-agentcodegen0\\requirements.post-0.txt",
+				"tag": "inline-changed-doc-tag"
+			},
+			{
+				"relativePath": "test-agent-code-gen-panel-agentcodegen0\\.env.post-0.example",
+				"tag": "inline-changed-doc-tag"
+			},
+			{
+				"relativePath": "test-agent-code-gen-panel-agentcodegen0\\joke_teller.post-0.py",
+				"tag": "inline-changed-doc-tag"
+			},
+			{
+				"relativePath": "test-agent-code-gen-panel-agentcodegen0\\README.post-0.md",
+				"tag": "inline-changed-doc-tag"
+			},
+			{
+				"relativePath": "test-agent-code-gen-panel-agentcodegen0\\inline-simulator-0.txt",
+				"tag": "inline-state-tag"
+			},
+			{
+				"relativePath": "test-agent-code-gen-panel-agentcodegen0\\sim-requests-0.txt",
+				"tag": "requests-tag"
+			},
+			{
+				"relativePath": "test-agent-code-gen-panel-agentcodegen0\\sim-log-0.txt",
+				"tag": "implicit-log-tag"
+			}
+		],
+		"pass": true,
+		"annotations": [],
+		"averageRequestDuration": null,
+		"requestCount": 9,
+		"hasCacheMiss": false
+	},
+	{
+		"type": "testRunEnd",
+		"name": "test-agent-code-gen [panel] - agentcodegen1",
+		"runNumber": 0,
+		"duration": 150472,
+		"writtenFiles": [
+			{
+				"relativePath": "test-agent-code-gen-panel-agentcodegen1\\README.post-0.md",
+				"tag": "inline-changed-doc-tag"
+			},
+			{
+				"relativePath": "test-agent-code-gen-panel-agentcodegen1\\requirements.post-0.txt",
+				"tag": "inline-changed-doc-tag"
+			},
+			{
+				"relativePath": "test-agent-code-gen-panel-agentcodegen1\\config.post-0.py",
+				"tag": "inline-changed-doc-tag"
+			},
+			{
+				"relativePath": "test-agent-code-gen-panel-agentcodegen1\\recipe_agent.post-0.py",
+				"tag": "inline-changed-doc-tag"
+			},
+			{
+				"relativePath": "test-agent-code-gen-panel-agentcodegen1\\.env.post-0.example",
+				"tag": "inline-changed-doc-tag"
+			},
+			{
+				"relativePath": "test-agent-code-gen-panel-agentcodegen1\\sample_recipes.post-0.py",
+				"tag": "inline-changed-doc-tag"
+			},
+			{
+				"relativePath": "test-agent-code-gen-panel-agentcodegen1\\copilot-instructions.post-0.md",
+				"tag": "inline-changed-doc-tag"
+			},
+			{
+				"relativePath": "test-agent-code-gen-panel-agentcodegen1\\inline-simulator-0.txt",
+				"tag": "inline-state-tag"
+			},
+			{
+				"relativePath": "test-agent-code-gen-panel-agentcodegen1\\sim-requests-0.txt",
+				"tag": "requests-tag"
+			},
+			{
+				"relativePath": "test-agent-code-gen-panel-agentcodegen1\\sim-log-0.txt",
+				"tag": "implicit-log-tag"
+			}
+		],
+		"pass": true,
+		"annotations": [
+			{
+				"severity": "error",
+				"label": "missing-path-in-code-block",
+				"message": "Code block without a file path"
+			},
+			{
+				"severity": "error",
+				"label": "missing-path-in-code-block",
+				"message": "Code block without a file path"
+			}
+		],
+		"averageRequestDuration": null,
+		"requestCount": 17,
+		"hasCacheMiss": false
+	}
+]

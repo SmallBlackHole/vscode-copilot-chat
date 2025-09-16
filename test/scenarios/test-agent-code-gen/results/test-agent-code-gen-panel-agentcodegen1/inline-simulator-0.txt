@@ -1,0 +1,63 @@
+[
+  {
+    "kind": "initial",
+    "additionalFiles": [
+      {
+        "workspacePath": "README.md",
+        "relativeDiskPath": "test-agent-code-gen-panel-agentcodegen1\\README.post-0.md",
+        "languageId": "markdown"
+      },
+      {
+        "workspacePath": "requirements.txt",
+        "relativeDiskPath": "test-agent-code-gen-panel-agentcodegen1\\requirements.post-0.txt",
+        "languageId": "plaintext"
+      },
+      {
+        "workspacePath": "config.py",
+        "relativeDiskPath": "test-agent-code-gen-panel-agentcodegen1\\config.post-0.py",
+        "languageId": "python"
+      },
+      {
+        "workspacePath": "recipe_agent.py",
+        "relativeDiskPath": "test-agent-code-gen-panel-agentcodegen1\\recipe_agent.post-0.py",
+        "languageId": "python"
+      },
+      {
+        "workspacePath": ".env.example",
+        "relativeDiskPath": "test-agent-code-gen-panel-agentcodegen1\\.env.post-0.example",
+        "languageId": "plaintext"
+      },
+      {
+        "workspacePath": "examples\\sample_recipes.py",
+        "relativeDiskPath": "test-agent-code-gen-panel-agentcodegen1\\sample_recipes.post-0.py",
+        "languageId": "python"
+      },
+      {
+        "workspacePath": ".github\\copilot-instructions.md",
+        "relativeDiskPath": "test-agent-code-gen-panel-agentcodegen1\\copilot-instructions.post-0.md",
+        "languageId": "markdown"
+      }
+    ],
+    "diagnostics": []
+  },
+  {
+    "kind": "interaction",
+    "changedFiles": [],
+    "annotations": [
+      {
+        "severity": "error",
+        "label": "missing-path-in-code-block",
+        "message": "Code block without a file path"
+      },
+      {
+        "severity": "error",
+        "label": "missing-path-in-code-block",
+        "message": "Code block without a file path"
+      }
+    ],
+    "interaction": {
+      "query": "/editAgent I want to create an LLM-based AI agent that can recommend recipes based on the ingredients users provide."
+    },
+    "requestCount": 17
+  }
+]

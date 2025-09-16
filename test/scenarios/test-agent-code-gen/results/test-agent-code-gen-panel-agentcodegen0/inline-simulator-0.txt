@@ -1,0 +1,37 @@
+[
+  {
+    "kind": "initial",
+    "additionalFiles": [
+      {
+        "workspacePath": "requirements.txt",
+        "relativeDiskPath": "test-agent-code-gen-panel-agentcodegen0\\requirements.post-0.txt",
+        "languageId": "plaintext"
+      },
+      {
+        "workspacePath": ".env.example",
+        "relativeDiskPath": "test-agent-code-gen-panel-agentcodegen0\\.env.post-0.example",
+        "languageId": "plaintext"
+      },
+      {
+        "workspacePath": "joke_teller.py",
+        "relativeDiskPath": "test-agent-code-gen-panel-agentcodegen0\\joke_teller.post-0.py",
+        "languageId": "python"
+      },
+      {
+        "workspacePath": "README.md",
+        "relativeDiskPath": "test-agent-code-gen-panel-agentcodegen0\\README.post-0.md",
+        "languageId": "markdown"
+      }
+    ],
+    "diagnostics": []
+  },
+  {
+    "kind": "interaction",
+    "changedFiles": [],
+    "annotations": [],
+    "interaction": {
+      "query": "/editAgent write a simple console app to tell a joke about a given topic using ai"
+    },
+    "requestCount": 9
+  }
+]

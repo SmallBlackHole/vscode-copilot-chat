@@ -1,0 +1,19 @@
+[
+    {
+        "question": "/editAgent I want to create an LLM-based AI agent that can recommend recipes based on the ingredients users provide.",
+        "stateFile": "./tools1.state.json",
+        "expectedToolCalls": "get_agent_code_gen_best_practices",
+        "toolInputValues": {},
+        "tools": {
+            "find_files": true,
+            "grep_search": true,
+            "read_file": true,
+            "insert_edit_into_file": true,
+            "semantic_search": true,
+            "list_dir": true,
+            "search_workspace_symbols": true,
+            "get_agent_code_gen_best_practices": true,
+            "create_file": true
+        }
+    }
+]
