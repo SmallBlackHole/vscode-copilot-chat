@@ -3,7 +3,9 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
+import './agentCodeGenTool';
 import './applyPatchTool';
+import './basicRunInTerminal';
 import './codebaseTool';
 import './createDirectoryTool';
 import './createFileTool';
@@ -15,6 +17,7 @@ import './findFilesTool';
 import './findTestsFilesTool';
 import './findTextInFilesTool';
 import './generatePrompt';
+import './getAgentModelCodeSampleTool';
 import './getErrorsTool';
 import './getNotebookCellOutputTool';
 import './getSearchViewResultsTool';
@@ -38,10 +41,9 @@ import './searchWorkspaceSymbolsTool';
 import './simpleBrowserTool';
 import './testFailureTool';
 import './thinkTool';
+import './toolReplayTool';
 import './usagesTool';
 import './userPreferencesTool';
 import './vscodeAPITool';
 import './vscodeCmdTool';
-import './toolReplayTool';
-import './agentCodeGenTool';
-import './getAgentModelCodeSampleTool';
+

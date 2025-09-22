@@ -59,12 +59,12 @@ npm run simulate
 ### End-to-End Tests
 Run comprehensive e2e tests with model suggestions:
 ```bash
-npm run simulate -- --external-scenarios <your-repo-path>/test/scenarios/test-generate-prompt  --parallelism 1 --sidebar --disable-tools=get_errors --verbose --output c:/temp/out --skip-cache --model claude-sonnet-4
+cross-env SKIP_TELEMETRY=1 SIMULATION=1 node dist/simulationMain.js --external-scenarios <your-repo-path>/test/scenarios/test-generate-prompt -n 1 --parallelism 1 --sidebar --disable-tools=get_errors --verbose --output c:/temp/out --skip-cache --model claude-sonnet-4 --skip-cache
 ```
 
 In order to use `manage_todo_list` or other tools outside this repo, run e2e tests using in-extension-host host. This will start a VS Code server.
 ```bash
-cross-env SKIP_TELEMETRY=1 SIMULATION=1 node dist/simulationMain.js --external-scenarios <your-repo-path>/test/scenarios/test-agent-code-gen  -n 1 --disable-tools=get_errors --in-extension-host --verbose --output c:/temp/out --sidebar --model claude-sonnet-4 --skip-cache -headless false
+cross-env SKIP_TELEMETRY=1 SIMULATION=1 node dist/simulationMain.js --external-scenarios <your-repo-path>/test/scenarios/test-agent-code-gen -n 1 --disable-tools=get_errors --in-extension-host --verbose --output c:/temp/out --sidebar --model claude-sonnet-4 --skip-cache
 ```
 
 #### How it works
