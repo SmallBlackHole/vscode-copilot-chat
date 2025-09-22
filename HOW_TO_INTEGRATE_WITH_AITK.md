@@ -62,6 +62,21 @@ Run comprehensive e2e tests with model suggestions:
 npm run simulate -- --external-scenarios <your-repo-path>/test/scenarios/test-generate-prompt  --parallelism 1 --sidebar --disable-tools=get_errors --verbose --output c:/temp/out --skip-cache --model claude-sonnet-4
 ```
 
+In order to use `manage_todo_list` or other tools outside this repo, run e2e tests using in-extension-host host. This will start a VS Code server.
+```bash
+cross-env SKIP_TELEMETRY=1 SIMULATION=1 node dist/simulationMain.js --external-scenarios <your-repo-path>/test/scenarios/test-agent-code-gen  -n 1 --disable-tools=get_errors --in-extension-host --verbose --output c:/temp/out --sidebar --model claude-sonnet-4 --skip-cache -headless false
+```
+
+#### How it works
+
+To run tests in a real extension host, we do the following process when `npm run simulate --in-extension-host` is called:
+
+1. This will create a 'simulation extension' locally, and start a VS Code server with that extension installed.
+1. This will create a temporary directory for the workspace, and use Playwright to open a browser on the server in that workspace.
+1. Once the workspace comes up with the 'simulator extension' installed, it will import the simulation test code and connect back to the `npm run simulate` process saying it's ready.
+
+For now, `run_in_terminal` tool needs user approve in VS Code, need more investigate.
+
 ## AI Toolkit Tool Integration
 
 The repository includes an automated script for generating VS Code Copilot Chat tool wrappers for AI Toolkit (AITK) tools.
