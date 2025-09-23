@@ -1,0 +1,295 @@
+{
+  "traces": [
+    {
+      "name": "chat gpt-4.1-mini",
+      "context": {
+        "trace_id": "606ce793d0d59da83cf0ee11504b413e",
+        "span_id": "b6e8f4f4dffc94a3"
+      },
+      "parent_id": "94affd574dd3b77a",
+      "start_time": "2025-09-09T10:17:20.404000Z",
+      "end_time": "2025-09-09T10:17:25.314000Z",
+      "status": {
+        "code": 0,
+        "message": null
+      },
+      "kind": "CLIENT",
+      "events": [
+        {
+          "name": "gen_ai.system.message",
+          "timestamp": "2025-09-09T10:17:20.404000Z",
+          "attributes": {
+            "event.name": "gen_ai.system.message",
+            "gen_ai.system": "azure_openai",
+            "CHAT_MESSAGE_INDEX": "0",
+            "code.file.path": "C:\\Users\\kuojianlu\\Documents\\repo\\agent-framework\\python\\packages\\main\\agent_framework\\telemetry.py",
+            "code.function.name": "_set_chat_response_input",
+            "code.line.number": "454"
+          },
+          "body": "{\"role\":{\"value\":\"system\"},\"contents\":[{\"text\":\"You are a helpful assistant that can provide weather and time information.\",\"type\":\"text\"}]}"
+        },
+        {
+          "name": "gen_ai.user.message",
+          "timestamp": "2025-09-09T10:17:20.404000Z",
+          "attributes": {
+            "event.name": "gen_ai.user.message",
+            "gen_ai.system": "azure_openai",
+            "CHAT_MESSAGE_INDEX": "1",
+            "code.file.path": "C:\\Users\\kuojianlu\\Documents\\repo\\agent-framework\\python\\packages\\main\\agent_framework\\telemetry.py",
+            "code.function.name": "_set_chat_response_input",
+            "code.line.number": "454"
+          },
+          "body": "{\"role\":{\"value\":\"user\"},\"contents\":[{\"text\":\"What's the weather like in New York?\",\"type\":\"text\"}]}"
+        },
+        {
+          "name": "gen_ai.choice",
+          "timestamp": "2025-09-09T10:17:25.313000Z",
+          "attributes": {
+            "event.name": "gen_ai.choice",
+            "gen_ai.system": "azure_openai",
+            "code.file.path": "C:\\Users\\kuojianlu\\Documents\\repo\\agent-framework\\python\\packages\\main\\agent_framework\\telemetry.py",
+            "code.function.name": "_set_chat_response_output",
+            "code.line.number": "500"
+          },
+          "body": "{\"message\": {\"role\": {\"value\": \"assistant\"}, \"contents\": [{\"type\": \"function_call\", \"call_id\": \"call_O8jQPBMEZd4fmKvhEQqMmh7V\", \"name\": \"get_weather\", \"arguments\": \"{\\\"location\\\":\\\"New York\\\"}\"}]}, \"index\": \"chatcmpl-CDphZE9eHG8OflcbLNkGx1QPcKMpu\"}"
+        },
+        {
+          "name": "gen_ai.choice",
+          "timestamp": "2025-09-09T10:17:25.314000Z",
+          "attributes": {
+            "event.name": "gen_ai.choice",
+            "gen_ai.system": "azure_openai",
+            "code.file.path": "C:\\Users\\kuojianlu\\Documents\\repo\\agent-framework\\python\\packages\\main\\agent_framework\\telemetry.py",
+            "code.function.name": "_set_chat_response_output",
+            "code.line.number": "500"
+          },
+          "body": "{\"message\": {\"role\": {\"value\": \"tool\"}, \"contents\": [{\"type\": \"function_result\", \"call_id\": \"call_O8jQPBMEZd4fmKvhEQqMmh7V\", \"result\": \"The weather in New York is sunny with a high of 12\\u00b0C.\"}]}, \"index\": \"chatcmpl-CDphZE9eHG8OflcbLNkGx1QPcKMpu\"}"
+        },
+        {
+          "name": "gen_ai.choice",
+          "timestamp": "2025-09-09T10:17:25.314000Z",
+          "attributes": {
+            "event.name": "gen_ai.choice",
+            "gen_ai.system": "azure_openai",
+            "code.file.path": "C:\\Users\\kuojianlu\\Documents\\repo\\agent-framework\\python\\packages\\main\\agent_framework\\telemetry.py",
+            "code.function.name": "_set_chat_response_output",
+            "code.line.number": "500"
+          },
+          "body": "{\"message\": {\"role\": {\"value\": \"assistant\"}, \"contents\": [{\"text\": \"The weather in New York is sunny with a high of 12\\u00b0C.\", \"type\": \"text\"}]}, \"index\": \"chatcmpl-CDphZE9eHG8OflcbLNkGx1QPcKMpu\"}"
+        }
+      ],
+      "attributes": {
+        "gen_ai.operation.name": "chat",
+        "gen_ai.system": "azure_openai",
+        "gen_ai.request.model": "gpt-4.1-mini",
+        "gen_ai.request.choice.count": "1",
+        "server.address": "https://aochengwang-test-resource.openai.azure.com/openai/deployments/gpt-4.1-mini/",
+        "gen_ai.response.finish_reasons": "{\"values\":[{\"stringValue\":\"stop\",\"value\":\"string_value\"}]}"
+      },
+      "resource": {
+        "attributes": {
+          "telemetry.sdk.language": "python",
+          "telemetry.sdk.name": "opentelemetry",
+          "telemetry.sdk.version": "1.34.1",
+          "service.name": "TelemetryExample"
+        },
+        "schema_url": null
+      },
+      "links": []
+    },
+    {
+      "name": "chat gpt-4.1-mini",
+      "context": {
+        "trace_id": "a6de52c0fc9969886712de722edede20",
+        "span_id": "d9157e2009cba07f"
+      },
+      "parent_id": "743d79a78e48f932",
+      "start_time": "2025-09-09T10:17:25.320000Z",
+      "end_time": "2025-09-09T10:17:26.709000Z",
+      "status": {
+        "code": 0,
+        "message": null
+      },
+      "kind": "CLIENT",
+      "events": [
+        {
+          "name": "gen_ai.system.message",
+          "timestamp": "2025-09-09T10:17:25.320000Z",
+          "attributes": {
+            "event.name": "gen_ai.system.message",
+            "gen_ai.system": "azure_openai",
+            "CHAT_MESSAGE_INDEX": "0",
+            "code.file.path": "C:\\Users\\kuojianlu\\Documents\\repo\\agent-framework\\python\\packages\\main\\agent_framework\\telemetry.py",
+            "code.function.name": "_set_chat_response_input",
+            "code.line.number": "454"
+          },
+          "body": "{\"role\":{\"value\":\"system\"},\"contents\":[{\"text\":\"You are a helpful assistant that can provide weather and time information.\",\"type\":\"text\"}]}"
+        },
+        {
+          "name": "gen_ai.user.message",
+          "timestamp": "2025-09-09T10:17:25.320000Z",
+          "attributes": {
+            "event.name": "gen_ai.user.message",
+            "gen_ai.system": "azure_openai",
+            "CHAT_MESSAGE_INDEX": "1",
+            "code.file.path": "C:\\Users\\kuojianlu\\Documents\\repo\\agent-framework\\python\\packages\\main\\agent_framework\\telemetry.py",
+            "code.function.name": "_set_chat_response_input",
+            "code.line.number": "454"
+          },
+          "body": "{\"role\":{\"value\":\"user\"},\"contents\":[{\"text\":\"What's the current UTC time?\",\"type\":\"text\"}]}"
+        },
+        {
+          "name": "gen_ai.choice",
+          "timestamp": "2025-09-09T10:17:26.709000Z",
+          "attributes": {
+            "event.name": "gen_ai.choice",
+            "gen_ai.system": "azure_openai",
+            "code.file.path": "C:\\Users\\kuojianlu\\Documents\\repo\\agent-framework\\python\\packages\\main\\agent_framework\\telemetry.py",
+            "code.function.name": "_set_chat_response_output",
+            "code.line.number": "500"
+          },
+          "body": "{\"message\": {\"role\": {\"value\": \"assistant\"}, \"contents\": [{\"type\": \"function_call\", \"call_id\": \"call_En9BsVGt3TSkIjVVW58n9s9E\", \"name\": \"get_time\", \"arguments\": \"{}\"}]}, \"index\": \"chatcmpl-CDphcyLpNfcfyFSkFV2Oc1cynxTcT\"}"
+        },
+        {
+          "name": "gen_ai.choice",
+          "timestamp": "2025-09-09T10:17:26.709000Z",
+          "attributes": {
+            "event.name": "gen_ai.choice",
+            "gen_ai.system": "azure_openai",
+            "code.file.path": "C:\\Users\\kuojianlu\\Documents\\repo\\agent-framework\\python\\packages\\main\\agent_framework\\telemetry.py",
+            "code.function.name": "_set_chat_response_output",
+            "code.line.number": "500"
+          },
+          "body": "{\"message\": {\"role\": {\"value\": \"tool\"}, \"contents\": [{\"type\": \"function_result\", \"call_id\": \"call_En9BsVGt3TSkIjVVW58n9s9E\", \"result\": \"The current UTC time is 2025-09-09 10:17:25.\"}]}, \"index\": \"chatcmpl-CDphcyLpNfcfyFSkFV2Oc1cynxTcT\"}"
+        },
+        {
+          "name": "gen_ai.choice",
+          "timestamp": "2025-09-09T10:17:26.709000Z",
+          "attributes": {
+            "event.name": "gen_ai.choice",
+            "gen_ai.system": "azure_openai",
+            "code.file.path": "C:\\Users\\kuojianlu\\Documents\\repo\\agent-framework\\python\\packages\\main\\agent_framework\\telemetry.py",
+            "code.function.name": "_set_chat_response_output",
+            "code.line.number": "500"
+          },
+          "body": "{\"message\": {\"role\": {\"value\": \"assistant\"}, \"contents\": [{\"text\": \"The current UTC time is 2025-09-09 10:17:25.\", \"type\": \"text\"}]}, \"index\": \"chatcmpl-CDphcyLpNfcfyFSkFV2Oc1cynxTcT\"}"
+        }
+      ],
+      "attributes": {
+        "gen_ai.operation.name": "chat",
+        "gen_ai.system": "azure_openai",
+        "gen_ai.request.model": "gpt-4.1-mini",
+        "gen_ai.request.choice.count": "1",
+        "server.address": "https://aochengwang-test-resource.openai.azure.com/openai/deployments/gpt-4.1-mini/",
+        "gen_ai.response.finish_reasons": "{\"values\":[{\"stringValue\":\"stop\",\"value\":\"string_value\"}]}"
+      },
+      "resource": {
+        "attributes": {
+          "telemetry.sdk.language": "python",
+          "telemetry.sdk.name": "opentelemetry",
+          "telemetry.sdk.version": "1.34.1",
+          "service.name": "TelemetryExample"
+        },
+        "schema_url": null
+      },
+      "links": []
+    },
+    {
+      "name": "chat gpt-4.1-mini",
+      "context": {
+        "trace_id": "e613547962e7d9a35399f5e125d7f802",
+        "span_id": "3888d518d4b2adf9"
+      },
+      "parent_id": "c6c90da094bcb5f2",
+      "start_time": "2025-09-09T10:17:26.709000Z",
+      "end_time": "2025-09-09T10:17:29.359000Z",
+      "status": {
+        "code": 0,
+        "message": null
+      },
+      "kind": "CLIENT",
+      "events": [
+        {
+          "name": "gen_ai.system.message",
+          "timestamp": "2025-09-09T10:17:26.709000Z",
+          "attributes": {
+            "event.name": "gen_ai.system.message",
+            "gen_ai.system": "azure_openai",
+            "CHAT_MESSAGE_INDEX": "0",
+            "code.file.path": "C:\\Users\\kuojianlu\\Documents\\repo\\agent-framework\\python\\packages\\main\\agent_framework\\telemetry.py",
+            "code.function.name": "_set_chat_response_input",
+            "code.line.number": "454"
+          },
+          "body": "{\"role\":{\"value\":\"system\"},\"contents\":[{\"text\":\"You are a helpful assistant that can provide weather and time information.\",\"type\":\"text\"}]}"
+        },
+        {
+          "name": "gen_ai.user.message",
+          "timestamp": "2025-09-09T10:17:26.709000Z",
+          "attributes": {
+            "event.name": "gen_ai.user.message",
+            "gen_ai.system": "azure_openai",
+            "CHAT_MESSAGE_INDEX": "1",
+            "code.file.path": "C:\\Users\\kuojianlu\\Documents\\repo\\agent-framework\\python\\packages\\main\\agent_framework\\telemetry.py",
+            "code.function.name": "_set_chat_response_input",
+            "code.line.number": "454"
+          },
+          "body": "{\"role\":{\"value\":\"user\"},\"contents\":[{\"text\":\"What's the weather in London and what's the current UTC time?\",\"type\":\"text\"}]}"
+        },
+        {
+          "name": "gen_ai.choice",
+          "timestamp": "2025-09-09T10:17:29.359000Z",
+          "attributes": {
+            "event.name": "gen_ai.choice",
+            "gen_ai.system": "azure_openai",
+            "code.file.path": "C:\\Users\\kuojianlu\\Documents\\repo\\agent-framework\\python\\packages\\main\\agent_framework\\telemetry.py",
+            "code.function.name": "_set_chat_response_output",
+            "code.line.number": "500"
+          },
+          "body": "{\"message\": {\"role\": {\"value\": \"assistant\"}, \"contents\": [{\"type\": \"function_call\", \"call_id\": \"call_ASI7p6UC8yvsofshWsE1JfRG\", \"name\": \"get_weather\", \"arguments\": \"{\\\"location\\\": \\\"London\\\"}\"}, {\"type\": \"function_call\", \"call_id\": \"call_fseiduGURZWbGPUQCpuZKgyZ\", \"name\": \"get_time\", \"arguments\": \"{}\"}]}, \"index\": \"chatcmpl-CDphey8Hc6A8gWT76mdiV7VNb8268\"}"
+        },
+        {
+          "name": "gen_ai.choice",
+          "timestamp": "2025-09-09T10:17:29.359000Z",
+          "attributes": {
+            "event.name": "gen_ai.choice",
+            "gen_ai.system": "azure_openai",
+            "code.file.path": "C:\\Users\\kuojianlu\\Documents\\repo\\agent-framework\\python\\packages\\main\\agent_framework\\telemetry.py",
+            "code.function.name": "_set_chat_response_output",
+            "code.line.number": "500"
+          },
+          "body": "{\"message\": {\"role\": {\"value\": \"tool\"}, \"contents\": [{\"type\": \"function_result\", \"call_id\": \"call_ASI7p6UC8yvsofshWsE1JfRG\", \"result\": \"The weather in London is sunny with a high of 14\\u00b0C.\"}, {\"type\": \"function_result\", \"call_id\": \"call_fseiduGURZWbGPUQCpuZKgyZ\", \"result\": \"The current UTC time is 2025-09-09 10:17:28.\"}]}, \"index\": \"chatcmpl-CDphey8Hc6A8gWT76mdiV7VNb8268\"}"
+        },
+        {
+          "name": "gen_ai.choice",
+          "timestamp": "2025-09-09T10:17:29.359000Z",
+          "attributes": {
+            "event.name": "gen_ai.choice",
+            "gen_ai.system": "azure_openai",
+            "code.file.path": "C:\\Users\\kuojianlu\\Documents\\repo\\agent-framework\\python\\packages\\main\\agent_framework\\telemetry.py",
+            "code.function.name": "_set_chat_response_output",
+            "code.line.number": "500"
+          },
+          "body": "{\"message\": {\"role\": {\"value\": \"assistant\"}, \"contents\": [{\"text\": \"The weather in London is sunny with a high of 14\\u00b0C. The current UTC time is 10:17 AM on September 9, 2025.\", \"type\": \"text\"}]}, \"index\": \"chatcmpl-CDphey8Hc6A8gWT76mdiV7VNb8268\"}"
+        }
+      ],
+      "attributes": {
+        "gen_ai.operation.name": "chat",
+        "gen_ai.system": "azure_openai",
+        "gen_ai.request.model": "gpt-4.1-mini",
+        "gen_ai.request.choice.count": "1",
+        "server.address": "https://aochengwang-test-resource.openai.azure.com/openai/deployments/gpt-4.1-mini/",
+        "gen_ai.response.finish_reasons": "{\"values\":[{\"stringValue\":\"stop\",\"value\":\"string_value\"}]}"
+      },
+      "resource": {
+        "attributes": {
+          "telemetry.sdk.language": "python",
+          "telemetry.sdk.name": "opentelemetry",
+          "telemetry.sdk.version": "1.34.1",
+          "service.name": "TelemetryExample"
+        },
+        "schema_url": null
+      },
+      "links": []
+    }
+  ]
+}

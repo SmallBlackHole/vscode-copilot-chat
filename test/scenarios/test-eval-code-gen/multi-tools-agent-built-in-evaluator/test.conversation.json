@@ -1,0 +1,6 @@
+[
+    {
+        "question": "/editAgent Evaluate the agent using dataset.json: 1. measure the relevance of agent response and user query; 2. measure the tool call accuracy of the agent",
+        "stateFile": "./tools0.state.json"
+    }
+]
