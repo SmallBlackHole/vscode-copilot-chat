@@ -46,4 +46,7 @@ import './usagesTool';
 import './userPreferencesTool';
 import './vscodeAPITool';
 import './vscodeCmdTool';
+import './getBulkResultCollectionBestPracticesToolWrapperTool';
+import './evaluationPlannerToolWrapperTool';
+import './getEvaluationCodeGenBestPracticesToolWrapperTool';
 
