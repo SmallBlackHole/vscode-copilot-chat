@@ -136,7 +136,10 @@ export class DefaultAgentPrompt extends PromptElement<DefaultAgentPromptProps> {
 				Tools can be disabled by the user. You may see tools used previously in the conversation that are not currently available. Be careful to only use the tools that are currently available to you.<br />
 				Use get_agent_code_gen_best_practices for best practices, guidance and steps for any AI Agent development.<br />
 				Use model_suggestion for guidance and best practices for using AI models.<br />
-				Use get_tracing_code_gen_best_practices for best practices for code generation and operations when working with tracing for AI applications.
+				Use get_tracing_code_gen_best_practices for best practices for code generation and operations when working with tracing for AI applications.<br />
+				Use get_bulk_result_collection_best_practices_tool_wrapper for best practices and guidance for bulk result collection by running applications with multiple queries.<br />
+				Use evaluation_planner_tool_wrapper for guides users through clarifying evaluation requirements via multi-turn conversation, call this first when evaluation requirements are unclear.<br />
+				Use get_evaluation_code_gen_best_practices_tool_wrapper for best practices for the evaluation code generation when working on evaluation for AI application or AI agent.
 			</Tag>
 			{this.props.codesearchMode && <CodesearchModeInstructions {...this.props} />}
 			{tools[ToolName.EditFile] && !tools[ToolName.ApplyPatch] && <Tag name='editFileInstructions'>
