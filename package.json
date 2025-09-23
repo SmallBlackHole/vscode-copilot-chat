@@ -1320,6 +1320,77 @@
             "language"
           ]
         }
+      },
+      {
+        "name": "copilot_getBulkResultCollectionBestPracticesToolWrapper",
+        "displayName": "Get Bulk Result Collection Best Practices",
+        "modelDescription": "This tool returns best practices and guidance for bulk result collection by running applications with multiple queries to collect real data. Provides SDK-specific guidance when applicable.",
+        "toolReferenceName": "getBulkResultCollectionBestPracticesToolWrapper",
+        "canBeReferencedInPrompt": true,
+        "tags": [],
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "sdk": {
+              "type": "string",
+              "description": "The AI SDK used by the application.",
+              "enum": [
+                "agent-framework",
+                "others"
+              ]
+            }
+          },
+          "required": []
+        }
+      },
+      {
+        "name": "copilot_evaluationPlannerToolWrapper",
+        "displayName": "Evaluation Planner",
+        "modelDescription": "This tool should be called when working on evaluation for AI application or AI agent. It guides users through a multi-turn conversation to clarify evaluation requirements and ensures all necessary details are gathered. CALL THIS TOOL FIRST before using the evaluation code generation tool when evaluation requirements are unclear or incomplete.",
+        "toolReferenceName": "evaluationPlannerToolWrapper",
+        "canBeReferencedInPrompt": true,
+        "tags": [],
+        "inputSchema": {
+          "type": "object",
+          "properties": {},
+          "required": []
+        }
+      },
+      {
+        "name": "copilot_getEvaluationCodeGenBestPracticesToolWrapper",
+        "displayName": "Get Evaluation Code Generation Best Practices",
+        "modelDescription": "This tool returns best practices for code generation when working on evaluation for AI application or AI agent.",
+        "toolReferenceName": "getEvaluationCodeGenBestPracticesToolWrapper",
+        "canBeReferencedInPrompt": true,
+        "tags": [],
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "evaluationRequirements": {
+              "type": "array",
+              "description": "List of what you want to evaluate or measure. ONLY include when the user explicitly describes specific evaluation goals, metrics, or measurement requirements with clear details (e.g., 'measure response time and fail if > 8 seconds', 'check if responses contain specific keywords', 'validate JSON format'). Do NOT include for general requests like 'add evaluation' or 'evaluate my app' without specific requirements.",
+              "items": {
+                "type": "string",
+                "description": "Description of what to evaluate and the goal (e.g., 'Response accuracy - check if answers are factually correct', 'Response relevance - assess how well responses address the user question', 'Response time - measure if responses are generated within acceptable time limits')"
+              }
+            },
+            "dataset": {
+              "type": "string",
+              "description": "The dataset to be used for evaluation"
+            },
+            "evaluationSdk": {
+              "type": "string",
+              "description": "The evaluation SDK to use for the evaluation code",
+              "default": "azure-ai-evaluation"
+            },
+            "language": {
+              "type": "string",
+              "description": "The programming language for the evaluation code",
+              "default": "python"
+            }
+          },
+          "required": []
+        }
       }
     ],
     "languageModelToolSets": [
