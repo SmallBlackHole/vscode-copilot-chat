@@ -1,0 +1,59 @@
+[
+	{
+		"test": "workflow-agent-built-in-evaluator [panel] - test",
+		"outcomeDirectory": "workflow-agent-built-in-evaluator-panel-test",
+		"conversationPath": "C:\\Users\\kuojianlu\\Documents\\repo\\vscode-copilot-chat\\test\\scenarios\\test-eval-code-gen\\workflow-agent-built-in-evaluator\\test.conversation.json",
+		"score": 1,
+		"duration": 359032,
+		"usage": {
+			"completion_tokens": 10555,
+			"prompt_tokens": 2214827,
+			"total_tokens": 2225382,
+			"prompt_tokens_details": {
+				"cached_tokens": 2123931
+			}
+		},
+		"outcomes": [
+			{
+				"kind": "edit",
+				"files": [
+					{
+						"srcUri": "orkspace\\analyze_results.py",
+						"post": "workflow-agent-built-in-evaluator-panel-test\\analyze_results.post-0.1.py"
+					}
+				],
+				"annotations": []
+			}
+		],
+		"cacheInfo": [
+			[]
+		],
+		"originalResults": [
+			{
+				"kind": "pass",
+				"usage": {
+					"completion_tokens": 10555,
+					"prompt_tokens": 2214827,
+					"total_tokens": 2225382,
+					"prompt_tokens_details": {
+						"cached_tokens": 2123931
+					}
+				},
+				"contentFilterCount": 0,
+				"duration": 359032,
+				"outcome": {
+					"kind": "edit",
+					"files": [
+						{
+							"srcUri": "orkspace\\analyze_results.py",
+							"post": "workflow-agent-built-in-evaluator-panel-test\\analyze_results.post-0.1.py"
+						}
+					],
+					"annotations": []
+				},
+				"cacheInfo": [],
+				"hasCacheMiss": false
+			}
+		]
+	}
+]

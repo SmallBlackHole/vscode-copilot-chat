@@ -1,0 +1,38 @@
+[
+  {
+    "kind": "initial",
+    "additionalFiles": [
+      {
+        "workspacePath": "orkspace\\dataset.jsonl",
+        "relativeDiskPath": "workflow-agent-built-in-evaluator-panel-test\\dataset.post-0.jsonl",
+        "languageId": "plaintext"
+      },
+      {
+        "workspacePath": "orkspace\\evaluate_relevance.py",
+        "relativeDiskPath": "workflow-agent-built-in-evaluator-panel-test\\evaluate_relevance.post-0.py",
+        "languageId": "python"
+      },
+      {
+        "workspacePath": "orkspace\\analyze_results.py",
+        "relativeDiskPath": "workflow-agent-built-in-evaluator-panel-test\\analyze_results.post-0.py",
+        "languageId": "python"
+      }
+    ],
+    "diagnostics": []
+  },
+  {
+    "kind": "interaction",
+    "changedFiles": [
+      {
+        "workspacePath": "orkspace\\analyze_results.py",
+        "relativeDiskPath": "workflow-agent-built-in-evaluator-panel-test\\analyze_results.post-0.1.py",
+        "languageId": "python"
+      }
+    ],
+    "annotations": [],
+    "interaction": {
+      "query": "/editAgent Evaluate using dataset.json: 1. measure the relevance of agent response and user query"
+    },
+    "requestCount": 33
+  }
+]

@@ -1,0 +1,49 @@
+{
+  "summary": {
+    "total_responses": 3,
+    "average_chars": 67.66666666666667,
+    "average_words": 13.666666666666666,
+    "average_duration_seconds": 2.983,
+    "total_chars": 203,
+    "total_words": 41,
+    "total_duration_seconds": 8.949
+  },
+  "individual_results": [
+    {
+      "query": "What's the weather like in New York?",
+      "response": "The weather in New York is sunny with a high of 12°C.",
+      "trace_id": "606ce793d0d59da83cf0ee11504b413e",
+      "model": "gpt-4.1-mini",
+      "start_time": "2025-09-09T10:17:20.404000Z",
+      "end_time": "2025-09-09T10:17:25.314000Z",
+      "response_length_chars": 53,
+      "response_length_words": 12,
+      "response_empty": false,
+      "response_duration_seconds": 4.91
+    },
+    {
+      "query": "What's the current UTC time?",
+      "response": "The current UTC time is 2025-09-09 10:17:25.",
+      "trace_id": "a6de52c0fc9969886712de722edede20",
+      "model": "gpt-4.1-mini",
+      "start_time": "2025-09-09T10:17:25.320000Z",
+      "end_time": "2025-09-09T10:17:26.709000Z",
+      "response_length_chars": 44,
+      "response_length_words": 7,
+      "response_empty": false,
+      "response_duration_seconds": 1.389
+    },
+    {
+      "query": "What's the weather in London and what's the current UTC time?",
+      "response": "The weather in London is sunny with a high of 14°C. The current UTC time is 10:17 AM on September 9, 2025.",
+      "trace_id": "e613547962e7d9a35399f5e125d7f802",
+      "model": "gpt-4.1-mini",
+      "start_time": "2025-09-09T10:17:26.709000Z",
+      "end_time": "2025-09-09T10:17:29.359000Z",
+      "response_length_chars": 106,
+      "response_length_words": 22,
+      "response_empty": false,
+      "response_duration_seconds": 2.65
+    }
+  ]
+}

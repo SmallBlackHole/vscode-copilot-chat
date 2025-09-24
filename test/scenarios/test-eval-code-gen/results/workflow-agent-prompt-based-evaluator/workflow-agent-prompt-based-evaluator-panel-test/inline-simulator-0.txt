@@ -1,0 +1,58 @@
+[
+  {
+    "kind": "initial",
+    "additionalFiles": [
+      {
+        "workspacePath": "orkspace\\convert_dataset.py",
+        "relativeDiskPath": "workflow-agent-prompt-based-evaluator-panel-test\\convert_dataset.post-0.py",
+        "languageId": "python"
+      },
+      {
+        "workspacePath": "orkspace\\review_evaluators.py",
+        "relativeDiskPath": "workflow-agent-prompt-based-evaluator-panel-test\\review_evaluators.post-0.py",
+        "languageId": "python"
+      },
+      {
+        "workspacePath": "orkspace\\evaluate_reviews.py",
+        "relativeDiskPath": "workflow-agent-prompt-based-evaluator-panel-test\\evaluate_reviews.post-0.py",
+        "languageId": "python"
+      },
+      {
+        "workspacePath": "orkspace\\requirements.txt",
+        "relativeDiskPath": "workflow-agent-prompt-based-evaluator-panel-test\\requirements.post-0.txt",
+        "languageId": "plaintext"
+      },
+      {
+        "workspacePath": "orkspace\\simple_evaluate_reviews.py",
+        "relativeDiskPath": "workflow-agent-prompt-based-evaluator-panel-test\\simple_evaluate_reviews.post-0.py",
+        "languageId": "python"
+      },
+      {
+        "workspacePath": "orkspace\\README.md",
+        "relativeDiskPath": "workflow-agent-prompt-based-evaluator-panel-test\\README.post-0.md",
+        "languageId": "markdown"
+      }
+    ],
+    "diagnostics": []
+  },
+  {
+    "kind": "interaction",
+    "changedFiles": [
+      {
+        "workspacePath": "orkspace\\review_evaluators.py",
+        "relativeDiskPath": "workflow-agent-prompt-based-evaluator-panel-test\\review_evaluators.post-0.1.py",
+        "languageId": "python"
+      },
+      {
+        "workspacePath": "orkspace\\simple_evaluate_reviews.py",
+        "relativeDiskPath": "workflow-agent-prompt-based-evaluator-panel-test\\simple_evaluate_reviews.post-0.1.py",
+        "languageId": "python"
+      }
+    ],
+    "annotations": [],
+    "interaction": {
+      "query": "/editAgent Evaluate using dataset.json: measure review quality - how constructive and actionable the reviewer feedback is"
+    },
+    "requestCount": 32
+  }
+]

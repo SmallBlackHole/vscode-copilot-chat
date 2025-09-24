@@ -1,0 +1,53 @@
+[
+  {
+    "kind": "initial",
+    "additionalFiles": [
+      {
+        "workspacePath": "orkspace\\data_processor.py",
+        "relativeDiskPath": "multi-tools-agent-built-in-evaluator-panel-test\\data_processor.post-0.py",
+        "languageId": "python"
+      },
+      {
+        "workspacePath": "orkspace\\evaluate_agent.py",
+        "relativeDiskPath": "multi-tools-agent-built-in-evaluator-panel-test\\evaluate_agent.post-0.py",
+        "languageId": "python"
+      },
+      {
+        "workspacePath": "orkspace\\README.md",
+        "relativeDiskPath": "multi-tools-agent-built-in-evaluator-panel-test\\README.post-0.md",
+        "languageId": "markdown"
+      },
+      {
+        "workspacePath": "orkspace\\simple_evaluate.py",
+        "relativeDiskPath": "multi-tools-agent-built-in-evaluator-panel-test\\simple_evaluate.post-0.py",
+        "languageId": "python"
+      }
+    ],
+    "diagnostics": []
+  },
+  {
+    "kind": "interaction",
+    "changedFiles": [
+      {
+        "workspacePath": "orkspace\\data_processor.py",
+        "relativeDiskPath": "multi-tools-agent-built-in-evaluator-panel-test\\data_processor.post-0.1.py",
+        "languageId": "python"
+      },
+      {
+        "workspacePath": "orkspace\\evaluate_agent.py",
+        "relativeDiskPath": "multi-tools-agent-built-in-evaluator-panel-test\\evaluate_agent.post-0.1.py",
+        "languageId": "python"
+      },
+      {
+        "workspacePath": "orkspace\\simple_evaluate.py",
+        "relativeDiskPath": "multi-tools-agent-built-in-evaluator-panel-test\\simple_evaluate.post-0.1.py",
+        "languageId": "python"
+      }
+    ],
+    "annotations": [],
+    "interaction": {
+      "query": "/editAgent Evaluate the agent using dataset.json: 1. measure the relevance of agent response and user query; 2. measure the tool call accuracy of the agent"
+    },
+    "requestCount": 40
+  }
+]

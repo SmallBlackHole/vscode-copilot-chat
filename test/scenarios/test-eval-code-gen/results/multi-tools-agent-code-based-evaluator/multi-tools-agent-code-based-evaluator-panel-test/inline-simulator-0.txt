@@ -1,0 +1,27 @@
+[
+  {
+    "kind": "initial",
+    "additionalFiles": [
+      {
+        "workspacePath": "orkspace\\evaluate_response_length.py",
+        "relativeDiskPath": "multi-tools-agent-code-based-evaluator-panel-test\\evaluate_response_length.post-0.py",
+        "languageId": "python"
+      },
+      {
+        "workspacePath": "orkspace\\simple_response_length_evaluator.py",
+        "relativeDiskPath": "multi-tools-agent-code-based-evaluator-panel-test\\simple_response_length_evaluator.post-0.py",
+        "languageId": "python"
+      }
+    ],
+    "diagnostics": []
+  },
+  {
+    "kind": "interaction",
+    "changedFiles": [],
+    "annotations": [],
+    "interaction": {
+      "query": "/editAgent Evaluate the agent using dataset.json: measure the response length"
+    },
+    "requestCount": 32
+  }
+]

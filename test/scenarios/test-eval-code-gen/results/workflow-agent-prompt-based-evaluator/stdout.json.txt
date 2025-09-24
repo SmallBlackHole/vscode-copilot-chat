@@ -1,0 +1,80 @@
+[
+	{
+		"type": "initialTestSummary",
+		"runOutputFolderName": "workflow-agent-prompt-based-evaluator",
+		"testsToRun": [
+			"workflow-agent-prompt-based-evaluator [panel] - test"
+		],
+		"nRuns": 1
+	},
+	{
+		"type": "initialTestSummary",
+		"runOutputFolderName": "workflow-agent-prompt-based-evaluator",
+		"testsToRun": [
+			"workflow-agent-prompt-based-evaluator [panel] - test"
+		],
+		"nRuns": 1
+	},
+	{
+		"type": "testRunStart",
+		"name": "workflow-agent-prompt-based-evaluator [panel] - test",
+		"runNumber": 0
+	},
+	{
+		"type": "testRunEnd",
+		"name": "workflow-agent-prompt-based-evaluator [panel] - test",
+		"runNumber": 0,
+		"duration": 563678,
+		"writtenFiles": [
+			{
+				"relativePath": "workflow-agent-prompt-based-evaluator-panel-test\\convert_dataset.post-0.py",
+				"tag": "inline-changed-doc-tag"
+			},
+			{
+				"relativePath": "workflow-agent-prompt-based-evaluator-panel-test\\review_evaluators.post-0.py",
+				"tag": "inline-changed-doc-tag"
+			},
+			{
+				"relativePath": "workflow-agent-prompt-based-evaluator-panel-test\\evaluate_reviews.post-0.py",
+				"tag": "inline-changed-doc-tag"
+			},
+			{
+				"relativePath": "workflow-agent-prompt-based-evaluator-panel-test\\requirements.post-0.txt",
+				"tag": "inline-changed-doc-tag"
+			},
+			{
+				"relativePath": "workflow-agent-prompt-based-evaluator-panel-test\\simple_evaluate_reviews.post-0.py",
+				"tag": "inline-changed-doc-tag"
+			},
+			{
+				"relativePath": "workflow-agent-prompt-based-evaluator-panel-test\\README.post-0.md",
+				"tag": "inline-changed-doc-tag"
+			},
+			{
+				"relativePath": "workflow-agent-prompt-based-evaluator-panel-test\\review_evaluators.post-0.1.py",
+				"tag": "inline-changed-doc-tag"
+			},
+			{
+				"relativePath": "workflow-agent-prompt-based-evaluator-panel-test\\simple_evaluate_reviews.post-0.1.py",
+				"tag": "inline-changed-doc-tag"
+			},
+			{
+				"relativePath": "workflow-agent-prompt-based-evaluator-panel-test\\inline-simulator-0.txt",
+				"tag": "inline-state-tag"
+			},
+			{
+				"relativePath": "workflow-agent-prompt-based-evaluator-panel-test\\sim-requests-0.txt",
+				"tag": "requests-tag"
+			},
+			{
+				"relativePath": "workflow-agent-prompt-based-evaluator-panel-test\\sim-log-0.txt",
+				"tag": "implicit-log-tag"
+			}
+		],
+		"pass": true,
+		"annotations": [],
+		"averageRequestDuration": null,
+		"requestCount": 32,
+		"hasCacheMiss": false
+	}
+]

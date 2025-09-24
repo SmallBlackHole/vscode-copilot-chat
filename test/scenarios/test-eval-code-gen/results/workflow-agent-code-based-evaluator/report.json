@@ -1,0 +1,67 @@
+[
+	{
+		"test": "workflow-agent-code-based-evaluator [panel] - test",
+		"outcomeDirectory": "workflow-agent-code-based-evaluator-panel-test",
+		"conversationPath": "C:\\Users\\kuojianlu\\Documents\\repo\\vscode-copilot-chat\\test\\scenarios\\test-eval-code-gen\\workflow-agent-code-based-evaluator\\test.conversation.json",
+		"score": 1,
+		"duration": 436910,
+		"usage": {
+			"completion_tokens": 15455,
+			"prompt_tokens": 1821798,
+			"total_tokens": 1837253,
+			"prompt_tokens_details": {
+				"cached_tokens": 1749514
+			}
+		},
+		"outcomes": [
+			{
+				"kind": "edit",
+				"files": [
+					{
+						"srcUri": "orkspace\\evaluate_response_length.py",
+						"post": "workflow-agent-code-based-evaluator-panel-test\\evaluate_response_length.post-0.1.py"
+					},
+					{
+						"srcUri": "orkspace\\generate_report.py",
+						"post": "workflow-agent-code-based-evaluator-panel-test\\generate_report.post-0.1.py"
+					}
+				],
+				"annotations": []
+			}
+		],
+		"cacheInfo": [
+			[]
+		],
+		"originalResults": [
+			{
+				"kind": "pass",
+				"usage": {
+					"completion_tokens": 15455,
+					"prompt_tokens": 1821798,
+					"total_tokens": 1837253,
+					"prompt_tokens_details": {
+						"cached_tokens": 1749514
+					}
+				},
+				"contentFilterCount": 0,
+				"duration": 436910,
+				"outcome": {
+					"kind": "edit",
+					"files": [
+						{
+							"srcUri": "orkspace\\evaluate_response_length.py",
+							"post": "workflow-agent-code-based-evaluator-panel-test\\evaluate_response_length.post-0.1.py"
+						},
+						{
+							"srcUri": "orkspace\\generate_report.py",
+							"post": "workflow-agent-code-based-evaluator-panel-test\\generate_report.post-0.1.py"
+						}
+					],
+					"annotations": []
+				},
+				"cacheInfo": [],
+				"hasCacheMiss": false
+			}
+		]
+	}
+]

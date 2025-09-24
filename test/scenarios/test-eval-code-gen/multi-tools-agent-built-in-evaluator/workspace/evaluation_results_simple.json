@@ -1,0 +1,172 @@
+{
+  "summary": {
+    "total_traces": 3,
+    "average_relevance": 4.666666666666667,
+    "average_tool_accuracy": 4.666666666666667,
+    "overall_score": 4.666666666666667,
+    "relevance_pass_rate": 1.0,
+    "tool_pass_rate": 1.0
+  },
+  "detailed_results": [
+    {
+      "trace_id": "606ce793d0d59da83cf0ee11504b413e",
+      "query": "What's the weather like in New York?",
+      "response": "The weather in New York is sunny with a high of 12°C.",
+      "tool_calls": [
+        {
+          "type": "tool_call",
+          "tool_call_id": "call_O8jQPBMEZd4fmKvhEQqMmh7V",
+          "name": "get_weather",
+          "arguments": {
+            "location": "New York"
+          }
+        }
+      ],
+      "tool_definitions": [
+        {
+          "name": "get_weather",
+          "type": "function",
+          "description": "Get current weather information for a specified location",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "location": {
+                "type": "string",
+                "description": "The location to get weather for"
+              }
+            },
+            "required": [
+              "location"
+            ]
+          }
+        },
+        {
+          "name": "get_time",
+          "type": "function",
+          "description": "Get current UTC time",
+          "parameters": {
+            "type": "object",
+            "properties": {},
+            "required": []
+          }
+        }
+      ],
+      "relevance": 5,
+      "relevance_reason": "Response mentions weather information; Response includes temperature details; Response correctly addresses new york; Response provides substantial information",
+      "relevance_result": "pass",
+      "relevance_threshold": 3,
+      "tool_call_accuracy": 5,
+      "tool_call_accuracy_reason": "Correctly called get_weather for weather query; Provided location parameter: New York; Location parameter matches query: new york; No unnecessary tool calls made",
+      "tool_call_accuracy_result": "pass",
+      "tool_call_accuracy_threshold": 3
+    },
+    {
+      "trace_id": "a6de52c0fc9969886712de722edede20",
+      "query": "What's the current UTC time?",
+      "response": "The current UTC time is 2025-09-09 10:17:25.",
+      "tool_calls": [
+        {
+          "type": "tool_call",
+          "tool_call_id": "call_En9BsVGt3TSkIjVVW58n9s9E",
+          "name": "get_time",
+          "arguments": {}
+        }
+      ],
+      "tool_definitions": [
+        {
+          "name": "get_weather",
+          "type": "function",
+          "description": "Get current weather information for a specified location",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "location": {
+                "type": "string",
+                "description": "The location to get weather for"
+              }
+            },
+            "required": [
+              "location"
+            ]
+          }
+        },
+        {
+          "name": "get_time",
+          "type": "function",
+          "description": "Get current UTC time",
+          "parameters": {
+            "type": "object",
+            "properties": {},
+            "required": []
+          }
+        }
+      ],
+      "relevance": 4,
+      "relevance_reason": "Response mentions time information; Response includes specific time details; Response provides substantial information",
+      "relevance_result": "pass",
+      "relevance_threshold": 3,
+      "tool_call_accuracy": 4,
+      "tool_call_accuracy_reason": "Correctly called get_time for time query; No unnecessary tool calls made",
+      "tool_call_accuracy_result": "pass",
+      "tool_call_accuracy_threshold": 3
+    },
+    {
+      "trace_id": "e613547962e7d9a35399f5e125d7f802",
+      "query": "What's the weather in London and what's the current UTC time?",
+      "response": "The weather in London is sunny with a high of 14°C. The current UTC time is 10:17 AM on September 9, 2025.",
+      "tool_calls": [
+        {
+          "type": "tool_call",
+          "tool_call_id": "call_ASI7p6UC8yvsofshWsE1JfRG",
+          "name": "get_weather",
+          "arguments": {
+            "location": "London"
+          }
+        },
+        {
+          "type": "tool_call",
+          "tool_call_id": "call_fseiduGURZWbGPUQCpuZKgyZ",
+          "name": "get_time",
+          "arguments": {}
+        }
+      ],
+      "tool_definitions": [
+        {
+          "name": "get_weather",
+          "type": "function",
+          "description": "Get current weather information for a specified location",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "location": {
+                "type": "string",
+                "description": "The location to get weather for"
+              }
+            },
+            "required": [
+              "location"
+            ]
+          }
+        },
+        {
+          "name": "get_time",
+          "type": "function",
+          "description": "Get current UTC time",
+          "parameters": {
+            "type": "object",
+            "properties": {},
+            "required": []
+          }
+        }
+      ],
+      "relevance": 5,
+      "relevance_reason": "Response mentions weather information; Response includes temperature details; Response mentions time information; Response includes specific time details; Response correctly addresses london; Response provides substantial information",
+      "relevance_result": "pass",
+      "relevance_threshold": 3,
+      "tool_call_accuracy": 5,
+      "tool_call_accuracy_reason": "Correctly called get_weather for weather query; Provided location parameter: London; Location parameter matches query: london; Correctly called get_time for time query; No unnecessary tool calls made",
+      "tool_call_accuracy_result": "pass",
+      "tool_call_accuracy_threshold": 3
+    }
+  ]
+}

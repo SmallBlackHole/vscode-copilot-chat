@@ -1,0 +1,75 @@
+[
+	{
+		"test": "multi-tools-agent-built-in-evaluator [panel] - test",
+		"outcomeDirectory": "multi-tools-agent-built-in-evaluator-panel-test",
+		"conversationPath": "C:\\Users\\kuojianlu\\Documents\\repo\\vscode-copilot-chat\\test\\scenarios\\test-eval-code-gen\\multi-tools-agent-built-in-evaluator\\test.conversation.json",
+		"score": 1,
+		"duration": 514740,
+		"usage": {
+			"completion_tokens": 20769,
+			"prompt_tokens": 2875491,
+			"total_tokens": 2896260,
+			"prompt_tokens_details": {
+				"cached_tokens": 2639103
+			}
+		},
+		"outcomes": [
+			{
+				"kind": "edit",
+				"files": [
+					{
+						"srcUri": "orkspace\\data_processor.py",
+						"post": "multi-tools-agent-built-in-evaluator-panel-test\\data_processor.post-0.1.py"
+					},
+					{
+						"srcUri": "orkspace\\evaluate_agent.py",
+						"post": "multi-tools-agent-built-in-evaluator-panel-test\\evaluate_agent.post-0.1.py"
+					},
+					{
+						"srcUri": "orkspace\\simple_evaluate.py",
+						"post": "multi-tools-agent-built-in-evaluator-panel-test\\simple_evaluate.post-0.1.py"
+					}
+				],
+				"annotations": []
+			}
+		],
+		"cacheInfo": [
+			[]
+		],
+		"originalResults": [
+			{
+				"kind": "pass",
+				"usage": {
+					"completion_tokens": 20769,
+					"prompt_tokens": 2875491,
+					"total_tokens": 2896260,
+					"prompt_tokens_details": {
+						"cached_tokens": 2639103
+					}
+				},
+				"contentFilterCount": 0,
+				"duration": 514740,
+				"outcome": {
+					"kind": "edit",
+					"files": [
+						{
+							"srcUri": "orkspace\\data_processor.py",
+							"post": "multi-tools-agent-built-in-evaluator-panel-test\\data_processor.post-0.1.py"
+						},
+						{
+							"srcUri": "orkspace\\evaluate_agent.py",
+							"post": "multi-tools-agent-built-in-evaluator-panel-test\\evaluate_agent.post-0.1.py"
+						},
+						{
+							"srcUri": "orkspace\\simple_evaluate.py",
+							"post": "multi-tools-agent-built-in-evaluator-panel-test\\simple_evaluate.post-0.1.py"
+						}
+					],
+					"annotations": []
+				},
+				"cacheInfo": [],
+				"hasCacheMiss": false
+			}
+		]
+	}
+]

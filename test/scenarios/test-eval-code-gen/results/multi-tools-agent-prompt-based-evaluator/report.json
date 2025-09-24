@@ -1,0 +1,67 @@
+[
+	{
+		"test": "multi-tools-agent-prompt-based-evaluator [panel] - test",
+		"outcomeDirectory": "multi-tools-agent-prompt-based-evaluator-panel-test",
+		"conversationPath": "C:\\Users\\kuojianlu\\Documents\\repo\\vscode-copilot-chat\\test\\scenarios\\test-eval-code-gen\\multi-tools-agent-prompt-based-evaluator\\test.conversation.json",
+		"score": 1,
+		"duration": 583607,
+		"usage": {
+			"completion_tokens": 22314,
+			"prompt_tokens": 2581689,
+			"total_tokens": 2604003,
+			"prompt_tokens_details": {
+				"cached_tokens": 2480660
+			}
+		},
+		"outcomes": [
+			{
+				"kind": "edit",
+				"files": [
+					{
+						"srcUri": "etup.py",
+						"post": "multi-tools-agent-prompt-based-evaluator-panel-test\\etup.post-0.1.py"
+					},
+					{
+						"srcUri": "emo_evaluation.py",
+						"post": "multi-tools-agent-prompt-based-evaluator-panel-test\\emo_evaluation.post-0.1.py"
+					}
+				],
+				"annotations": []
+			}
+		],
+		"cacheInfo": [
+			[]
+		],
+		"originalResults": [
+			{
+				"kind": "pass",
+				"usage": {
+					"completion_tokens": 22314,
+					"prompt_tokens": 2581689,
+					"total_tokens": 2604003,
+					"prompt_tokens_details": {
+						"cached_tokens": 2480660
+					}
+				},
+				"contentFilterCount": 0,
+				"duration": 583607,
+				"outcome": {
+					"kind": "edit",
+					"files": [
+						{
+							"srcUri": "etup.py",
+							"post": "multi-tools-agent-prompt-based-evaluator-panel-test\\etup.post-0.1.py"
+						},
+						{
+							"srcUri": "emo_evaluation.py",
+							"post": "multi-tools-agent-prompt-based-evaluator-panel-test\\emo_evaluation.post-0.1.py"
+						}
+					],
+					"annotations": []
+				},
+				"cacheInfo": [],
+				"hasCacheMiss": false
+			}
+		]
+	}
+]
