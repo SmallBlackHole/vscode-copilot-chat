@@ -1,0 +1,195 @@
+{
+  "collected_at": "2025-09-21T22:11:16.975494",
+  "agent_name": "Weather and Time Agent",
+  "total_queries": 3,
+  "successful_responses": 3,
+  "results": [
+    {
+      "query": "What's the weather like in New York?",
+      "response": {
+        "text": "The weather in New York is currently cloudy with a high of 15\u00b0C.",
+        "messages": [
+          {
+            "role": "assistant",
+            "text": "",
+            "contents": [
+              {
+                "type": "function_call",
+                "text": null,
+                "name": "get_weather",
+                "arguments": "{\"location\":\"New York\"}",
+                "call_id": "call_HqXDaG8Kttabb3zSEJHyHrwM",
+                "result": null
+              }
+            ]
+          },
+          {
+            "role": "tool",
+            "text": "",
+            "contents": [
+              {
+                "type": "function_result",
+                "text": null,
+                "name": null,
+                "arguments": null,
+                "call_id": "call_HqXDaG8Kttabb3zSEJHyHrwM",
+                "result": "The weather in New York is cloudy with a high of 15\u00b0C."
+              }
+            ]
+          },
+          {
+            "role": "assistant",
+            "text": "The weather in New York is currently cloudy with a high of 15\u00b0C.",
+            "contents": [
+              {
+                "type": "text",
+                "text": "The weather in New York is currently cloudy with a high of 15\u00b0C.",
+                "name": null,
+                "arguments": null,
+                "call_id": null,
+                "result": null
+              }
+            ]
+          }
+        ],
+        "response_id": "chatcmpl-CIF4bvvbKV8tvHDE21jLjaj9fDSe3",
+        "created_at": "2025-09-21T22:11:21.000000Z",
+        "usage_details": {
+          "total_tokens": null,
+          "input_tokens": null,
+          "output_tokens": null
+        }
+      }
+    },
+    {
+      "query": "What's the current UTC time?",
+      "response": {
+        "text": "The current UTC time is 2025-09-21 14:11:14.",
+        "messages": [
+          {
+            "role": "assistant",
+            "text": "",
+            "contents": [
+              {
+                "type": "function_call",
+                "text": null,
+                "name": "get_time",
+                "arguments": "{}",
+                "call_id": "call_Ny2A9PHBeV60W4qeNRWcxmfk",
+                "result": null
+              }
+            ]
+          },
+          {
+            "role": "tool",
+            "text": "",
+            "contents": [
+              {
+                "type": "function_result",
+                "text": null,
+                "name": null,
+                "arguments": null,
+                "call_id": "call_Ny2A9PHBeV60W4qeNRWcxmfk",
+                "result": "The current UTC time is 2025-09-21 14:11:14."
+              }
+            ]
+          },
+          {
+            "role": "assistant",
+            "text": "The current UTC time is 2025-09-21 14:11:14.",
+            "contents": [
+              {
+                "type": "text",
+                "text": "The current UTC time is 2025-09-21 14:11:14.",
+                "name": null,
+                "arguments": null,
+                "call_id": null,
+                "result": null
+              }
+            ]
+          }
+        ],
+        "response_id": "chatcmpl-CIF4dggNlZ8x6N8b5WuvrB5S6q4RY",
+        "created_at": "2025-09-21T22:11:23.000000Z",
+        "usage_details": {
+          "total_tokens": null,
+          "input_tokens": null,
+          "output_tokens": null
+        }
+      }
+    },
+    {
+      "query": "What's the weather in London and what's the current UTC time?",
+      "response": {
+        "text": "The weather in London is stormy with a high of 11\u00b0C. The current UTC time is 14:11 on September 21, 2025.",
+        "messages": [
+          {
+            "role": "assistant",
+            "text": "",
+            "contents": [
+              {
+                "type": "function_call",
+                "text": null,
+                "name": "get_weather",
+                "arguments": "{\"location\": \"London\"}",
+                "call_id": "call_E6i8C9wS5IyHD6jfPJ7fU2rg",
+                "result": null
+              },
+              {
+                "type": "function_call",
+                "text": null,
+                "name": "get_time",
+                "arguments": "{}",
+                "call_id": "call_Y1vITioLGMcv4XSnt873cvHC",
+                "result": null
+              }
+            ]
+          },
+          {
+            "role": "tool",
+            "text": "",
+            "contents": [
+              {
+                "type": "function_result",
+                "text": null,
+                "name": null,
+                "arguments": null,
+                "call_id": "call_E6i8C9wS5IyHD6jfPJ7fU2rg",
+                "result": "The weather in London is stormy with a high of 11\u00b0C."
+              },
+              {
+                "type": "function_result",
+                "text": null,
+                "name": null,
+                "arguments": null,
+                "call_id": "call_Y1vITioLGMcv4XSnt873cvHC",
+                "result": "The current UTC time is 2025-09-21 14:11:16."
+              }
+            ]
+          },
+          {
+            "role": "assistant",
+            "text": "The weather in London is stormy with a high of 11\u00b0C. The current UTC time is 14:11 on September 21, 2025.",
+            "contents": [
+              {
+                "type": "text",
+                "text": "The weather in London is stormy with a high of 11\u00b0C. The current UTC time is 14:11 on September 21, 2025.",
+                "name": null,
+                "arguments": null,
+                "call_id": null,
+                "result": null
+              }
+            ]
+          }
+        ],
+        "response_id": "chatcmpl-CIF4eFnBUlS5DoC4sp3OjZSMJWomQ",
+        "created_at": "2025-09-21T22:11:24.000000Z",
+        "usage_details": {
+          "total_tokens": null,
+          "input_tokens": null,
+          "output_tokens": null
+        }
+      }
+    }
+  ]
+}

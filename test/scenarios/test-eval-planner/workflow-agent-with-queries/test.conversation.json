@@ -1,0 +1,9 @@
+[
+    {
+        "question": "/editAgent Evaluate the app: measure the relevance of the response and user query",
+        "stateFile": "./tools0.state.json"
+    },
+    {
+        "question": "/editAgent yes"
+    }
+]
