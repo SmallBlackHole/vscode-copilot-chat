@@ -65,9 +65,15 @@ export function generateScenarioTestRunner(scenario: Scenario, evaluator: Scenar
 			const log = (message: string, err?: any) => testContext.log(message, err);
 
 			const history: (ChatRequestTurn | ChatResponseTurn)[] = [];
+			let persistentSessionId: string | undefined;
+
 			for (let i = 0; i < scenario.length; i++) {
 				const testCase = scenario[i];
-				simulationWorkspace.resetFromDeserializedWorkspaceState(testCase.getState?.());
+				// Only reset workspace state if this conversation turn has a state file
+				// Otherwise, preserve the existing workspace state for multi-turn conversations
+				if (testCase.getState) {
+					simulationWorkspace.resetFromDeserializedWorkspaceState(testCase.getState());
+				}
 				await testCase.setupCase?.(accessor, simulationWorkspace);
 				const mockProgressReporter = new SpyChatResponseStream();
 				log(`> Query "${testCase.question}"\n`);
@@ -80,6 +86,16 @@ export function generateScenarioTestRunner(scenario: Scenario, evaluator: Scenar
 						request.tools.set(getContributedToolName(toolName), shouldUse);
 					}
 				}
+
+				// In extension host mode, ensure conversation continuity by using a persistent session
+				if (isInExtensionHost && i > 0 && history.length > 0) {
+					// For subsequent turns in extension host mode, ensure we maintain session continuity
+					const lastTurn = history[history.length - 1];
+					if (lastTurn instanceof ChatResponseTurn && lastTurn.result?.metadata?.sessionId) {
+						persistentSessionId = lastTurn.result.metadata.sessionId;
+					}
+				}
+
 				const interactiveSession = accessor.get(IInstantiationService).createInstance(
 					ChatParticipantRequestHandler,
 					history,
@@ -97,6 +113,11 @@ export function generateScenarioTestRunner(scenario: Scenario, evaluator: Scenar
 				);
 				const result = await interactiveSession.getResult();
 				assert.ok(!result.errorDetails, result.errorDetails?.message);
+
+				// Store the session ID for conversation continuity
+				if (result.metadata?.sessionId && !persistentSessionId) {
+					persistentSessionId = result.metadata.sessionId;
+				}
 
 				history.push(new ChatRequestTurn(request.prompt, request.command, [...request.references], getChatParticipantIdFromName(participantId), []));
 				history.push(new ChatResponseTurn(mockProgressReporter.items.filter(x => x instanceof ChatResponseMarkdownPart || x instanceof ChatResponseAnchorPart), result, participantId, request.command));

@@ -334,31 +334,31 @@ export function addHistoryToConversation(accessor: ServicesAccessor, history: Re
 	for (const entry of history) {
 		// The extension API model technically supports arbitrary requests/responses not in pairs, but this isn't used anywhere,
 		// so we can just fit this to our Conversation model for now.
-		if (entry instanceof ChatRequestTurn) {
-			previousChatRequestTurn = entry;
-		} else {
+		if (entry.constructor.name === 'ChatRequestTurn') {
+			previousChatRequestTurn = entry as ChatRequestTurn;
+		} else if (entry.constructor.name === 'ChatResponseTurn') {
 			const existingTurn = instaService.invokeFunction(findExistingTurnFromVSCodeChatHistoryTurn, entry);
 			if (existingTurn) {
 				turns.push(existingTurn);
 			} else {
 				if (previousChatRequestTurn) {
-					const deserializedTurn = instaService.invokeFunction(createTurnFromVSCodeChatHistoryTurns, previousChatRequestTurn, entry);
+					const deserializedTurn = instaService.invokeFunction(createTurnFromVSCodeChatHistoryTurns, previousChatRequestTurn, entry as ChatResponseTurn);
 					previousChatRequestTurn = undefined;
 					turns.push(deserializedTurn);
 				}
 			}
 
-			const copilotResult = entry.result as ICopilotChatResultIn;
-			if (typeof copilotResult.metadata?.sessionId === 'string') {
-				sessionId = copilotResult.metadata.sessionId;
+			if ((entry as ChatResponseTurn).result) {
+				const copilotResult = ((entry as ChatResponseTurn) as any).result as ICopilotChatResultIn;
+				if (typeof copilotResult.metadata?.sessionId === 'string') {
+					sessionId = copilotResult.metadata.sessionId;
+				}
 			}
 		}
 	}
 
 	return { turns, sessionId };
-}
-
-/**
+}/**
  * Try to find an existing `Turn` instance that we created previously based on the responseId of a vscode turn.
  */
 function findExistingTurnFromVSCodeChatHistoryTurn(accessor: ServicesAccessor, turn: ChatRequestTurn | ChatResponseTurn): Turn | undefined {
