@@ -1,0 +1,6 @@
+[
+    {
+        "question": "/editAgent Run with queries.json to collect responses",
+        "stateFile": "./tools0.state.json"
+    }
+]
