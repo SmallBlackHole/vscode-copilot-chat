@@ -61,7 +61,7 @@ export enum ToolName {
 	ExecuteTask = 'execute_task',
 	GetAgentCodeGenBestPractices = 'get_agent_code_gen_best_practices',
 	GetAgentModelCodeSample = 'get_agent_model_code_sample',
-	GetBulkResultCollectionBestPracticesToolWrapper = 'get_bulk_result_collection_best_practices_tool_wrapper',
+	EvaluationAgentRunnerBestPracticesToolWrapper = 'evaluation_agent_runner_best_practices_tool_wrapper',
 	EvaluationPlannerToolWrapper = 'evaluation_planner_tool_wrapper',
 	GetEvaluationCodeGenBestPracticesToolWrapper = 'get_evaluation_code_gen_best_practices_tool_wrapper',
 	CoreConfirmationTool = 'vscode_get_confirmation'
@@ -116,7 +116,7 @@ export enum ContributedToolName {
 	ExecuteTask = 'execute_task',
 	GetAgentCodeGenBestPractices = 'copilot_getAgentCodeGenBestPractices',
 	GetAgentModelCodeSample = 'copilot_getAgentModelCodeSample',
-	GetBulkResultCollectionBestPracticesToolWrapper = 'copilot_getBulkResultCollectionBestPracticesToolWrapper',
+	EvaluationAgentRunnerBestPracticesToolWrapper = 'copilot_evaluationAgentRunnerBestPracticesToolWrapper',
 	EvaluationPlannerToolWrapper = 'copilot_evaluationPlannerToolWrapper',
 	GetEvaluationCodeGenBestPracticesToolWrapper = 'copilot_getEvaluationCodeGenBestPracticesToolWrapper',
 }
