@@ -1,0 +1,12 @@
+[
+    {
+        "question": "/editAgent Assess how well my agent performs",
+        "stateFile": "./tools0.state.json"
+    },
+    {
+        "question": "/editAgent yes"
+    },
+    {
+        "question": "/editAgent yes"
+    }
+]

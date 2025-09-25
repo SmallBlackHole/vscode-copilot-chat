@@ -1,0 +1,9 @@
+[
+    {
+        "question": "/editAgent Evaluate Weather and Time Agent: measure the tool call accuracy of the agent",
+        "stateFile": "./tools0.state.json"
+    },
+    {
+        "question": "/editAgent yes"
+    }
+]
