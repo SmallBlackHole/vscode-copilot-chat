@@ -95,7 +95,7 @@ export class CopilotDebugCommandContribution extends Disposable implements vscod
 		const pipePath = process.platform === 'win32' ? '\\\\.\\pipe\\' + uri.path.slice(1) : uri.path;
 		const cts = new CancellationTokenSource();
 
-		const queryParams = new URLSearchParams(uri.query);
+		const queryParams = new URLSearchParams(uri.query || '');
 		const referrer = queryParams.get('referrer');
 		/* __GDPR__
 			"uriHandler" : {
