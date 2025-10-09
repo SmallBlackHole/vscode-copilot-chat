@@ -9,7 +9,7 @@ from typing import Annotated
 from dotenv import load_dotenv
 
 from agent_framework import ChatAgent
-from agent_framework.azure import AzureChatClient
+from agent_framework.azure import AzureOpenAIChatClient
 from azure.identity import AzureCliCredential
 from pydantic import Field
 
@@ -34,11 +34,11 @@ async def tools_on_agent_level() -> None:
 
     # Load environment variables from .env file
     load_dotenv()
-    
+
     # Get Azure OpenAI configuration from environment variables
     endpoint = os.getenv("AZURE_OPENAI_ENDPOINT")
     deployment_name = os.getenv("AZURE_OPENAI_DEPLOYMENT_NAME")
-    
+
     if not endpoint or not deployment_name:
         raise ValueError("Please set AZURE_OPENAI_ENDPOINT and AZURE_OPENAI_DEPLOYMENT_NAME in your .env file")
 
@@ -47,7 +47,7 @@ async def tools_on_agent_level() -> None:
     # For authentication, run `az login` command in terminal or replace AzureCliCredential with preferred
     # authentication option.
     agent = ChatAgent(
-        chat_client=AzureChatClient(
+        chat_client=AzureOpenAIChatClient(
             credential=AzureCliCredential(),
             endpoint=endpoint,
             deployment_name=deployment_name,
