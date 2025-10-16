@@ -5,7 +5,7 @@
 
 import { Raw } from '@vscode/prompt-tsx';
 import { ClientHttp2Stream } from 'http2';
-import { OpenAI } from 'openai';
+import type { OpenAI } from 'openai';
 import { Response } from '../../../platform/networking/common/fetcherService';
 import { coalesce } from '../../../util/vs/base/common/arrays';
 import { AsyncIterableObject } from '../../../util/vs/base/common/async';
@@ -20,12 +20,12 @@ import { ILogService } from '../../log/common/logService';
 import { FinishedCallback, IResponseDelta, OpenAiResponsesFunctionTool } from '../../networking/common/fetch';
 import { ICreateEndpointBodyOptions, IEndpointBody } from '../../networking/common/networking';
 import { ChatCompletion, FinishedCompletionReason, TokenLogProb } from '../../networking/common/openai';
+import { IExperimentationService } from '../../telemetry/common/nullExperimentationService';
 import { ITelemetryService } from '../../telemetry/common/telemetry';
 import { TelemetryData } from '../../telemetry/common/telemetryData';
 import { IChatModelInformation } from '../common/endpointProvider';
 import { getStatefulMarkerAndIndex } from '../common/statefulMarkerContainer';
 import { rawPartAsThinkingData } from '../common/thinkingDataContainer';
-import { IExperimentationService } from '../../telemetry/common/nullExperimentationService';
 
 export function createResponsesRequestBody(accessor: ServicesAccessor, options: ICreateEndpointBodyOptions, model: string, modelInfo: IChatModelInformation): IEndpointBody {
 	const configService = accessor.get(IConfigurationService);
@@ -84,14 +84,17 @@ function rawMessagesToResponseAPI(modelId: string, messages: readonly Raw.ChatMe
 			case Raw.ChatRole.Assistant:
 				if (message.content.length) {
 					input.push(...extractThinkingData(message.content));
-					input.push({
-						role: 'assistant',
-						content: message.content.map(rawContentToResponsesOutputContent).filter(isDefined),
-						// I don't think this needs to be round-tripped.
-						id: 'msg_123',
-						status: 'completed',
-						type: 'message',
-					} satisfies OpenAI.Responses.ResponseOutputMessage);
+					const asstContent = message.content.map(rawContentToResponsesOutputContent).filter(isDefined);
+					if (asstContent.length) {
+						input.push({
+							role: 'assistant',
+							content: asstContent,
+							// I don't think this needs to be round-tripped.
+							id: 'msg_123',
+							status: 'completed',
+							type: 'message',
+						} satisfies OpenAI.Responses.ResponseOutputMessage);
+					}
 				}
 				if (message.toolCalls) {
 					for (const toolCall of message.toolCalls) {
@@ -150,7 +153,9 @@ function rawContentToResponsesContent(part: Raw.ChatCompletionContentPart): Open
 function rawContentToResponsesOutputContent(part: Raw.ChatCompletionContentPart): OpenAI.Responses.ResponseOutputText | OpenAI.Responses.ResponseOutputRefusal | undefined {
 	switch (part.type) {
 		case Raw.ChatCompletionContentPartKind.Text:
-			return { type: 'output_text', text: part.text, annotations: [] };
+			if (part.text.trim()) {
+				return { type: 'output_text', text: part.text, annotations: [] };
+			}
 	}
 }
 
@@ -174,7 +179,8 @@ export async function processResponseFromChatEndpoint(instantiationService: IIns
 	const body = (await response.body()) as ClientHttp2Stream;
 	return new AsyncIterableObject<ChatCompletion>(async feed => {
 		const requestId = response.headers.get('X-Request-ID') ?? generateUuid();
-		const processor = instantiationService.createInstance(OpenAIResponsesProcessor, telemetryData, requestId);
+		const ghRequestId = response.headers.get('x-github-request-id') ?? '';
+		const processor = instantiationService.createInstance(OpenAIResponsesProcessor, telemetryData, requestId, ghRequestId);
 		const parser = new SSEParser((ev) => {
 			try {
 				logService.trace(`SSE: ${ev.data}`);
@@ -206,6 +212,7 @@ class OpenAIResponsesProcessor {
 	constructor(
 		private readonly telemetryData: TelemetryData,
 		private readonly requestId: string,
+		private readonly ghRequestId: string,
 	) { }
 
 	public push(chunk: OpenAI.Responses.ResponseStreamEvent, _onProgress: FinishedCallback): ChatCompletion | undefined {
@@ -286,7 +293,7 @@ class OpenAIResponsesProcessor {
 					choiceIndex: 0,
 					tokens: [],
 					telemetryData: this.telemetryData,
-					requestId: { headerRequestId: this.requestId, completionId: chunk.response.id, created: chunk.response.created_at, deploymentId: '', serverExperiments: '' },
+					requestId: { headerRequestId: this.requestId, gitHubRequestId: this.ghRequestId, completionId: chunk.response.id, created: chunk.response.created_at, deploymentId: '', serverExperiments: '' },
 					usage: {
 						prompt_tokens: chunk.response.usage?.input_tokens ?? 0,
 						completion_tokens: chunk.response.usage?.output_tokens ?? 0,

@@ -13,7 +13,6 @@ import './docTool';
 import './editNotebookTool';
 import './evaluationPlannerToolWrapperTool';
 import './executePromptTool';
-import './executeTaskTool';
 import './findFilesTool';
 import './findTestsFilesTool';
 import './findTextInFilesTool';
