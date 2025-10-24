@@ -4,25 +4,22 @@
  *--------------------------------------------------------------------------------------------*/
 
 import { GetAgentCodeGenTool } from "ai-mlstudio/lmt/getAgentCodeGenTool";
-import type * as vscode from 'vscode';
-import { LanguageModelTextPart, LanguageModelToolResult } from '../../../vscodeTypes';
-import { ToolName } from '../common/toolNames';
-import { ICopilotTool, ToolRegistry } from '../common/toolsRegistry';
+import { ToolRegistry } from '../common/toolsRegistry';
 
-export class AgentCodeGenTool implements ICopilotTool<void> {
-	public static toolName = ToolName.GetAgentCodeGenBestPractices;
-	public static getAgentCodeGenTool = new GetAgentCodeGenTool();
-	constructor() {
-	}
+// export class AgentCodeGenTool implements ICopilotTool<void> {
+// 	public static toolName = ToolName.GetAgentCodeGenBestPractices;
+// 	public static getAgentCodeGenTool = new GetAgentCodeGenTool();
+// 	constructor() {
+// 	}
 
-	async invoke(options: vscode.LanguageModelToolInvocationOptions<void>, token: vscode.CancellationToken) {
-		const toolResult = await AgentCodeGenTool.getAgentCodeGenTool.invoke(options as any, token);
-		return new LanguageModelToolResult([
-			new LanguageModelTextPart(
-				(toolResult.content[0] as any).value
-			)
-		]);
-	}
-}
+// 	async invoke(options: vscode.LanguageModelToolInvocationOptions<void>, token: vscode.CancellationToken) {
+// 		const toolResult = await AgentCodeGenTool.getAgentCodeGenTool.invoke(options as any, token);
+// 		return new LanguageModelToolResult([
+// 			new LanguageModelTextPart(
+// 				(toolResult.content[0] as any).value
+// 			)
+// 		]);
+// 	}
+// }
 
-ToolRegistry.registerTool(AgentCodeGenTool);
+ToolRegistry.registerTool(GetAgentCodeGenTool);

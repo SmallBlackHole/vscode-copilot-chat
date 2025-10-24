@@ -4,25 +4,22 @@
  *--------------------------------------------------------------------------------------------*/
 
 import { GetTracingCodeGenBestPracticesTool } from "ai-mlstudio/lmt/getTracingCodeGenBestPracticesTool";
-import type * as vscode from 'vscode';
-import { LanguageModelTextPart, LanguageModelToolResult } from '../../../vscodeTypes';
-import { ToolName } from '../common/toolNames';
-import { ICopilotTool, ToolRegistry } from '../common/toolsRegistry';
+import { ToolRegistry } from '../common/toolsRegistry';
 
-export class TracingCodeBestPracticesTool implements ICopilotTool<void> {
-	public static toolName = ToolName.GetTracingCodeGenBestPractices;
-	public static getTracingCodeGenBestPractices = new GetTracingCodeGenBestPracticesTool();
-	constructor() {
-	}
+// export class TracingCodeBestPracticesTool implements ICopilotTool<void> {
+// 	public static toolName = ToolName.GetTracingCodeGenBestPractices;
+// 	public static getTracingCodeGenBestPractices = new GetTracingCodeGenBestPracticesTool();
+// 	constructor() {
+// 	}
 
-	async invoke(options: vscode.LanguageModelToolInvocationOptions<void>, token: vscode.CancellationToken) {
-		const toolResult = await TracingCodeBestPracticesTool.getTracingCodeGenBestPractices.invoke(options as any, token);
-		return new LanguageModelToolResult([
-			new LanguageModelTextPart(
-				(toolResult.content[0] as any).value
-			)
-		]);
-	}
-}
+// 	async invoke(options: vscode.LanguageModelToolInvocationOptions<void>, token: vscode.CancellationToken) {
+// 		const toolResult = await TracingCodeBestPracticesTool.getTracingCodeGenBestPractices.invoke(options as any, token);
+// 		return new LanguageModelToolResult([
+// 			new LanguageModelTextPart(
+// 				(toolResult.content[0] as any).value
+// 			)
+// 		]);
+// 	}
+// }
 
-ToolRegistry.registerTool(TracingCodeBestPracticesTool);
+ToolRegistry.registerTool(GetTracingCodeGenBestPracticesTool);
