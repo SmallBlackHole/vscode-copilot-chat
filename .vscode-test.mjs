@@ -28,10 +28,11 @@ writeFileSync(packageJsonPath, JSON.stringify(pkg, null, '\t'));
 process.on('exit', () => writeFileSync(packageJsonPath, raw));
 
 const isRecoveryBuild = !pkg.version.endsWith('.0');
+const vscodeVersion = process.env.VSCODE_VERSION?.toUpperCase() === 'STABLE' ? 'stable' : (isRecoveryBuild ? 'stable' : 'insiders-unreleased');
 
 export default defineConfig({
 	files: __dirname + (isSanity ? '/dist/sanity-test-extension.js' : '/dist/test-extension.js'),
-	version: isRecoveryBuild ? 'stable' : 'insiders-unreleased',
+	version: vscodeVersion,
 	launchArgs: [
 		'--disable-extensions',
 		'--profile-temp'
