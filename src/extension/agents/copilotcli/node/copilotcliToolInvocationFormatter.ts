@@ -3,19 +3,20 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type { SDKEvent } from '@github/copilot/sdk';
+import type { SessionEvent, ToolExecutionCompleteEvent, ToolExecutionStartEvent } from '@github/copilot/sdk';
 import * as l10n from '@vscode/l10n';
-import type { ChatCompletionMessageParam } from 'openai/resources/chat/completions';
-import type { ExtendedChatResponsePart } from 'vscode';
+import type { ChatPromptReference, ExtendedChatResponsePart } from 'vscode';
 import { URI } from '../../../../util/vs/base/common/uri';
-import { ChatRequestTurn2, ChatResponseMarkdownPart, ChatResponseTurn2, ChatToolInvocationPart, MarkdownString } from '../../../../vscodeTypes';
+import { ChatRequestTurn2, ChatResponseMarkdownPart, ChatResponsePullRequestPart, ChatResponseThinkingProgressPart, ChatResponseTurn2, ChatToolInvocationPart, MarkdownString, Uri } from '../../../../vscodeTypes';
 
 /**
  * CopilotCLI tool names
  */
-const enum CopilotCLIToolNames {
+export const enum CopilotCLIToolNames {
 	StrReplaceEditor = 'str_replace_editor',
-	Bash = 'bash'
+	View = 'view',
+	Bash = 'bash',
+	Think = 'think'
 }
 
 interface StrReplaceEditorArgs {
@@ -35,126 +36,109 @@ interface BashArgs {
 	async?: boolean;
 }
 
-function resolveContentToString(content: unknown): string {
-	if (typeof content === 'string') {
-		return content;
-	} else if (Array.isArray(content)) {
-		return content.map(part => resolveContentToString(part)).join('');
-	} else if (content && typeof content === 'object' && 'text' in content && typeof content.text === 'string') {
-		return content.text;
-	}
-	return '';
+export function stripReminders(text: string): string {
+	// Remove any <reminder> ... </reminder> blocks, including newlines
+	// Also remove <current_datetime> ... </current_datetime> blocks
+	// Also remove <pr_metadata .../> tags
+	return text
+		.replace(/<reminder>[\s\S]*?<\/reminder>\s*/g, '')
+		.replace(/<current_datetime>[\s\S]*?<\/current_datetime>\s*/g, '')
+		.replace(/<pr_metadata[^>]*\/?>\s*/g, '')
+		.trim();
 }
 
 /**
- * Parse chat messages from the CopilotCLI SDK into SDKEvent format
- * Used when loading session history from disk
+ * Extract PR metadata from assistant message content
  */
-export function parseChatMessagesToEvents(chatMessages: readonly ChatCompletionMessageParam[]): SDKEvent[] {
-	const events: SDKEvent[] = [];
+function extractPRMetadata(content: string): { cleanedContent: string; prPart?: ChatResponsePullRequestPart } {
+	const prMetadataRegex = /<pr_metadata\s+uri="([^"]+)"\s+title="([^"]+)"\s+description="([^"]+)"\s+author="([^"]+)"\s+linkTag="([^"]+)"\s*\/?>/;
+	const match = content.match(prMetadataRegex);
 
-	for (const msg of chatMessages) {
-		// Handle regular messages (user or assistant)
-		if (msg.role === 'user' || msg.role === 'assistant') {
-			if (msg.content) {
-				events.push({
-					type: 'message' as const,
-					content: resolveContentToString(msg.content),
-					role: msg.role
-				});
-			}
+	if (match) {
+		const [fullMatch, uri, title, description, author, linkTag] = match;
+		// Unescape XML entities
+		const unescapeXml = (text: string) => text
+			.replace(/&apos;/g, "'")
+			.replace(/&quot;/g, '"')
+			.replace(/&gt;/g, '>')
+			.replace(/&lt;/g, '<')
+			.replace(/&amp;/g, '&');
 
-			// Handle tool calls in assistant messages
-			if (msg.role === 'assistant' && msg.tool_calls && Array.isArray(msg.tool_calls)) {
-				for (const toolCall of msg.tool_calls) {
-					if (toolCall.type === 'function' && toolCall.function) {
-						events.push({
-							type: 'tool_use' as const,
-							toolName: toolCall.function.name,
-							args: toolCall.function.arguments ? JSON.parse(toolCall.function.arguments) : {},
-							toolCallId: toolCall.id
-						});
-					}
-				}
-			}
-		}
+		const prPart = new ChatResponsePullRequestPart(
+			Uri.parse(uri),
+			unescapeXml(title),
+			unescapeXml(description),
+			unescapeXml(author),
+			unescapeXml(linkTag)
+		);
 
-		// Handle tool results
-		if (msg.role === 'tool') {
-			events.push({
-				type: 'tool_result' as const,
-				toolName: 'unknown', // Tool name isn't in the message, would need to match with tool_call_id
-				result: {
-					textResultForLlm: resolveContentToString(msg.content),
-					resultType: 'success',
-					toolTelemetry: {
-						properties: {},
-						restrictedProperties: {},
-						metrics: {}
-					}
-				},
-				toolCallId: msg.tool_call_id
-			});
-		}
+		const cleanedContent = content.replace(fullMatch, '').trim();
+		return { cleanedContent, prPart };
 	}
 
-	return events;
-}
-
-export function stripReminders(text: string): string {
-	// Remove any <reminder> ... </reminder> blocks, including newlines
-	return text.replace(/<reminder>[\s\S]*?<\/reminder>\s*/g, '').trim();
+	return { cleanedContent: content };
 }
 
 /**
  * Build chat history from SDK events for VS Code chat session
  * Converts SDKEvents into ChatRequestTurn2 and ChatResponseTurn2 objects
  */
-export function buildChatHistoryFromEvents(events: readonly SDKEvent[]): (ChatRequestTurn2 | ChatResponseTurn2)[] {
+export function buildChatHistoryFromEvents(events: readonly SessionEvent[]): (ChatRequestTurn2 | ChatResponseTurn2)[] {
 	const turns: (ChatRequestTurn2 | ChatResponseTurn2)[] = [];
 	let currentResponseParts: ExtendedChatResponsePart[] = [];
 	const pendingToolInvocations = new Map<string, ChatToolInvocationPart>();
+	const toolNames = new Map<string, string>();
 
 	for (const event of events) {
-		if (event.type === 'message') {
-			if (event.role === 'user') {
+		switch (event.type) {
+			case 'user.message': {
 				// Flush any pending response parts before adding user message
 				if (currentResponseParts.length > 0) {
 					turns.push(new ChatResponseTurn2(currentResponseParts, {}, ''));
 					currentResponseParts = [];
 				}
-				turns.push(new ChatRequestTurn2(stripReminders(event.content || ''), undefined, [], '', [], undefined));
-			} else if (event.role === 'assistant' && event.content) {
-				currentResponseParts.push(
-					new ChatResponseMarkdownPart(new MarkdownString(event.content))
-				);
+				// TODO @DonJayamanne Temporary work around until we get the zod types.
+				type Attachment = {
+					path: string;
+					type: "file" | "directory";
+					displayName: string;
+				};
+				const references: ChatPromptReference[] = ((event.data.attachments || []) as Attachment[]).map(attachment => ({ id: attachment.path, name: attachment.displayName, value: Uri.file(attachment.path) } as ChatPromptReference));
+				turns.push(new ChatRequestTurn2(stripReminders(event.data.content || ''), undefined, references, '', [], undefined));
+				break;
 			}
-		} else if (event.type === 'tool_use') {
-			// Use the formatter to create properly formatted tool invocation
-			const toolInvocation = createCopilotCLIToolInvocation(
-				event.toolName,
-				event.toolCallId,
-				event.args
-			);
-			if (toolInvocation) {
-				toolInvocation.isConfirmed = false;
-				// Store pending invocation to update with result later
-				if (event.toolCallId) {
-					pendingToolInvocations.set(event.toolCallId, toolInvocation);
+			case 'assistant.message': {
+				if (event.data.content) {
+					// Extract PR metadata if present
+					const { cleanedContent, prPart } = extractPRMetadata(event.data.content);
+
+					// Add PR part first if it exists
+					if (prPart) {
+						currentResponseParts.push(prPart);
+					}
+
+					if (cleanedContent) {
+						currentResponseParts.push(
+							new ChatResponseMarkdownPart(new MarkdownString(cleanedContent))
+						);
+					}
 				}
-				currentResponseParts.push(toolInvocation);
+				break;
 			}
-		} else if (event.type === 'tool_result') {
-			// Update the pending tool invocation with the result
-			if (event.toolCallId) {
-				const invocation = pendingToolInvocations.get(event.toolCallId);
-				if (invocation) {
-					invocation.isConfirmed = event.result.resultType !== 'rejected' && event.result.resultType !== 'denied';
-					invocation.isError = event.result.resultType === 'failure';
-					pendingToolInvocations.delete(event.toolCallId);
+			case 'tool.execution_start': {
+				const responsePart = processToolExecutionStart(event, toolNames, pendingToolInvocations);
+				if (responsePart instanceof ChatResponseThinkingProgressPart) {
+					currentResponseParts.push(responsePart);
 				}
+				break;
 			}
-			// Tool results themselves are not displayed - they update the invocation state
+			case 'tool.execution_complete': {
+				const responsePart = processToolExecutionComplete(event, pendingToolInvocations);
+				if (responsePart && !(responsePart instanceof ChatResponseThinkingProgressPart)) {
+					currentResponseParts.push(responsePart);
+				}
+				break;
+			}
 		}
 	}
 
@@ -166,34 +150,77 @@ export function buildChatHistoryFromEvents(events: readonly SDKEvent[]): (ChatRe
 	return turns;
 }
 
+export function processToolExecutionStart(event: ToolExecutionStartEvent, toolNames: Map<string, string>, pendingToolInvocations: Map<string, ChatToolInvocationPart | ChatResponseThinkingProgressPart>): ChatToolInvocationPart | ChatResponseThinkingProgressPart | undefined {
+	const toolInvocation = createCopilotCLIToolInvocation(
+		event.data.toolName,
+		event.data.toolCallId,
+		event.data.arguments
+	);
+	toolNames.set(event.data.toolCallId, event.data.toolName);
+	if (toolInvocation) {
+		// Store pending invocation to update with result later
+		pendingToolInvocations.set(event.data.toolCallId, toolInvocation);
+	}
+	return toolInvocation;
+}
+
+export function processToolExecutionComplete(event: ToolExecutionCompleteEvent, pendingToolInvocations: Map<string, ChatToolInvocationPart | ChatResponseThinkingProgressPart>): ChatToolInvocationPart | ChatResponseThinkingProgressPart | undefined {
+	const invocation = pendingToolInvocations.get(event.data.toolCallId);
+	pendingToolInvocations.delete(event.data.toolCallId);
+
+	if (invocation && invocation instanceof ChatToolInvocationPart) {
+		invocation.isComplete = true;
+		invocation.isError = !!event.data.error;
+		invocation.invocationMessage = event.data.error?.message || invocation.invocationMessage;
+		if (!event.data.success && (event.data.error?.code === 'rejected' || event.data.error?.code === 'denied')) {
+			invocation.isConfirmed = false;
+		} else {
+			invocation.isConfirmed = true;
+		}
+	}
+
+	return invocation;
+}
+
 /**
  * Creates a formatted tool invocation part for CopilotCLI tools
  */
 export function createCopilotCLIToolInvocation(
 	toolName: string,
-	toolCallId: string | undefined,
+	toolCallId: string,
 	args: unknown,
-	resultType?: 'success' | 'failure' | 'rejected' | 'denied',
-	error?: string
-): ChatToolInvocationPart | undefined {
-	const invocation = new ChatToolInvocationPart(toolName, toolCallId ?? '', false);
-	invocation.isConfirmed = resultType === 'success';
-	invocation.isComplete = true;
-
-	if (resultType) {
-		invocation.isError = resultType === 'failure';
+): ChatToolInvocationPart | ChatResponseThinkingProgressPart | undefined {
+	if (toolName === CopilotCLIToolNames.Think) {
+		const thought = (args as { thought?: string })?.thought;
+		if (thought && typeof thought === 'string') {
+			return new ChatResponseThinkingProgressPart(thought);
+		}
+		return undefined;
 	}
+
+	const invocation = new ChatToolInvocationPart(toolName, toolCallId ?? '', false);
+	invocation.isConfirmed = false;
+	invocation.isComplete = false;
 
 	// Format based on tool name
 	if (toolName === CopilotCLIToolNames.StrReplaceEditor) {
 		formatStrReplaceEditorInvocation(invocation, args as StrReplaceEditorArgs);
 	} else if (toolName === CopilotCLIToolNames.Bash) {
 		formatBashInvocation(invocation, args as BashArgs);
+	} else if (toolName === CopilotCLIToolNames.View) {
+		formatViewToolInvocation(invocation, args as StrReplaceEditorArgs);
 	} else {
 		formatGenericInvocation(invocation, toolName, args);
 	}
 
 	return invocation;
+}
+
+function formatViewToolInvocation(invocation: ChatToolInvocationPart, args: StrReplaceEditorArgs): void {
+	const path = args.path ?? '';
+	const display = path ? formatUriForMessage(path) : '';
+
+	invocation.invocationMessage = new MarkdownString(l10n.t("Read {0}", display));
 }
 
 function formatStrReplaceEditorInvocation(invocation: ChatToolInvocationPart, args: StrReplaceEditorArgs): void {
