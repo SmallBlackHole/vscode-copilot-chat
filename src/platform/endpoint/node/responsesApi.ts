@@ -175,6 +175,160 @@ function extractThinkingData(content: Raw.ChatCompletionContentPart[]): OpenAI.R
 	}));
 }
 
+/**
+ * This is an approximate responses input -> raw messages helper, should be used for logging only
+ */
+export function responseApiInputToRawMessagesForLogging(body: OpenAI.Responses.ResponseCreateParams): Raw.ChatMessage[] {
+	const messages: Raw.ChatMessage[] = [];
+	const pendingFunctionCalls: Raw.ChatMessageToolCall[] = [];
+
+	const flushPendingFunctionCalls = () => {
+		if (pendingFunctionCalls.length > 0) {
+			messages.push({
+				role: Raw.ChatRole.Assistant,
+				content: [],
+				toolCalls: pendingFunctionCalls.splice(0)
+			});
+		}
+	};
+
+	// Add system instructions if provided
+	if (body.instructions) {
+		messages.push({
+			role: Raw.ChatRole.System,
+			content: [{ type: Raw.ChatCompletionContentPartKind.Text, text: body.instructions }]
+		});
+	}
+
+	// Convert input to array format if it's a string
+	const inputItems = typeof body.input === 'string' ? [{ role: 'user' as const, content: body.input, type: 'message' as const }] : (body.input ?? []);
+
+	for (const item of inputItems) {
+		// Handle message items with roles
+		if ('role' in item) {
+			switch (item.role) {
+				case 'user':
+					flushPendingFunctionCalls();
+					messages.push({
+						role: Raw.ChatRole.User,
+						content: ensureContentArray(item.content).map(responseContentToRawContent).filter(isDefined)
+					});
+					break;
+				case 'system':
+				case 'developer':
+					flushPendingFunctionCalls();
+					messages.push({
+						role: Raw.ChatRole.System,
+						content: ensureContentArray(item.content).map(responseContentToRawContent).filter(isDefined)
+					});
+					break;
+				case 'assistant':
+					flushPendingFunctionCalls();
+					if (isResponseOutputMessage(item)) {
+						messages.push({
+							role: Raw.ChatRole.Assistant,
+							content: item.content.map(responseOutputToRawContent).filter(isDefined)
+						});
+					} else if (isResponseInputItemMessage(item)) {
+						messages.push({
+							role: Raw.ChatRole.Assistant,
+							content: ensureContentArray(item.content).map(responseContentToRawContent).filter(isDefined)
+						});
+					}
+					break;
+			}
+		} else if ('type' in item) {
+			// Handle other item types without roles
+			switch (item.type) {
+				case 'function_call':
+					// Collect function calls to be grouped with the next assistant message
+					pendingFunctionCalls.push({
+						id: item.call_id,
+						type: 'function',
+						function: {
+							name: item.name,
+							arguments: item.arguments
+						}
+					});
+					break;
+				case 'function_call_output':
+					flushPendingFunctionCalls();
+					messages.push({
+						role: Raw.ChatRole.Tool,
+						content: [{ type: Raw.ChatCompletionContentPartKind.Text, text: item.output }],
+						toolCallId: item.call_id
+					});
+					break;
+				case 'reasoning':
+					// We can't perfectly reconstruct the original thinking data
+					// but we can add a placeholder for logging
+					flushPendingFunctionCalls();
+					messages.push({
+						role: Raw.ChatRole.Assistant,
+						content: [{
+							type: Raw.ChatCompletionContentPartKind.Text,
+							text: `Reasoning summary: ${item.summary.map(s => s.text).join('\n\n')}`
+						}]
+					});
+					break;
+			}
+		}
+	}
+
+	// Flush any remaining function calls at the end
+	if (pendingFunctionCalls.length > 0) {
+		messages.push({
+			role: Raw.ChatRole.Assistant,
+			content: [],
+			toolCalls: pendingFunctionCalls.splice(0)
+		});
+	}
+
+	return messages;
+}
+
+function isResponseOutputMessage(item: OpenAI.Responses.ResponseInputItem): item is OpenAI.Responses.ResponseOutputMessage {
+	return 'role' in item && item.role === 'assistant' && 'type' in item && item.type === 'message' && 'content' in item && Array.isArray(item.content);
+}
+
+function isResponseInputItemMessage(item: OpenAI.Responses.ResponseInputItem): item is OpenAI.Responses.ResponseInputItem.Message {
+	return 'role' in item && item.role === 'assistant' && (!('type' in item) || item.type !== 'message');
+}
+
+function ensureContentArray(content: string | OpenAI.Responses.ResponseInputMessageContentList): OpenAI.Responses.ResponseInputMessageContentList {
+	if (typeof content === 'string') {
+		return [{ type: 'input_text', text: content }];
+	}
+	return content;
+}
+
+function responseContentToRawContent(part: OpenAI.Responses.ResponseInputContent): Raw.ChatCompletionContentPart | undefined {
+	switch (part.type) {
+		case 'input_text':
+			return { type: Raw.ChatCompletionContentPartKind.Text, text: part.text };
+		case 'input_image':
+			return {
+				type: Raw.ChatCompletionContentPartKind.Image,
+				imageUrl: { url: part.image_url || '', detail: part.detail === 'auto' ? undefined : part.detail }
+			};
+		case 'input_file':
+			// This is a rough approximation for logging
+			return {
+				type: Raw.ChatCompletionContentPartKind.Opaque,
+				value: `[File Input - Filename: ${part.filename || 'unknown'}]`
+			};
+	}
+}
+
+function responseOutputToRawContent(part: OpenAI.Responses.ResponseOutputText | OpenAI.Responses.ResponseOutputRefusal): Raw.ChatCompletionContentPart | undefined {
+	switch (part.type) {
+		case 'output_text':
+			return { type: Raw.ChatCompletionContentPartKind.Text, text: part.text };
+		case 'refusal':
+			return { type: Raw.ChatCompletionContentPartKind.Text, text: `[Refusal: ${part.refusal}]` };
+	}
+}
+
 export async function processResponseFromChatEndpoint(instantiationService: IInstantiationService, telemetryService: ITelemetryService, logService: ILogService, response: Response, expectedNumChoices: number, finishCallback: FinishedCallback, telemetryData: TelemetryData): Promise<AsyncIterableObject<ChatCompletion>> {
 	const body = (await response.body()) as ClientHttp2Stream;
 	return new AsyncIterableObject<ChatCompletion>(async feed => {
@@ -205,7 +359,7 @@ interface CapiResponsesTextDeltaEvent extends Omit<OpenAI.Responses.ResponseText
 	logprobs: Array<OpenAI.Responses.ResponseTextDeltaEvent.Logprob> | undefined;
 }
 
-class OpenAIResponsesProcessor {
+export class OpenAIResponsesProcessor {
 	private textAccumulator: string = '';
 	private hasReceivedReasoningSummary = false;
 
@@ -291,6 +445,7 @@ class OpenAIResponsesProcessor {
 				return {
 					blockFinished: true,
 					choiceIndex: 0,
+					model: chunk.response.model,
 					tokens: [],
 					telemetryData: this.telemetryData,
 					requestId: { headerRequestId: this.requestId, gitHubRequestId: this.ghRequestId, completionId: chunk.response.id, created: chunk.response.created_at, deploymentId: '', serverExperiments: '' },

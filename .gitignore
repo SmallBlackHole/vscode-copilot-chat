@@ -33,6 +33,3 @@ coverage/
 test/simulation/cache/_base.sqlite
 
 test/aml/out
-src/extension/completions-core
-
-*.code-workspace
