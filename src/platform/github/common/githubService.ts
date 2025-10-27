@@ -9,7 +9,7 @@ import { ICAPIClientService } from '../../endpoint/common/capiClient';
 import { ILogService } from '../../log/common/logService';
 import { IFetcherService } from '../../networking/common/fetcherService';
 import { ITelemetryService } from '../../telemetry/common/telemetry';
-import { makeGitHubAPIRequest, makeSearchGraphQLRequest, PullRequestSearchItem, SessionInfo } from './githubAPI';
+import { addPullRequestCommentGraphQLRequest, closePullRequest, getPullRequestFromGlobalId, makeGitHubAPIRequest, makeGitHubAPIRequestWithPagination, makeSearchGraphQLRequest, PullRequestComment, PullRequestSearchItem, SessionInfo } from './githubAPI';
 
 export type IGetRepositoryInfoResponseData = Endpoints["GET /repos/{owner}/{repo}"]["response"]["data"];
 
@@ -24,6 +24,34 @@ export type GithubRepositoryItem = {
 	html_url: string;
 	type: 'file' | 'dir';
 };
+
+export interface JobInfo {
+	job_id: string;
+	session_id: string;
+	problem_statement: string;
+	content_filter_mode?: string;
+	status: string;
+	result?: string;
+	actor: {
+		id: number;
+		login: string;
+	};
+	created_at: string;
+	updated_at: string;
+	pull_request: {
+		id: number;
+		number: number;
+	};
+	workflow_run?: {
+		id: number;
+	};
+	error?: {
+		message: string;
+	};
+	event_type?: string;
+	event_url?: string;
+	event_identifiers?: string[];
+}
 
 export interface IGithubRepositoryService {
 
@@ -62,18 +90,69 @@ export interface IOctoKitSessionInfo {
 	created_at: string;
 }
 
-export interface IOctoKitPullRequestInfo {
-	number: number;
-	title: string;
+export interface RemoteAgentJobResponse {
+	job_id: string;
+	session_id: string;
+	actor: {
+		id: number;
+		login: string;
+	};
+	created_at: string;
+	updated_at: string;
+}
+
+export interface RemoteAgentJobPayload {
+	problem_statement: string;
+	event_type: string;
+	pull_request?: {
+		title?: string;
+		body_placeholder?: string;
+		body_suffix?: string;
+		base_ref?: string;
+		head_ref?: string;
+	};
+	run_name?: string;
+	custom_agent?: string;
+}
+
+interface GetCustomAgentsResponse {
+	agents: CustomAgentListItem[];
+}
+
+export interface CustomAgentListItem {
+	name: string;
+	repo_owner_id: number;
+	repo_owner: string;
+	repo_id: number;
+	repo_name: string;
+	display_name: string;
+	description: string;
+	tools: string[];
+	version: string;
+}
+
+export interface CustomAgentDetails extends CustomAgentListItem {
+	prompt: string;
+	'mcp-servers'?: {
+		[serverName: string]: {
+			type: string;
+			command?: string;
+			args?: string[];
+			tools?: string[];
+			env?: { [key: string]: string };
+			headers?: { [key: string]: string };
+		};
+	};
+}
+
+export interface PullRequestFile {
+	filename: string;
+	status: 'added' | 'removed' | 'modified' | 'renamed' | 'copied' | 'changed' | 'unchanged';
 	additions: number;
 	deletions: number;
-	headRepository: {
-		name: string;
-		owner: {
-			login: string;
-		};
-		url: string;
-	};
+	changes: number;
+	patch?: string;
+	previous_filename?: string;
 }
 
 export interface IOctoKitService {
@@ -105,6 +184,83 @@ export interface IOctoKitService {
 	 * Returns the logs for a specific Copilot session.
 	 */
 	getSessionLogs(sessionId: string): Promise<string>;
+
+	/**
+	 * Returns the information for a specific Copilot session.
+	 */
+	getSessionInfo(sessionId: string): Promise<SessionInfo>;
+
+	/**
+	 * Posts a new Copilot agent job.
+	 */
+	postCopilotAgentJob(
+		owner: string,
+		name: string,
+		apiVersion: string,
+		payload: RemoteAgentJobPayload,
+	): Promise<RemoteAgentJobResponse>;
+
+	/**
+	 * Gets a job by its job ID.
+	 */
+	getJobByJobId(owner: string, repo: string, jobId: string, userAgent: string): Promise<JobInfo>;
+
+	/**
+	 * Gets a job by session ID
+	 */
+	getJobBySessionId(owner: string, repo: string, sessionId: string, userAgent: string): Promise<JobInfo>;
+
+	/**
+	 * Adds a comment to a pull request.
+	 */
+	addPullRequestComment(pullRequestId: string, commentBody: string): Promise<PullRequestComment | null>;
+
+	/**
+	 * Gets all open Copilot sessions.
+	 */
+	getAllOpenSessions(nwo: string): Promise<SessionInfo[]>;
+
+	/**
+	 * Gets pull request from global id.
+	 */
+	getPullRequestFromGlobalId(globalId: string): Promise<PullRequestSearchItem | null>;
+
+	/**
+	 * Gets the list of custom agents available for a repository.
+	 * This includes both repo-level and org/enterprise-level custom agents.
+	 * @param owner The repository owner
+	 * @param repo The repository name
+	 * @returns An array of custom agent list items with basic metadata
+	 */
+	getCustomAgents(owner: string, repo: string): Promise<CustomAgentListItem[]>;
+
+	/**
+	 * Gets the full details of a specific custom agent, including its prompt.
+	 * @param owner The repository owner
+	 * @param repo The repository name
+	 * @param agentName The name of the custom agent
+	 * @param version Optional git ref (branch, tag, or commit SHA) to fetch from. Defaults to the default branch.
+	 * @returns The custom agent details or undefined if not found
+	 */
+	getCustomAgentDetails(owner: string, repo: string, agentName: string, version?: string): Promise<CustomAgentDetails | undefined>;
+
+	/**
+	 * Gets the list of files changed in a pull request.
+	 * @param owner The repository owner
+	 * @param repo The repository name
+	 * @param pullNumber The pull request number
+	 * @returns An array of changed files with their metadata
+	 */
+	getPullRequestFiles(owner: string, repo: string, pullNumber: number): Promise<PullRequestFile[]>;
+
+	/**
+	 * Closes a pull request.
+	 * @param owner The repository owner
+	 * @param repo The repository name
+	 * @param pullNumber The pull request number
+	 * @returns A promise that resolves to true if the PR was successfully closed
+	 */
+	closePullRequest(owner: string, repo: string, pullNumber: number): Promise<boolean>;
 }
 
 /**
@@ -144,5 +300,52 @@ export class BaseOctoKitService {
 
 	protected async getSessionLogsWithToken(sessionId: string, token: string) {
 		return makeGitHubAPIRequest(this._fetcherService, this._logService, this._telemetryService, 'https://api.githubcopilot.com', `agents/sessions/${sessionId}/logs`, 'GET', token, undefined, undefined, 'text');
+	}
+
+	protected async getSessionInfoWithToken(sessionId: string, token: string) {
+		return makeGitHubAPIRequest(this._fetcherService, this._logService, this._telemetryService, 'https://api.githubcopilot.com', `agents/sessions/${sessionId}`, 'GET', token, undefined, undefined, 'text');
+	}
+
+	protected async postCopilotAgentJobWithToken(owner: string, name: string, apiVersion: string, userAgent: string, payload: RemoteAgentJobPayload, token: string): Promise<RemoteAgentJobResponse> {
+		return makeGitHubAPIRequest(this._fetcherService, this._logService, this._telemetryService, 'https://api.githubcopilot.com', `agents/swe/${apiVersion}/jobs/${owner}/${name}`, 'POST', token, payload, undefined, undefined, userAgent);
+	}
+
+	protected async getJobByJobIdWithToken(owner: string, repo: string, jobId: string, userAgent: string, token: string): Promise<JobInfo> {
+		return makeGitHubAPIRequest(this._fetcherService, this._logService, this._telemetryService, 'https://api.githubcopilot.com', `agents/swe/v1/jobs/${owner}/${repo}/${jobId}`, 'GET', token, undefined, undefined, undefined, userAgent);
+	}
+
+	protected async getJobBySessionIdWithToken(owner: string, repo: string, sessionId: string, userAgent: string, token: string): Promise<JobInfo> {
+		return makeGitHubAPIRequest(this._fetcherService, this._logService, this._telemetryService, 'https://api.githubcopilot.com', `agents/swe/v1/jobs/${owner}/${repo}/session/${sessionId}`, 'GET', token, undefined, undefined, undefined, userAgent);
+	}
+
+	protected async addPullRequestCommentWithToken(pullRequestId: string, commentBody: string, token: string): Promise<PullRequestComment | null> {
+		return addPullRequestCommentGraphQLRequest(this._fetcherService, this._logService, this._telemetryService, this._capiClientService.dotcomAPIURL, token, pullRequestId, commentBody);
+	}
+
+	protected async getAllOpenSessionsWithToken(nwo: string, token: string): Promise<SessionInfo[]> {
+		return makeGitHubAPIRequestWithPagination(this._fetcherService, this._logService, `https://api.githubcopilot.com`, 'agents/sessions', nwo, token);
+	}
+
+	protected async getPullRequestFromSessionWithToken(globalId: string, token: string): Promise<PullRequestSearchItem | null> {
+		return getPullRequestFromGlobalId(this._fetcherService, this._logService, this._telemetryService, this._capiClientService.dotcomAPIURL, token, globalId);
+	}
+
+	protected async getCustomAgentsWithToken(owner: string, repo: string, token: string): Promise<GetCustomAgentsResponse> {
+		const queryParams = '?exclude_invalid_config=true';
+		return makeGitHubAPIRequest(this._fetcherService, this._logService, this._telemetryService, 'https://api.githubcopilot.com', `agents/swe/custom-agents/${owner}/${repo}${queryParams}`, 'GET', token, undefined, undefined, 'json', 'vscode-copilot-chat');
+	}
+
+	protected async getCustomAgentDetailsWithToken(owner: string, repo: string, agentName: string, token: string, version?: string): Promise<CustomAgentDetails | undefined> {
+		const queryParams = version ? `?version=${encodeURIComponent(version)}` : '';
+		return makeGitHubAPIRequest(this._fetcherService, this._logService, this._telemetryService, 'https://api.githubcopilot.com', `agents/swe/custom-agents/${owner}/${repo}/${agentName}${queryParams}`, 'GET', token, undefined, undefined, 'json', 'vscode-copilot-chat');
+	}
+
+	protected async getPullRequestFilesWithToken(owner: string, repo: string, pullNumber: number, token: string): Promise<PullRequestFile[]> {
+		const result = await makeGitHubAPIRequest(this._fetcherService, this._logService, this._telemetryService, this._capiClientService.dotcomAPIURL, `repos/${owner}/${repo}/pulls/${pullNumber}/files`, 'GET', token, undefined, '2022-11-28');
+		return result || [];
+	}
+
+	protected async closePullRequestWithToken(owner: string, repo: string, pullNumber: number, token: string): Promise<boolean> {
+		return closePullRequest(this._fetcherService, this._logService, this._telemetryService, this._capiClientService.dotcomAPIURL, token, owner, repo, pullNumber);
 	}
 }
