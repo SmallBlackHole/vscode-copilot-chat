@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { GetTracingCodeGenBestPracticesTool } from "ai-mlstudio/lmt/getTracingCodeGenBestPracticesTool";
+import { GeneratePromptTool } from "ai-mlstudio/lmt/generatePromptTool";
 import { ToolRegistry } from '../common/toolsRegistry';
 
-ToolRegistry.registerTool(GetTracingCodeGenBestPracticesTool);
+ToolRegistry.registerTool(GeneratePromptTool);
