@@ -6,20 +6,4 @@
 import { GetEvaluationAgentRunnerBestPracticesTool } from "ai-mlstudio/lmt/getEvaluationAgentRunnerBestPracticesTool";
 import { ToolRegistry } from '../common/toolsRegistry';
 
-// export class GetEvaluationAgentRunnerBestPracticesToolWrapper implements ICopilotTool<void> {
-// 	public static toolName = ToolName.EvaluationAgentRunnerBestPracticesToolWrapper;
-// 	public static getBulkResultCollectionBestPracticesTool = new GetEvaluationAgentRunnerBestPracticesTool();
-// 	constructor() {
-// 	}
-
-// 	async invoke(options: vscode.LanguageModelToolInvocationOptions<void>, token: vscode.CancellationToken) {
-// 		const toolResult = await GetEvaluationAgentRunnerBestPracticesToolWrapper.getBulkResultCollectionBestPracticesTool.invoke(options as any, token);
-// 		return new LanguageModelToolResult([
-// 			new LanguageModelTextPart(
-// 				(toolResult.content[0] as any).value
-// 			)
-// 		]);
-// 	}
-// }
-
 ToolRegistry.registerTool(GetEvaluationAgentRunnerBestPracticesTool);

@@ -6,20 +6,4 @@
 import { GetAiModelGuidanceTool } from "ai-mlstudio/lmt/getAiModelGuidanceTool";
 import { ToolRegistry } from '../common/toolsRegistry';
 
-// export class ModelSuggestionTool implements ICopilotTool<void> {
-// 	public static toolName = ToolName.ModelSuggestion;
-// 	public static getAiModelGuidanceTool = new GetAiModelGuidanceTool();
-// 	constructor() {
-// 	}
-
-// 	async invoke(options: vscode.LanguageModelToolInvocationOptions<void>, token: vscode.CancellationToken) {
-// 		const toolResult = await ModelSuggestionTool.getAiModelGuidanceTool.invoke(options as any, token);
-// 		return new LanguageModelToolResult([
-// 			new LanguageModelTextPart(
-// 				(toolResult.content[0] as any).value
-// 			)
-// 		]);
-// 	}
-// }
-
 ToolRegistry.registerTool(GetAiModelGuidanceTool);
