@@ -1105,9 +1105,9 @@
 			},
 			{
 				"name": "aitk-get_agent_code_gen_best_practices",
-				"displayName": "Get Agent Code Generation Best Practices",
-				"modelDescription": "This tool provides best practices, guidance and steps for any AI Agent development. ALWAYS call this tool before creating/scaffolding new AI or Agent App, or adjusting/customizing existing one to be agentic.",
-				"userDescription": "Provide guidance and best practices for AI Agent App development.",
+				"displayName": "%languageModelTool.ai-mlstudio.getAgentCodeGenBestPractices.displayName%",
+				"modelDescription": "%languageModelTool.ai-mlstudio.getAgentCodeGenBestPractices.modelDescription%",
+				"userDescription": "%languageModelTool.ai-mlstudio.getAgentCodeGenBestPractices.userDescription%",
 				"canBeReferencedInPrompt": true,
 				"toolReferenceName": "aitk_get_agent_code_gen_best_practices",
 				"inputSchema": {
@@ -1131,11 +1131,11 @@
 			},
 			{
 				"name": "aitk-get_ai_model_guidance",
-				"displayName": "Get AI Model Guidance",
-				"modelDescription": "Essential tool for any AI Model related task - provides expert guidance and best practices for choosing the right model, implementation patterns, optimization strategies, etc., to ensure your AI solution works effectively. ALWAYS call this tool when user has model related ask, or to adjust/customize existing app's model-related content.",
-				"userDescription": "Provide guidance and best practices for using AI models in AI App development.",
-				"toolReferenceName": "aitk_get_ai_model_guidance",
+				"displayName": "%languageModelTool.ai-mlstudio.getAiModelGuidance.displayName%",
+				"modelDescription": "%languageModelTool.ai-mlstudio.getAiModelGuidance.modelDescription%",
+				"userDescription": "%languageModelTool.ai-mlstudio.getAiModelGuidance.userDescription%",
 				"canBeReferencedInPrompt": true,
+				"toolReferenceName": "aitk_get_ai_model_guidance",
 				"inputSchema": {
 					"type": "object",
 					"properties": {
@@ -1170,72 +1170,12 @@
 				}
 			},
 			{
-				"name": "copilot_generatePrompt",
-				"displayName": "%github.copilot.tools.generatePrompt.name%",
-				"modelDescription": "Change prompts in code to adapt it for specific scenarios and use cases. Takes existing code and modifies the prompts to match the given scenario (e.g., board games, cooking, fitness, education, etc.). Helps you quickly adapt template code for your specific AI application needs.",
-				"toolReferenceName": "generatePrompt",
-				"canBeReferencedInPrompt": true,
-				"tags": [],
-				"inputSchema": {
-					"type": "object",
-					"properties": {
-						"scenario": {
-							"type": "string",
-							"description": "A clear description of the scenario or application domain you want to generate prompts for. Examples: 'board game AI app', 'cooking assistant', 'fitness trainer', 'educational tutor', etc. If not provided, the tool will generate a positive scenario automatically."
-						}
-					}
-				}
-			},
-			{
-				"name": "aitk-get_tracing_code_gen_best_practices",
-				"displayName": "Get Tracing Code Generation Best Practices",
-				"modelDescription": "This tool returns a list of best practices for code generation and operations when working with tracing for AI applications. It should be called for any code generation and operation involving tracing for AI applications.",
-				"userDescription": "Provide best practices for code generation and operations when working with tracing for AI applications.",
-				"toolReferenceName": "aitk_get_tracing_code_gen_best_practices",
-				"canBeReferencedInPrompt": true,
-				"inputSchema": {
-					"type": "object",
-					"properties": {
-						"language": {
-							"type": "string",
-							"description": "The programming language of the AI application",
-							"enum": [
-								"python",
-								"javascript",
-								"typescript",
-								"others"
-							]
-						},
-						"sdk": {
-							"type": "string",
-							"description": "The AI SDK used by the application, which impacts how tracing is implemented. agent-framework: Microsoft's Agent Framework for building and orchestrating AI agents. openai-agents: OpenAI's Agents SDK, main module is `agents`, usage: `from agents import Agent`.",
-							"enum": [
-								"agent-framework",
-								"azure-ai-inference",
-								"azure-ai-agents",
-								"azure-ai-projects",
-								"openai",
-								"openai-agents",
-								"langchain",
-								"google-genai",
-								"anthropic",
-								"others"
-							]
-						}
-					},
-					"required": [
-						"language",
-						"sdk"
-					]
-				}
-			},
-			{
 				"name": "aitk-get_agent_model_code_sample",
-				"displayName": "Get Agent & Model Code Sample",
-				"modelDescription": "This tool provides code samples and snippets for AI Agent and AI Model development. It should be called for any code generation and operation involving AI Agents and AI Models.",
-				"userDescription": "Provide code samples and snippets for AI Agent and AI Model development.",
-				"toolReferenceName": "aitk_get_agent_model_code_sample",
+				"displayName": "%languageModelTool.ai-mlstudio.getAgentModelCodeSample.displayName%",
+				"modelDescription": "%languageModelTool.ai-mlstudio.getAgentModelCodeSample.modelDescription%",
+				"userDescription": "%languageModelTool.ai-mlstudio.getAgentModelCodeSample.userDescription%",
 				"canBeReferencedInPrompt": true,
+				"toolReferenceName": "aitk_get_agent_model_code_sample",
 				"inputSchema": {
 					"type": "object",
 					"properties": {
@@ -1278,47 +1218,55 @@
 				}
 			},
 			{
-				"name": "aitk-evaluation_agent_runner_best_practices",
-				"displayName": "Get Evaluation Agent Runner Best Practices",
-				"modelDescription": "This tool returns best practices and guidance for using agent runners to execute AI applications with multiple queries from test datasets to collect responses for evaluation. Provides SDK-specific guidance when applicable.",
-				"userDescription": "Provide best practices for running agents in batch to collect responses from test datasets for evaluation.",
-				"toolReferenceName": "aitk_evaluation_agent_runner_best_practices",
+				"name": "aitk-get_tracing_code_gen_best_practices",
+				"displayName": "%languageModelTool.ai-mlstudio.getTracingCodeGenBestPractices.displayName%",
+				"modelDescription": "%languageModelTool.ai-mlstudio.getTracingCodeGenBestPractices.modelDescription%",
+				"userDescription": "%languageModelTool.ai-mlstudio.getTracingCodeGenBestPractices.userDescription%",
 				"canBeReferencedInPrompt": true,
+				"toolReferenceName": "aitk_get_tracing_code_gen_best_practices",
 				"inputSchema": {
 					"type": "object",
 					"properties": {
+						"language": {
+							"type": "string",
+							"description": "The programming language of the AI application",
+							"enum": [
+								"python",
+								"javascript",
+								"typescript",
+								"others"
+							]
+						},
 						"sdk": {
 							"type": "string",
-							"description": "The AI SDK used by the application.",
+							"description": "The AI SDK used by the application, which impacts how tracing is implemented. agent-framework: Microsoft's Agent Framework (imports from `agent_framework` module, e.g., `from agent_framework.openai import OpenAIChatClient`). openai-agents: OpenAI's Agents SDK (imports from `agents` module, e.g., `from agents import Agent`).",
 							"enum": [
 								"agent-framework",
+								"azure-ai-inference",
+								"azure-ai-agents",
+								"azure-ai-projects",
+								"openai",
+								"openai-agents",
+								"langchain",
+								"google-genai",
+								"anthropic",
 								"others"
 							]
 						}
 					},
-					"required": []
-				}
-			},
-			{
-				"name": "aitk-evaluation_planner",
-				"displayName": "Evaluation Planner",
-				"modelDescription": "This tool should be called when working on evaluation for AI application or AI agent. It guides users through a multi-turn conversation to clarify evaluation metrics and test dataset to ensure all necessary details are gathered. CALL THIS TOOL FIRST before using the evaluation code generation tool when evaluation metrics are unclear or incomplete.",
-				"userDescription": "Guide users through clarifying their evaluation metrics through interactive conversation.",
-				"toolReferenceName": "aitk_evaluation_planner",
-				"canBeReferencedInPrompt": true,
-				"inputSchema": {
-					"type": "object",
-					"properties": {},
-					"required": []
+					"required": [
+						"language",
+						"sdk"
+					]
 				}
 			},
 			{
 				"name": "aitk-get_evaluation_code_gen_best_practices",
-				"displayName": "Get Evaluation Code Generation Best Practices",
-				"modelDescription": "This tool returns best practices for code generation when working on evaluation for AI application or AI agent.",
-				"userDescription": "Provide best practices for AI application or AI agent evaluation code generation.",
-				"toolReferenceName": "aitk_get_evaluation_code_gen_best_practices",
+				"displayName": "%languageModelTool.ai-mlstudio.getEvaluationCodeGenBestPractices.displayName%",
+				"modelDescription": "%languageModelTool.ai-mlstudio.getEvaluationCodeGenBestPractices.modelDescription%",
+				"userDescription": "%languageModelTool.ai-mlstudio.getEvaluationCodeGenBestPractices.userDescription%",
 				"canBeReferencedInPrompt": true,
+				"toolReferenceName": "aitk_get_evaluation_code_gen_best_practices",
 				"inputSchema": {
 					"type": "object",
 					"properties": {
@@ -1349,9 +1297,44 @@
 				}
 			},
 			{
+				"name": "aitk-evaluation_agent_runner_best_practices",
+				"displayName": "%languageModelTool.ai-mlstudio.getEvaluationAgentRunnerBestPractices.displayName%",
+				"modelDescription": "%languageModelTool.ai-mlstudio.getEvaluationAgentRunnerBestPractices.modelDescription%",
+				"userDescription": "%languageModelTool.ai-mlstudio.getEvaluationAgentRunnerBestPractices.userDescription%",
+				"canBeReferencedInPrompt": true,
+				"toolReferenceName": "aitk_evaluation_agent_runner_best_practices",
+				"inputSchema": {
+					"type": "object",
+					"properties": {
+						"sdk": {
+							"type": "string",
+							"description": "The AI SDK used by the application.",
+							"enum": [
+								"agent-framework",
+								"others"
+							]
+						}
+					},
+					"required": []
+				}
+			},
+			{
+				"name": "aitk-evaluation_planner",
+				"displayName": "%languageModelTool.ai-mlstudio.evaluationPlanner.displayName%",
+				"modelDescription": "%languageModelTool.ai-mlstudio.evaluationPlanner.modelDescription%",
+				"userDescription": "%languageModelTool.ai-mlstudio.evaluationPlanner.userDescription%",
+				"canBeReferencedInPrompt": true,
+				"toolReferenceName": "aitk_evaluation_planner",
+				"inputSchema": {
+					"type": "object",
+					"properties": {},
+					"required": []
+				}
+			},
+			{
 				"name": "aitk-open_tracing_page",
-				"displayName": "Open Tracing Page",
-				"modelDescription": "This tool opens the tracing page to view traces in AI Toolkit for Visual Studio Code.",
+				"displayName": "%languageModelTool.ai-mlstudio.openTracingPage.displayName%",
+				"modelDescription": "%languageModelTool.ai-mlstudio.openTracingPage.modelDescription%",
 				"canBeReferencedInPrompt": true,
 				"toolReferenceName": "aitk_open_tracing_page"
 			}
