@@ -6,6 +6,7 @@
 import './applyPatchTool';
 import './basicRunInTerminal';
 import './codebaseTool';
+import './convertDeclarativeAgentToCodeTool';
 import './createDirectoryTool';
 import './createFileTool';
 import './docTool';
