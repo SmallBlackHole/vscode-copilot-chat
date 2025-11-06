@@ -88,7 +88,7 @@ export class DefaultAgentPrompt extends PromptElement<DefaultAgentPromptProps> {
 				Use aitk-get_ai_model_guidance for guidance and best practices for using AI models.<br />
 				Use aitk-get_tracing_code_gen_best_practices for best practices for code generation and operations when working with tracing for AI applications.<br />
 				Use aitk-evaluation_agent_runner_best_practices for best practices and guidance for using agent runners to collect responses from test datasets for evaluation.<br />
-				Use aitk-evaluation_planner for guiding users through clarifying evaluation metrics and test dataset via multi-turn conversation, call this first when evaluation metrics are unclear.<br />
+				Use aitk-evaluation_planner for guiding users through clarifying evaluation metrics and test dataset via multi-turn conversation, call this first before writing any evaluation code.<br />
 				Use aitk-get_evaluation_code_gen_best_practices for best practices for the evaluation code generation when working on evaluation for AI application or AI agent.
 			</Tag>
 			{this.props.codesearchMode && <CodesearchModeInstructions {...this.props} />}
