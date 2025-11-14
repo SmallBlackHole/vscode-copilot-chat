@@ -196,13 +196,16 @@ class DefaultGpt5AgentPrompt extends PromptElement<DefaultAgentPromptProps> {
 				{tools[ToolName.CoreRunInTerminal] && <>NEVER try to edit a file by running terminal commands unless the user specifically asks for it.<br /></>}
 				{!tools.hasSomeEditTool && <>You don't currently have any tools available for editing files. If the user asks you to edit a file, you can ask the user to enable editing tools or print a codeblock with the suggested changes.<br /></>}
 				{!tools[ToolName.CoreRunInTerminal] && <>You don't currently have any tools available for running terminal commands. If the user asks you to run a terminal command, you can ask the user to enable terminal tools or print a codeblock with the suggested command.<br /></>}
-				Tools can be disabled by the user. You may see tools used previously in the conversation that are not currently available. Be careful to only use the tools that are currently available to you.<br />
-				Use aitk-get_agent_code_gen_best_practices for best practices, guidance and steps for any AI Agent development.<br />
-				Use aitk-get_ai_model_guidance for guidance and best practices for using AI models.<br />
-				Use aitk-get_tracing_code_gen_best_practices for best practices for code generation and operations when working with tracing for AI applications.<br />
-				Use aitk-evaluation_agent_runner_best_practices for best practices and guidance for using agent runners to collect responses from test datasets for evaluation.<br />
-				Use aitk-evaluation_planner for guiding users through clarifying evaluation metrics and test dataset via multi-turn conversation, call this first when evaluation metrics are unclear.<br />
-				Use aitk-get_evaluation_code_gen_best_practices for best practices for the evaluation code generation when working on evaluation for AI application or AI agent.
+				Tools can be disabled by the user. You may see tools used previously in the conversation that are not currently available. Be careful to only use the tools that are currently available to you.<br /><br />
+				# Tools selection guidelines for app development involving AI and Agents<br />
+				When working on AI or Agent application development, you must always call the following tools to assist in code generation when applicable:<br />
+				- Call `aitk_get_agent_code_gen_best_practices` tool to get best practices, guidance and steps for any AI Agent development: When creating/scaffolding new AI or Agent App, or adjusting/customizing existing one to be agentic.<br />
+				- Call `aitk_get_agent_model_code_sample` tool to get code samples and snippets for AI Agent and AI Model development: When generating any code involving AI Agents and AI Models.<br />
+				- Call `aitk_get_ai_model_guidance` tool to get guidance and best practices for using AI models: When user has model related ask, or to adjust/customize existing app's model-related content.<br />
+				- Call `aitk_evaluation_planner` tool to guide users through clarifying evaluation metrics and test dataset via multi-turn conversation, call this first when evaluation metrics are unclear.<br />
+				- Call `aitk_get_evaluation_code_gen_best_practices` tool to get best practices for the evaluation code generation when working on evaluation for AI application or AI agent.<br />
+				- Call `aitk_evaluation_agent_runner_best_practices` tool to get best practices and guidance for using agent runners to collect responses from test datasets for evaluation.<br />
+				- Call `aitk_get_tracing_code_gen_best_practices` tool to get best practices for code generation and operations when working with tracing for AI applications.
 			</Tag>
 			{this.props.codesearchMode && <CodesearchModeInstructions {...this.props} />}
 			{tools[ToolName.EditFile] && !tools[ToolName.ApplyPatch] && <Tag name='editFileInstructions'>
