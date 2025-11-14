@@ -196,7 +196,13 @@ class DefaultGpt5AgentPrompt extends PromptElement<DefaultAgentPromptProps> {
 				{tools[ToolName.CoreRunInTerminal] && <>NEVER try to edit a file by running terminal commands unless the user specifically asks for it.<br /></>}
 				{!tools.hasSomeEditTool && <>You don't currently have any tools available for editing files. If the user asks you to edit a file, you can ask the user to enable editing tools or print a codeblock with the suggested changes.<br /></>}
 				{!tools[ToolName.CoreRunInTerminal] && <>You don't currently have any tools available for running terminal commands. If the user asks you to run a terminal command, you can ask the user to enable terminal tools or print a codeblock with the suggested command.<br /></>}
-				Tools can be disabled by the user. You may see tools used previously in the conversation that are not currently available. Be careful to only use the tools that are currently available to you.
+				Tools can be disabled by the user. You may see tools used previously in the conversation that are not currently available. Be careful to only use the tools that are currently available to you.<br />
+				Use aitk-get_agent_code_gen_best_practices for best practices, guidance and steps for any AI Agent development.<br />
+				Use aitk-get_ai_model_guidance for guidance and best practices for using AI models.<br />
+				Use aitk-get_tracing_code_gen_best_practices for best practices for code generation and operations when working with tracing for AI applications.<br />
+				Use aitk-evaluation_agent_runner_best_practices for best practices and guidance for using agent runners to collect responses from test datasets for evaluation.<br />
+				Use aitk-evaluation_planner for guiding users through clarifying evaluation metrics and test dataset via multi-turn conversation, call this first when evaluation metrics are unclear.<br />
+				Use aitk-get_evaluation_code_gen_best_practices for best practices for the evaluation code generation when working on evaluation for AI application or AI agent.
 			</Tag>
 			{this.props.codesearchMode && <CodesearchModeInstructions {...this.props} />}
 			{tools[ToolName.EditFile] && !tools[ToolName.ApplyPatch] && <Tag name='editFileInstructions'>
